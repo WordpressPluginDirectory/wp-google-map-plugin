@@ -6275,7 +6275,7 @@ text-align:left;
     color:#E84952 !important;
 }
 .check-column .checkbox label{
-    position: absolute !important;
+/*    position: absolute !important;*/
 }
 .wp-list-table.widefat thead td.check-column{
     padding-bottom: 4px;
@@ -6678,4 +6678,8 @@ textarea.fc_view_source {
     transform: translateY(-50%);
     font-size: 0px;
     z-index: 9999;
+}
+
+.check-column input:hover+label, .check-column label:hover {
+    background: rgba(0,0,0,.00);
 }

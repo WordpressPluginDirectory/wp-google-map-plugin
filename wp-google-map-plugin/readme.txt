@@ -1,12 +1,12 @@
-=== WordPress Plugin for Google Maps - WP MAPS (formerly WP Google Map Plugin) ===
+=== WordPress Plugin for Google Maps - WP MAPS ===
 Contributors:      flippercode
 Plugin Name:       WP MAPS
-Tags: map,maps,google map, google maps,locator, store locator 
+Tags: wordpress org map, map, maps, google maps, wp google maps, google map plugin, wordpress google maps, gdpr google maps, gdpr maps, custom markers, google maps wordpress, google maps embed, custom infowindow, map locations, store locator 
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.4.1
-Stable tag: 4.5.5
+Tested up to: 6.4.2
+Stable tag: 4.5.6
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,7 +22,11 @@ The most advanced yet easy to use Google maps plugin for WordPress. Create beaut
 
 With just few clicks, you will be able to add beautifully designed custom google maps to any page / post or widget with help of generated shortcode.
 
-Contact [Dedicated Support team](https://www.flippercode.com/support) for setup configurations needs or for any other assistance.
+= Try it Now =
+
+Explore the WP Maps plugin in the WordPress playground without any installation. [Try WP Maps](https://playground.wordpress.net/?plugin=wp-google-map-plugin) 
+
+Contact [Dedicated Support team](https://weplugins.com/support) for setup configurations needs or for any other assistance.
 
 Google autosuggest enabled location form helps you as site administrator to create unlimited markers and then assign these markers to a google map. It's super easy.  
 
@@ -142,8 +146,6 @@ This section describes how to install the plugin and get it working.
 	1. Go to <strong>settings</strong> page of plugin and insert your google maps api key. see full instruction [How to create Api key](https://www.wpmapspro.com/docs/how-to-create-an-api-key/)
 
 	2. First create your locations using 'Add Location' page.
-runk/modules/group_map/views/form.php
-M       trunk/wp-google-map-plugin.php
 
 	3. Then create your first map using 'Add Map' page and assign your locations.
 
@@ -166,10 +168,6 @@ M       trunk/wp-google-map-plugin.php
 
 == Upgrade Notice ==
 
-= 4.5.5 =
-  - Tested with latest version of WordPress
-= 4.5.4 =
-  - Parent-Child Category issue fixed
 = 4.5.3 =
   - Translated in 15 Languages.
   - Tutorial links added.

@@ -1021,8 +1021,8 @@ font-size: .9em;
 .fc-danger a{color:#721c24!important;}
 
 .buy_premium, .sample_notice{
-    margin: 0.2em 0;
-    padding: 10px;
+    margin: 0.2em 0 !important;
+    padding: 13px !important;
     margin-bottom: .8em;
 }
 

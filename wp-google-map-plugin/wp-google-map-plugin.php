@@ -5,7 +5,7 @@ Plugin URI: https://www.flippercode.com
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
 Author URI: https://www.flippercode.com
-Version: 4.5.5
+Version: 4.5.6
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -74,7 +74,6 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			    add_action( 'wp_ajax_nopriv_wpgmp_hide_buy_notice', array( $this, 'wpgmp_hide_buy_notice' ) );
 				add_action('wp_ajax_wpgmp_hide_sample_notice', array($this, 'wpgmp_hide_sample_notice'));
 				add_action('wp_ajax_nopriv_wpgmp_hide_sample_notice', array($this, 'wpgmp_hide_sample_notice'));
-				add_action('admin_menu', array($this,'add_custom_link_into_plugin_menu') );
 			}
 			
 		}
@@ -107,7 +106,8 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			}
 
 		}
-		
+
+
 		function wpgmp_go_pro_link($actions) {
 			
 			$actions['settings'] = '<a href="' . admin_url( 'admin.php?page=wpgmp_manage_settings' ) . '">'.esc_html__( 'Settings', 'wp-google-map-plugin' ).'</a>';
@@ -376,12 +376,6 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 
 		}
 
-		function add_custom_link_into_plugin_menu() { 
-		   
-		    global $submenu;
-		    $permalink = 'https://www.wpmapspro.com/?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium';
-		    $submenu['wpgmp_view_overview'][] = array( '<span class="fc-fire-sale"><img draggable="false" role="img" class="emoji" alt="🔥" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f525.svg"></span>'.esc_html__(' Go Pro', 'wpgmp-google-map'), "manage_options", $permalink );
-		}
 		
 		/**
 		 * Eneque scripts in the backend.
@@ -796,7 +790,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.5.4' );
+			define( 'WPGMP_VERSION', '4.5.6' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );
