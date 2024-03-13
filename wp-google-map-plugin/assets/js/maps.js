@@ -2116,7 +2116,8 @@
                             "{marker_icon}": place.location.icon,
                             "{marker_category}": location_categories.join(','),
                             "{marker_message}": place.content,
-                            "{marker_image}": marker_image
+                            "{marker_image}": marker_image,
+                            "{get_directions_link}": 'http://www.google.com/maps/place/' + parseFloat(place.location.lat) + ',' + parseFloat(place.location.lng),
                         };
 
                         //Add extra fields of locations

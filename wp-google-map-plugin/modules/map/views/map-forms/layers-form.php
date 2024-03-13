@@ -91,6 +91,7 @@ $location_placeholders = array(
 		'{marker_country}',
 		'{marker_zoom}',
 		'{marker_postal_code}',
+		'{get_directions_link}',
 	);
 
 if( isset( $data['map_all_control']['infowindow_setting'] ) && !empty( $data['map_all_control']['infowindow_setting'] ) && !isset($data['map_all_control']['location_infowindow_skin']) ){
