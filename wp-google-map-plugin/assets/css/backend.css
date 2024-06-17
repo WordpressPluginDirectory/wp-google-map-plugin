@@ -1315,6 +1315,10 @@ box-shadow: 0 1px 3px rgb(25 143 217 / 30%), inset 0 -1px 0 rgb(0 0 0 / 5%);
     color: rgb(160, 160, 160);
 }
 
+.fc-form-container,.fc-back { 
+    min-height: auto!important;
+}
+
 .wpgmp_location_selection{
     margin-top: -30px;
 }

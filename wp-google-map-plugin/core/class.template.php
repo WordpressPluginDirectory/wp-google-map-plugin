@@ -295,7 +295,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
                     <div class="social-media-links">
                            <a href="' . $this->options['docURL'] . '" target="_blank"><img src="'. plugin_dir_url( __DIR__ ).'assets/images/vector.png"></a>
 						   <a href="https://www.wpmapspro.com/?utm_source=wordpress&amp;utm_medium=liteversion&amp;utm_campaign=freemium&amp;utm_id=freemium" target="_blank"><img src="'. plugin_dir_url( __DIR__ ).'assets/images/icon-premium.png"></a>	
-                           <a href="https://www.flippercode.com" target="_blank"><img src="'. plugin_dir_url( __DIR__ ).'assets/images/flippdercode_logo.png"></a>
+                           <a href="https://weplugins.com/" target="_blank"><img src="'. plugin_dir_url( __DIR__ ).'assets/images/flippdercode_logo.png"></a>
                          </div>      
                     </div></div></div></div></div></div>'; 
                     

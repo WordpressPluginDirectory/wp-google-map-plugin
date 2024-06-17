@@ -458,7 +458,8 @@ if ( !empty( $map->map_all_control['location_infowindow_skin'] ) and is_array( $
 * END Addtional css
 */
 
-$map_output.= '<div class="wpgmp_map_container '.apply_filters('wpgmp_container_class','wpgmp-map-'.$map->map_id,$map).'" rel="map'.$map->map_id.'">';
+
+$map_output .= '<div class="wpgmp_map_container ' . apply_filters( 'wpgmp_main_container_class', 'wpgmp-map-' . $map->map_id, $map ) . '" rel="map' . $map->map_id . '" data-plugin-version="'.WPGMP_VERSION.'">';
 
 /* Search Control over map */
 if ( $map->map_all_control['search_control'] == 'true' ) {
@@ -480,9 +481,6 @@ if ( ! empty( $map->map_all_control['display_listing'] ) && $map->map_all_contro
 }
 
 $listing_div .= apply_filters( 'wpgmp_after_listing', '', $map );
-
-
-
 
 $output = $map_div.$listing_div;
 
@@ -550,6 +548,152 @@ $map_data_obj = json_encode( $map_data );
 $map_data_obj = base64_encode($map_data_obj);
 
 $map_output .= '<div style="display:none !important;visiblity:hidden !important:width:0px;height:0px;padding:0px;margin:0px;" class="wpgmp-map-data-container" data-map-id="'. $map_id . '">'.$map_data_obj.'</div>';
+
+$base_font_size = isset($map->map_all_control['wpgmp_base_font_size'] ) ? trim( str_replace( 'px', '', $map->map_all_control['wpgmp_base_font_size'] ) ) : '';
+$css_rules      = array();
+$base_class     = '.wpgmp-map-' . $map->map_id . ' ';
+
+if ( $base_font_size != '' ) { 
+	if (!strpos($base_font_size, 'px'))
+	$base_font_size = $base_font_size . 'px';
+	$css_rules[]    = $base_class . ',' . $base_class . ' .wpgmp_tabs_container,' . $base_class . ' .wpgmp_listing_container { font-size : ' . $base_font_size . ' !important;}';
+}
+
+if ( isset($map->map_all_control['wpgmp_custom_css']) && trim( $map->map_all_control['wpgmp_custom_css'] ) != '' ) {
+	$css_rules[] = $map->map_all_control['wpgmp_custom_css'];
+}
+
+if ( ! isset( $map->map_all_control['apply_own_schema'] ) ) {
+		$map->map_all_control['apply_own_schema'] = false;
+	}
+
+
+if ( isset( $map->map_all_control['color_schema'] ) && trim( $map->map_all_control['color_schema'] ) != '' and $map->map_all_control['apply_own_schema'] != true ) {
+	$color_schema                                  = $map->map_all_control['color_schema'];
+	$color_schema_colors                           = explode( '_', $color_schema );
+	$map->map_all_control['wpgmp_primary_color']   = $color_schema_colors[0];
+	$map->map_all_control['wpgmp_secondary_color'] = $color_schema_colors[1];
+}
+
+
+if ( isset( $map->map_all_control['apply_custom_design'] ) && $map->map_all_control['apply_custom_design'] == 'true' ) {
+
+	if ( trim( $map->map_all_control['wpgmp_primary_color'] ) != '' && $map->map_all_control['wpgmp_primary_color'] != '#' ) {
+
+		$secondary_color = $map->map_all_control['wpgmp_primary_color'];
+
+		$css_rules[] = $base_class . '.wpgmp_tabs_container .wpgmp_tabs li a.active, ' . $base_class . '.fc-primary-bg, ' . $base_class . '.wpgmp_infowindow .fc-badge.info, ' . $base_class . '.wpgmp_toggle_main_container .amenity_type:hover, ' . $base_class . '
+.wpgmp_direction_container p input.wpgmp_find_direction,
+' . $base_class . '.wpgmp_nearby_container .wpgmp_find_nearby_button, ' . $base_class . '.fc-label-info, ' . $base_class . '.fc-badge.info, ' . $base_class . '.wpgmp_pagination span,
+' . $base_class . '.wpgmp_pagination a, ' . $base_class . 'div.categories_filter select,  ' . $base_class . '.wpgmp_toggle_container, ' . $base_class . ' .categories_filter_reset_btn,' . $base_class . '.categories_filter input[type="button"], ' . $base_class . '.categories_filter_reset_btn:hover {
+        background-color: ' . $secondary_color . ';
+}
+
+' . $base_class . '.wpgmp-select-all,' . $base_class . '.fc-primary-fg{
+        color: ' . $secondary_color . ';
+} 
+
+' . $base_class . '.fc-label-info, ' . $base_class . '.fc-badge.info {
+    border: 1px solid ' . $secondary_color . ';
+}
+
+' . $base_class . 'div.categories_filter select , ' . $base_class . 'div.categories_filter select:hover {
+	background-color: ' . $secondary_color . ';
+	color:#ffffff;
+ }
+
+' . $base_class . 'div.wpgmp_search_form input.wpgmp_search_input {
+	border-bottom: 1px solid ' . $secondary_color . ';
+} ' . $base_class . '.wpgmp_iw_content .fc-item-title span{color:#fff;}' . $base_class . '.wpgmp_location_category.fc-badge.info{color:#fff;}';
+
+	}
+}
+
+if ( isset( $map->map_all_control['apply_own_schema'] ) && $map->map_all_control['apply_own_schema'] == 'true' ) {
+
+	if ( trim( $map->map_all_control['wpgmp_secondary_color'] ) != '' && $map->map_all_control['wpgmp_secondary_color'] != '#' ) {
+
+		$primary_color = $map->map_all_control['wpgmp_secondary_color'];
+		$css_rules[]   = $base_class . '.wpgmp_tabs_container .wpgmp_tabs, ' . $base_class . '.fc-secondary-bg, ' . $base_class . '.wpgmp_toggle_main_container .amenity_type, ' . $base_class . '.wpgmp_pagination span.current, ' . $base_class . '.wpgmp_pagination a:hover, .wpgmp_toggle_main_container input[type="submit"] {
+background: ' . $primary_color . '; 
+}
+
+' . $base_class . '.fc-secondary-fg,' . $base_class . '.wpgmp_infowindow .fc-item-title,' . $base_class . '.wpgmp_tabs_container .wpgmp_tab_item .wpgmp_cat_title, ' . $base_class . '.wpgmp_location_title a.place_title {
+    color: ' . $primary_color . '!important; 
+}
+
+' . $base_class . 'div.wpgmp_search_form input.wpgmp_search_input:focus {
+    border: 1px solid ' . $primary_color . '; 
+}' . $base_class . '.wpgmp_location_category.fc-badge.info{color:#fff;}' . $base_class . '.wpgmp_iw_content .fc-item-title span{color:#fff;}';
+
+	}
+
+
+	/* End Primary Color */
+
+	if ( trim( $map->map_all_control['wpgmp_primary_color'] ) != '' && $map->map_all_control['wpgmp_primary_color'] != '#' ) {
+
+		$secondary_color = $map->map_all_control['wpgmp_primary_color'];
+
+		$css_rules[] = $base_class . '.wpgmp_tabs_container .wpgmp_tabs li a.active, ' . $base_class . '.fc-primary-bg, ' . $base_class . '.wpgmp_infowindow .fc-badge.info, ' . $base_class . '.wpgmp_toggle_main_container .amenity_type:hover, ' . $base_class . '
+.wpgmp_direction_container p input.wpgmp_find_direction,
+' . $base_class . '.wpgmp_nearby_container .wpgmp_find_nearby_button, ' . $base_class . '.fc-label-info, ' . $base_class . '.fc-badge.info, ' . $base_class . '.wpgmp_pagination span,
+' . $base_class . '.wpgmp_pagination a, ' . $base_class . 'div.categories_filter select,   ' . $base_class . 'div.categories_filter select:hover,  ' . $base_class . '.wpgmp_toggle_container, ' . $base_class . '.categories_filter_reset_btn,' . $base_class . '.categories_filter input[type="button"], ' . $base_class . '.categories_filter_reset_btn:hover {
+        background-color: ' . $secondary_color . ';
+        color : #fff;
+}
+
+' . $base_class . '.wpgmp-select-all,' . $base_class . '.fc-primary-fg {
+        color: ' . $secondary_color . ';
+} 
+
+' . $base_class . '.fc-label-info, ' . $base_class . '.fc-badge.info {
+    border: 1px solid ' . $secondary_color . ';
+}
+
+' . $base_class . 'div.wpgmp_search_form input.wpgmp_search_input {
+	border-bottom: 1px solid ' . $secondary_color . ';
+}
+';
+
+	}
+}
+
+/* Infowindow style */
+if ( isset($map->map_all_control['map_infowindow_customisations']) && $map->map_all_control['map_infowindow_customisations'] == 'true' ) {
+
+	$infowindow_header_font_color = esc_attr( isset( $map->map_all_control['infowindow_header_font_color'] ) && ( $map->map_all_control['infowindow_header_font_color'] != '' && $map->map_all_control['infowindow_header_font_color'] != '#' ) ? 'color: ' . sanitize_text_field( $map->map_all_control['infowindow_header_font_color'] ) . ';' : 'color:#fff;' );
+
+	$infowindow_header_bgcolor = esc_attr( isset( $map->map_all_control['infowindow_header_bgcolor'] ) && ( $map->map_all_control['infowindow_header_bgcolor'] != '' && $map->map_all_control['infowindow_header_bgcolor'] != '#' ) ? 'background-color: ' . sanitize_text_field( $map->map_all_control['infowindow_header_bgcolor'] ) . ';' : 'background-color:#3498db;' ); 
+
+	$infowindow_border_color = esc_attr( isset( $map->map_all_control['infowindow_border_color'] ) && ( $map->map_all_control['infowindow_border_color'] != '' && $map->map_all_control['infowindow_border_color'] != '#' ) ? 'box-shadow: ' . sanitize_text_field( $map->map_all_control['infowindow_border_color'] ) . ' 0px 1px 4px -1px;' : 'box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;' ); 
+
+	$infowindow_border_color_ch = esc_attr( isset( $map->map_all_control['infowindow_border_color'] ) && ( $map->map_all_control['infowindow_border_color'] != '' && $map->map_all_control['infowindow_border_color'] != '#' ) ? 'border: 1px solid ' . sanitize_text_field( $map->map_all_control['infowindow_border_color'] ) . ';' : 'border: 1px solid rgba(0, 0, 0, 0);' );
+
+	$infowindow_bg_color = esc_attr( isset( $map->map_all_control['infowindow_bg_color'] ) && ( $map->map_all_control['infowindow_bg_color'] != '' && $map->map_all_control['infowindow_bg_color'] != '#' ) ? 'background-color: ' . sanitize_text_field( $map->map_all_control['infowindow_bg_color'] ) . ';' : 'background-color:#fff;' ); 
+
+	$infowindow_border_radius = esc_attr( isset( $map->map_all_control['infowindow_border_radius'] ) && ( $map->map_all_control['infowindow_border_radius'] != '' ) ? 'border-radius: ' . sanitize_text_field( $map->map_all_control['infowindow_border_radius'] ) . 'px;' : 'border-radius:3px;' ); 
+	$infowindow_width = esc_attr( isset( $map->map_all_control['infowindow_width'] ) && ( $map->map_all_control['infowindow_width'] != '' ) ? 'width: ' . sanitize_text_field( $map->map_all_control['infowindow_width'] ) . 'px;' : '' ); 
+
+	$infowindow_border_color = esc_attr( isset($map->map_all_control['infowindow_header_font_color']) && ( $map->map_all_control['infowindow_border_color'] != '' && ($map->map_all_control['infowindow_border_color'] != '#') ) ? 'border-top-color : ' . sanitize_text_field( $map->map_all_control['infowindow_border_color'] ) : 'border-top-color: '.sanitize_text_field($map->map_all_control['infowindow_bg_color'] ) ); 
+
+	$css_rules[] = '#map' .$map_id. ' .wpgmp_infowindow .wpgmp_iw_head, #map'. $map_id .' .post_body .geotags_link, #map'. $map_id .' .post_body .geotags_link a{height: 28px; font-weight: 600; line-height: 27px; font-size:16px; '. $infowindow_header_font_color .' '. $infowindow_header_bgcolor.'}
+#map'. $map_id .' .wpgmp_infowindow .wpgmp_iw_head_content, .wpgmp_infowindow .wpgmp_iw_content, #map'. $map_id .' .post_body .geotags_link{padding-left:5px;}
+#map'. $map_id .' .wpgmp_infowindow .wpgmp_iw_content{ min-height: 50px!important; min-width: 150px!important; padding-top:5px; }
+#map'. $map_id .' .wpgmp_infowindow, #map'. $map_id .' .post_body{ float: left; position: relative; '. $infowindow_border_color .'; '. $infowindow_border_color_ch .' '. $infowindow_bg_color .' '. $infowindow_border_radius .' '. $infowindow_width .'}
+#map'. $map_id .' .wpgmp_infowindow{float:none;}
+#map'. $map_id .' .infoBoxTail:after{ '.$infowindow_border_color .'; }';
+
+}
+
+if( !isset( $secondary_color ) ) {
+	$secondary_color = '';
+}
+
+
+if ( ! empty( $css_rules ) ) {
+	$map_output .= '<style id="wpgmp_server_generated_css_rules">' . implode( ' ', apply_filters('wpgmp_css_rules',$css_rules, $map_id, $secondary_color) ) . '</style>';
+}
 
 return $map_output;
 }

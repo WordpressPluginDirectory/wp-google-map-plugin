@@ -2,20 +2,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 19:46+0530\n"
-"PO-Revision-Date: 2023-09-12 20:41+0530\n"
+"POT-Creation-Date: 2024-06-17 15:28+0530\n"
+"PO-Revision-Date: 2024-06-17 15:29+0530\n"
+"Last-Translator: \n"
 "Language-Team: flippercode <hello@flippercode.com>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: esc_html__;esc_html_e\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e;__;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: classes/class-wp-maps-block.php:371 wp-google-map-plugin.php:236
+msgid "All"
+msgstr ""
+
+#: classes/class-wp-maps-block.php:372 wp-google-map-plugin.php:237
+msgid "Show Locations"
+msgstr ""
+
+#: classes/class-wp-maps-block.php:373 wp-google-map-plugin.php:238
+msgid "Sort by"
+msgstr ""
+
+#: classes/class-wp-maps-block.php:374 wp-google-map-plugin.php:239
+msgid "Not working..."
+msgstr ""
+
+#: classes/class-wp-maps-block.php:375 wp-google-map-plugin.php:240
+msgid "Select Category"
+msgstr ""
+
+#: classes/class-wp-maps-block.php:436
+msgid "WP Maps Block"
+msgstr ""
 
 #: classes/class.map-widget.php:25
 msgid "A widget to display google maps"
@@ -31,6 +55,60 @@ msgstr ""
 
 #: classes/class.map-widget.php:90
 msgid "Select map"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:9
+msgid ""
+"Need help? We are ready to answer your questions. <a href=\"https://"
+"weplugins.com/support/\" target=\"_blank\">Contact Support</a>"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:14
+msgid "The plugin is not working"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:20
+msgid "The plugin suddenly stopped working"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:27
+msgid "The plugin broke my site"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:35
+msgid "I couldn't understand how to get it work"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:42
+msgid "I found a better plugin"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:48
+msgid "The plugin is great, but I need a specific feature"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:54
+msgid "It's a temporary deactivation, I'm just debugging an issue"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:60
+msgid "Other"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:203
+msgid "Processing"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:232
+msgid "Submit and Deactivate"
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:247
+msgid "Please tell us the reason so we can improve it."
+msgstr ""
+
+#: classes/wpgmp-feedback-form.php:312
+msgid "Skip and Deactivate"
 msgstr ""
 
 #: classes/wpgmp-template.php:24
@@ -128,8 +206,8 @@ msgstr ""
 msgid "Request a quotation"
 msgstr ""
 
-#: classes/wpgmp-template.php:65 wp-google-map-plugin.php:315
-#: wp-google-map-plugin.php:316
+#: classes/wpgmp-template.php:65 wp-google-map-plugin.php:361
+#: wp-google-map-plugin.php:362
 msgid "WP MAPS"
 msgstr ""
 
@@ -139,6 +217,10 @@ msgstr ""
 
 #: core/class.plugin-overview.php:242
 msgid "Getting Started Guide"
+msgstr ""
+
+#: core/class.tabular.php:457
+msgid "No items found."
 msgstr ""
 
 #: inc/modals/pro.php:11
@@ -185,7 +267,7 @@ msgstr ""
 msgid "View Demo"
 msgstr ""
 
-#: modules/group_map/model.group_map.php:40 modules/overview/views/how.php:68
+#: modules/group_map/model.group_map.php:40 modules/overview/views/how.php:73
 msgid "Add Marker Category"
 msgstr ""
 
@@ -196,6 +278,7 @@ msgstr ""
 
 #: modules/group_map/model.group_map.php:131
 #: modules/location/model.location.php:190 modules/map/model.map.php:243
+#: modules/tools/model.tools.php:85 modules/tools/model.tools.php:245
 msgid "Something went wrong. Please try again."
 msgstr ""
 
@@ -209,44 +292,44 @@ msgstr ""
 msgid "Marker category was added successfully."
 msgstr ""
 
-#: modules/group_map/views/form.php:27 modules/group_map/views/form.php:30
+#: modules/group_map/views/form.php:29 modules/group_map/views/form.php:32
 #: modules/group_map/views/manage.php:61 modules/group_map/views/manage.php:71
 msgid "Marker Category"
 msgstr ""
 
-#: modules/group_map/views/form.php:27
+#: modules/group_map/views/form.php:29
 msgid "Manage Marker Categories"
 msgstr ""
 
-#: modules/group_map/views/form.php:43 modules/group_map/views/manage.php:63
+#: modules/group_map/views/form.php:49 modules/group_map/views/manage.php:63
 msgid "Parent Category"
 msgstr ""
 
-#: modules/group_map/views/form.php:45
+#: modules/group_map/views/form.php:51
 msgid ""
 "You can optionally assign a parent marker category to the new marker "
 "category you are creating. Assign parent category if you want."
 msgstr ""
 
-#: modules/group_map/views/form.php:52 modules/group_map/views/form.php:57
+#: modules/group_map/views/form.php:58 modules/group_map/views/form.php:63
 msgid "Marker Category Title"
 msgstr ""
 
-#: modules/group_map/views/form.php:55
+#: modules/group_map/views/form.php:61
 msgid "Enter marker category name / title here."
 msgstr ""
 
-#: modules/group_map/views/form.php:63
+#: modules/group_map/views/form.php:69
 msgid "Select Marker Category Icon"
 msgstr ""
 
-#: modules/group_map/views/form.php:66 modules/location/views/form.php:185
+#: modules/group_map/views/form.php:72 modules/location/views/form.php:185
 #: modules/map/views/map-forms/layers-form.php:36
 #: modules/map/views/map-forms/locations-form.php:51
 msgid "Choose"
 msgstr ""
 
-#: modules/group_map/views/form.php:67 modules/location/views/form.php:186
+#: modules/group_map/views/form.php:73 modules/location/views/form.php:186
 #: modules/map/views/map-forms/layers-form.php:37
 msgid "Remove"
 msgstr ""
@@ -284,7 +367,7 @@ msgid "No marker categories were found."
 msgstr ""
 
 #: modules/location/model.location.php:42 modules/location/views/manage.php:46
-#: modules/overview/views/how.php:36
+#: modules/overview/views/how.php:41
 msgid "Add Location"
 msgstr ""
 
@@ -573,7 +656,7 @@ msgid "No locations were found."
 msgstr ""
 
 #: modules/map/model.map.php:39 modules/map/views/manage.php:83
-#: modules/overview/views/how.php:43
+#: modules/overview/views/how.php:48
 msgid "Add Map"
 msgstr ""
 
@@ -989,43 +1072,43 @@ msgstr ""
 msgid "DROP indicates that the marker should drop from the top of the map. "
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:103
+#: modules/map/views/map-forms/layers-form.php:104
 msgid "Infowindow Message for Locations"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:123
+#: modules/map/views/map-forms/layers-form.php:124
 msgid "Infowindow Message for Posts"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:134
+#: modules/map/views/map-forms/layers-form.php:135
 msgid "Infowindow Customization Settings"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:143
+#: modules/map/views/map-forms/layers-form.php:144
 msgid "Map Layers Settings"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:150
+#: modules/map/views/map-forms/layers-form.php:151
 msgid "Traffic Layer"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:154
+#: modules/map/views/map-forms/layers-form.php:155
 msgid "Please check to enable the traffic layer on map."
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:159
+#: modules/map/views/map-forms/layers-form.php:160
 msgid "Transit Layer"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:163
+#: modules/map/views/map-forms/layers-form.php:164
 msgid "Please check to enable the transit layer on map."
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:169
+#: modules/map/views/map-forms/layers-form.php:170
 msgid "Bicycling Layer"
 msgstr ""
 
-#: modules/map/views/map-forms/layers-form.php:173
+#: modules/map/views/map-forms/layers-form.php:174
 msgid "Please check to enable the bicycling layer on map."
 msgstr ""
 
@@ -1129,8 +1212,71 @@ msgstr ""
 msgid "Copy google map javascript style array from %s paste here."
 msgstr ""
 
-#: modules/map/views/map-forms/map-ui.php:14
+#: modules/map/views/map-forms/map-ui.php:12
 msgid "Map Theme Settings"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:21
+msgid "Apply Custom Design"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:24
+msgid "Apply your own design everywhere."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:32
+msgid "Custom CSS"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:34
+msgid "Enter any custom css here that needs to be loaded on frontend."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:35
+msgid "Enter custom css here to load on frontend."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:45
+msgid "Base Font Size"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:47
+msgid ""
+"Change it according to your site'sf ont family and font size. The default "
+"base font size is 16px."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:48
+msgid "Enter base font size."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:75
+msgid "Map Color Schema"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:86
+msgid "Apply Own Schema"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:89
+msgid ""
+"Apply your own color schema. Above selected map color schema will be ignored."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:97
+msgid "Primary Color"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:99
+msgid "Choose your primary color."
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:107
+msgid "Secondary Color"
+msgstr ""
+
+#: modules/map/views/map-forms/map-ui.php:109
+msgid "Choose your secondary color."
 msgstr ""
 
 #: modules/map/views/map-forms/marker-cluster-setting-form.php:12
@@ -1261,49 +1407,60 @@ msgstr ""
 msgid "How to Create your First Map?"
 msgstr ""
 
+#: modules/overview/views/how.php:25
+msgid "installing our Sample Data"
+msgstr ""
+
 #: modules/overview/views/how.php:26
+#, php-format
+msgid ""
+"Get rolling fast by %s. It sets up everything for you - just add your Google "
+"Maps API key and you are good to go!"
+msgstr ""
+
+#: modules/overview/views/how.php:31
 msgid "Google Map API Key"
 msgstr ""
 
-#: modules/overview/views/how.php:28
+#: modules/overview/views/how.php:33
 #, php-format
 msgid ""
 "First create a %s. Then go to %s page and insert your google maps API Key "
 "and save."
 msgstr ""
 
-#: modules/overview/views/how.php:37
+#: modules/overview/views/how.php:42
 #, php-format
 msgid "Create a location by using %s page."
 msgstr ""
 
-#: modules/overview/views/how.php:45
+#: modules/overview/views/how.php:50
 #, php-format
 msgid ""
 "Go to %s page, assign locations to the map and setup other details as per "
 "your requirements. Save the map."
 msgstr ""
 
-#: modules/overview/views/how.php:53
+#: modules/overview/views/how.php:58
 msgid "How to Display Map in Frontend?"
 msgstr ""
 
-#: modules/overview/views/how.php:57
+#: modules/overview/views/how.php:62
 msgid "Manage Map"
 msgstr ""
 
-#: modules/overview/views/how.php:58
+#: modules/overview/views/how.php:63
 #, php-format
 msgid ""
 "Go to %s and copy the shortcode then paste it to any page/post where you "
 "want to display map."
 msgstr ""
 
-#: modules/overview/views/how.php:64
+#: modules/overview/views/how.php:69
 msgid "How to Create Marker Category?"
 msgstr ""
 
-#: modules/overview/views/how.php:69
+#: modules/overview/views/how.php:74
 #, php-format
 msgid ""
 "Creating marker categories & assiging those to locations helps grouping the "
@@ -1314,45 +1471,46 @@ msgid ""
 "Locations\" page."
 msgstr ""
 
-#: modules/overview/views/how.php:77
+#: modules/overview/views/how.php:82
 msgid "Google Map API Troubleshooting"
 msgstr ""
 
-#: modules/overview/views/how.php:79
+#: modules/overview/views/how.php:84
 msgid ""
 "If your google maps is not working. Make sure you have checked following "
 "things."
 msgstr ""
 
-#: modules/overview/views/how.php:81
+#: modules/overview/views/how.php:86
 msgid "1. Make sure you have assigned locations to your map."
 msgstr ""
 
-#: modules/overview/views/how.php:82
+#: modules/overview/views/how.php:87
 msgid "2. You must have google maps api key."
 msgstr ""
 
-#: modules/overview/views/how.php:83
+#: modules/overview/views/how.php:88
 msgid ""
-"3. Check HTTP referrers. It must be *yourwebsite.com/* or *.yourwebsite.com/*"
+"3. Check HTTP referrers. It must be https://yourwebsiteurl.com or "
+"*yourwebsiteurl.com/*"
 msgstr ""
 
-#: modules/overview/views/how.php:89
+#: modules/overview/views/how.php:94
 msgid "support ticket"
 msgstr ""
 
-#: modules/overview/views/how.php:91
+#: modules/overview/views/how.php:96
 #, php-format
 msgid ""
 "If you need any assistance or if you still see any issue, feel free to "
 "create a %s and we'd be happy to help you asap."
 msgstr ""
 
-#: modules/overview/views/how.php:94
+#: modules/overview/views/how.php:99
 msgid "WP Maps Pro"
 msgstr ""
 
-#: modules/overview/views/how.php:96
+#: modules/overview/views/how.php:101
 #, php-format
 msgid ""
 "If you are looking for even more features, please have a look on the pro "
@@ -1407,7 +1565,7 @@ msgid ""
 "creation process :   "
 msgstr ""
 
-#: modules/settings/views/manage.php:39 wp-google-map-plugin.php:460
+#: modules/settings/views/manage.php:39 wp-google-map-plugin.php:500
 msgid "Copy HTTP Referrer To Clipboard"
 msgstr ""
 
@@ -1768,117 +1926,167 @@ msgstr ""
 msgid "Plugin Tools"
 msgstr ""
 
-#: wp-google-map-plugin.php:114
+#: modules/tools/model.tools.php:68
+msgid ""
+"Please entery \"DELETE\" in the provided textbox and then proceed to clear "
+"plugin's database."
+msgstr ""
+
+#: modules/tools/model.tools.php:81
+msgid "All the saved locations, marker categories and maps were removed."
+msgstr ""
+
+#: modules/tools/model.tools.php:242
+msgid ""
+"Sample Data has been created successfully. Go to Manage Maps and use the map "
+"shortcode."
+msgstr ""
+
+#: modules/tools/model.tools.php:249
+msgid ""
+"Please enter \"YES\" in the provided textbox and then submit the form to "
+"install sample data."
+msgstr ""
+
+#: modules/tools/views/manage.php:26 modules/tools/views/manage.php:30
+msgid "Install Sample Data"
+msgstr ""
+
+#: modules/tools/views/manage.php:44
+msgid ""
+"Click below to install sample data. This is very useful to get started. 2 "
+"categories, 5 locations and 1 map will be created for demonstration purpose."
+msgstr ""
+
+#: modules/tools/views/manage.php:53 modules/tools/views/manage.php:99
+msgid "Verify Action"
+msgstr ""
+
+#: modules/tools/views/manage.php:55
+msgid "Enter"
+msgstr ""
+
+#: modules/tools/views/manage.php:55
+msgid "& submit the button below to install sample map data."
+msgstr ""
+
+#: modules/tools/views/manage.php:64
+msgid "Create Sample Data"
+msgstr ""
+
+#: modules/tools/views/manage.php:72 modules/tools/views/manage.php:76
+msgid "Clean Database"
+msgstr ""
+
+#: modules/tools/views/manage.php:90
+msgid ""
+"Enter \"DELETE\" in the below textbox and submit the form to remove all "
+"locations, maps, and categories i.e compelete database generated by our "
+"plugin. This method is not recommended on a live site as everything related "
+"to our plugin will be removed except plugin settings."
+msgstr ""
+
+#: modules/tools/views/manage.php:102
+msgid "Enter "
+msgstr ""
+
+#: modules/tools/views/manage.php:102
+msgid ""
+" to give consent that you actually want to remove all maps data generated by "
+"our plugin."
+msgstr ""
+
+#: modules/tools/views/manage.php:110
+msgid "Submit"
+msgstr ""
+
+#: wp-google-map-plugin.php:160
 msgid "Settings"
 msgstr ""
 
-#: wp-google-map-plugin.php:115
+#: wp-google-map-plugin.php:161
 msgid "Pro Version"
 msgstr ""
 
-#: wp-google-map-plugin.php:190
-msgid "All"
-msgstr ""
-
-#: wp-google-map-plugin.php:191
-msgid "Show Locations"
-msgstr ""
-
-#: wp-google-map-plugin.php:192
-msgid "Sort by"
-msgstr ""
-
-#: wp-google-map-plugin.php:193
-msgid "Not working..."
-msgstr ""
-
-#: wp-google-map-plugin.php:194
-msgid "Select Category"
-msgstr ""
-
-#: wp-google-map-plugin.php:384
-msgid " Go Pro"
-msgstr ""
-
-#: wp-google-map-plugin.php:444
+#: wp-google-map-plugin.php:484
 msgid "Hide"
 msgstr ""
 
-#: wp-google-map-plugin.php:451
+#: wp-google-map-plugin.php:491
 msgid "Do you really want to delete this location?"
 msgstr ""
 
-#: wp-google-map-plugin.php:452
+#: wp-google-map-plugin.php:492
 msgid "Do you really want to delete this map?"
 msgstr ""
 
-#: wp-google-map-plugin.php:453
+#: wp-google-map-plugin.php:493
 msgid "Do you really want to delete this category?"
 msgstr ""
 
-#: wp-google-map-plugin.php:454
+#: wp-google-map-plugin.php:494
 msgid "Do you really want to delete this route?"
 msgstr ""
 
-#: wp-google-map-plugin.php:455
+#: wp-google-map-plugin.php:495
 msgid "Do you really want to delete this record?"
 msgstr ""
 
-#: wp-google-map-plugin.php:456
+#: wp-google-map-plugin.php:496
 msgid "Please select some records first to apply bulk action on them."
 msgstr ""
 
-#: wp-google-map-plugin.php:457
+#: wp-google-map-plugin.php:497
 msgid "Are you sure you want to delete the selected records ?"
 msgstr ""
 
-#: wp-google-map-plugin.php:458
+#: wp-google-map-plugin.php:498
 msgid "Overwrite existing google maps database?"
 msgstr ""
 
-#: wp-google-map-plugin.php:459
+#: wp-google-map-plugin.php:499
 msgid "Referrer Was Copied"
 msgstr ""
 
-#: wp-google-map-plugin.php:467
+#: wp-google-map-plugin.php:507
 msgid "Are you sure to delete item?"
 msgstr ""
 
-#: wp-google-map-plugin.php:627
+#: wp-google-map-plugin.php:671
 msgid "Choose Icons"
 msgstr ""
 
-#: wp-google-map-plugin.php:652
+#: wp-google-map-plugin.php:696
 msgid "Choose icon"
 msgstr ""
 
-#: wp-google-map-plugin.php:653
+#: wp-google-map-plugin.php:697
 msgid "Search icons"
 msgstr ""
 
-#: wp-google-map-plugin.php:681
+#: wp-google-map-plugin.php:725
 msgid "Please choose marker icon for the category."
 msgstr ""
 
-#: wp-google-map-plugin.php:681
+#: wp-google-map-plugin.php:725
 msgid "Insert into Post"
 msgstr ""
 
-#: wp-google-map-plugin.php:717
+#: wp-google-map-plugin.php:761
 msgid "Pro"
 msgstr ""
 
-#: wp-google-map-plugin.php:720
+#: wp-google-map-plugin.php:764
 #, php-format
 msgid ""
 "Upgrade hassle-free to %s version & unlock listing, routes,  directions, "
 "filtration, drawing & many more features."
 msgstr ""
 
-#: wp-google-map-plugin.php:720
+#: wp-google-map-plugin.php:764
 msgid "Upgrade Now"
 msgstr ""
 
-#: wp-google-map-plugin.php:866
+#: wp-google-map-plugin.php:910
 msgid "PRO"
 msgstr ""

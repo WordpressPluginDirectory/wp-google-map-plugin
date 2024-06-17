@@ -13,19 +13,19 @@ if ( isset( $_GET['doaction'] ) && 'edit' == sanitize_key($_GET['doaction']) && 
 	$map_obj = $map_obj->fetch( array( array( 'map_id', '=', intval( wp_unslash( $_GET['map_id'] ) ) ) ) );
 	$map = $map_obj[0];
 	if(!empty($map)) {
-		$map->map_street_view_setting = unserialize( $map->map_street_view_setting );
-		$map->map_route_direction_setting = unserialize( $map->map_route_direction_setting );
-		$map->map_all_control = unserialize( $map->map_all_control );
-		$map->map_info_window_setting = unserialize( $map->map_info_window_setting );
-		$map->style_google_map = unserialize( $map->style_google_map );
-		$map->map_locations = unserialize( $map->map_locations );
-		$map->map_layer_setting = unserialize( $map->map_layer_setting );
-		$map->map_polygon_setting = unserialize( $map->map_polygon_setting );
-		$map->map_polyline_setting = unserialize( $map->map_polyline_setting );
-		$map->map_cluster_setting = unserialize( $map->map_cluster_setting );
-		$map->map_overlay_setting = unserialize( $map->map_overlay_setting );
-		$map->map_infowindow_setting = unserialize( $map->map_infowindow_setting );
-		$map->map_geotags = unserialize( $map->map_geotags );
+		$map->map_street_view_setting = maybe_unserialize( $map->map_street_view_setting );
+		$map->map_route_direction_setting = maybe_unserialize( $map->map_route_direction_setting );
+		$map->map_all_control = maybe_unserialize( $map->map_all_control );
+		$map->map_info_window_setting = maybe_unserialize( $map->map_info_window_setting );
+		$map->style_google_map = maybe_unserialize( $map->style_google_map );
+		$map->map_locations = maybe_unserialize( $map->map_locations );
+		$map->map_layer_setting = maybe_unserialize( $map->map_layer_setting );
+		$map->map_polygon_setting = maybe_unserialize( $map->map_polygon_setting );
+		$map->map_polyline_setting = maybe_unserialize( $map->map_polyline_setting );
+		$map->map_cluster_setting = maybe_unserialize( $map->map_cluster_setting );
+		$map->map_overlay_setting = maybe_unserialize( $map->map_overlay_setting );
+		$map->map_infowindow_setting = maybe_unserialize( $map->map_infowindow_setting );
+		$map->map_geotags = maybe_unserialize( $map->map_geotags );
 		$data = (array) $map;
 	}
 	
@@ -55,7 +55,7 @@ $form->add_element('hidden', 'form_action_url', array('value' => $form->form_act
 
 if( get_option( 'wpgmp_api_key' ) == '' ) {
 
-$link = '<a href="javascript:void(0);" class="wpgmp_map_key_missing">'.esc_html__("create google maps api key","wp-google-map-plugin").'</a>';
+$link = '<a href="https://www.wpmapspro.com/docs/how-to-create-an-api-key/" class="wpgmp_map_key_missing" target="_blank">'.esc_html__("create google maps api key","wp-google-map-plugin").'</a>';
 $setting_link = '<a target="_blank" href="' . admin_url( 'admin.php?page=wpgmp_manage_settings' ) . '">'.esc_html__("here","wp-google-map-plugin").'</a>';
 	
 $form->add_element( 'message', 'wpgmp_key_required', array(

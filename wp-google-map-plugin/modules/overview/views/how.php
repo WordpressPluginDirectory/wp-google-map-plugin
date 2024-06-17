@@ -20,11 +20,16 @@ echo wp_kses_post( $form->show_header() );
  <div class="fc-12">
             <h4 class="fc-title-blue"><?php esc_html_e('How to Create your First Map?','wp-google-map-plugin');?>  </h4>
               <div class="wpgmp-overview">
+                <p>
+                <?php 
+                $install_sample_data_url = '<a target="_blank" href="'.admin_url( 'admin.php?page=wpgmp_manage_tools' ).'">'.esc_html__('installing our Sample Data','wp-google-map-plugin').'</a>';
+                echo sprintf( esc_html__( "Get rolling fast by %s. It sets up everything for you - just add your Google Maps API key and you are good to go!", 'wp-google-map-plugin' ), $install_sample_data_url); ?>
+               </p>
                 <ol>
 
                     <li><?php 
-                    $api_key_link = '<a href="javascript:void(0);" class="wpgmp_map_key_missing" >  '.esc_html__( 'Google Map API Key','wp-google-map-plugin').'</a>';
-                    $plugin_setting = '<a href="'.admin_url( 'admin.php?page=wpgmp_manage_settings' ).'"> Settings </a>';
+                    $api_key_link = '<a href="https://www.wpmapspro.com/docs/how-to-create-an-api-key/" class="wpgmp_map_key_missing" target="_blank" >  '.esc_html__( 'Google Map API Key','wp-google-map-plugin').'</a>';
+                    $plugin_setting = '<a href="'.admin_url( 'admin.php?page=wpgmp_manage_settings' ).'" target="_blank"> Settings </a>';
                     echo sprintf( esc_html__( 'First create a %s. Then go to %s page and insert your google maps API Key and save.', 'wp-google-map-plugin' ), $api_key_link, $plugin_setting );
 
                     ?>
@@ -80,13 +85,13 @@ echo wp_kses_post( $form->show_header() );
         <ul>
         <li> <?php esc_html_e('1. Make sure you have assigned locations to your map.','wp-google-map-plugin');?></li>
         <li> <?php esc_html_e('2. You must have google maps api key.','wp-google-map-plugin');?></li>
-        <li> <?php esc_html_e('3. Check HTTP referrers. It must be *yourwebsite.com/* or *.yourwebsite.com/*','wp-google-map-plugin');?> 
+        <li> <?php esc_html_e('3. Check HTTP referrers. It must be https://yourwebsiteurl.com or *yourwebsiteurl.com/*','wp-google-map-plugin');?> 
         </li>
         </ul>
         <p><img src="<?php echo WPGMP_IMAGES; ?>referrer.png"> </p>
         <p><?php
 
-        $support_ticket = '<a target="_blank" href="http://www.flippercode.com/support">'.esc_html__('support ticket','wp-google-map-plugin').'</a>';
+        $support_ticket = '<a target="_blank" href="https://weplugins.com/support/">'.esc_html__('support ticket','wp-google-map-plugin').'</a>';
 
             echo sprintf( esc_html__( "If you need any assistance or if you still see any issue, feel free to create a %s and we'd be happy to help you asap.", 'wp-google-map-plugin' ), $support_ticket);
             echo '<br><br>';    

@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Maps
-Plugin URI: https://www.flippercode.com
+Plugin URI: https://weplugins.com/
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
-Author URI: https://www.flippercode.com
-Version: 4.5.8
+Author URI: https://weplugins.com/
+Version: 4.6.1
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -74,8 +74,55 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			    add_action( 'wp_ajax_nopriv_wpgmp_hide_buy_notice', array( $this, 'wpgmp_hide_buy_notice' ) );
 				add_action('wp_ajax_wpgmp_hide_sample_notice', array($this, 'wpgmp_hide_sample_notice'));
 				add_action('wp_ajax_nopriv_wpgmp_hide_sample_notice', array($this, 'wpgmp_hide_sample_notice'));
+				add_action('wp_ajax_wpgmp_submit_uninstall_reason_action', array($this, 'wpgmp_submit_uninstall_reason_action_perform'));
+				add_action('wp_ajax_nopriv_wpgmp_submit_uninstall_reason_action', array($this, 'wpgmp_submit_uninstall_reason_action'));
 			}
 			
+		}
+
+		function wpgmp_submit_uninstall_reason_action_perform(){
+
+			
+		    global  $wp_version, $current_user;
+		    wp_verify_nonce($_REQUEST['wpgmp_ajax_nonce'], 'wpgmp_ajax_nonce');
+			$reason_id = isset($_REQUEST['reason_id']) ? stripcslashes(sanitize_text_field($_REQUEST['reason_id'])) : '';
+		    $basename  = isset($_REQUEST['plugin']) ? stripcslashes(sanitize_text_field($_REQUEST['plugin'])) : '';
+
+		    if (empty($reason_id) || empty($basename)) {
+		        exit;
+		    }
+
+		    $reason_info = isset($_REQUEST['reason_info']) ? stripcslashes(sanitize_textarea_field($_REQUEST['reason_info'])) : '';
+		    if (!empty($reason_info)) {
+		        $reason_info = substr($reason_info, 0, 255);
+		    }
+		    $is_anonymous = isset($_REQUEST['is_anonymous']) && 1 == $_REQUEST['is_anonymous'];
+
+
+		    $options = array(
+		        'product'     => 'WP Maps Plugin',
+		        'reason_id'   => $reason_id,
+		        'reason_info' => $reason_info,
+		    );
+
+		    if (!$is_anonymous) {
+		        $options['url']                  = get_site_url();
+		        $options['wp_version']           = $wp_version;
+		        $options['plugin_version']       = WPGMP_VERSION;
+		        $options['email'] = $current_user->data->user_email;
+		    }
+
+	        wp_remote_post(
+		        "https://weplugins.com/wp-json/weplugins/v1/plugin-deactivate",
+		        array(
+		            'method'  => 'POST',
+		            'body'    => $options,
+		            'timeout' => 15,
+		        )
+		    );
+		    exit;
+	    
+
 		}
  
 		/**
@@ -171,9 +218,9 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			
 
 			if ( get_option( 'wpgmp_api_key' ) != '' ) {
-				$google_map_api = 'https://maps.google.com/maps/api/js?key='.get_option( 'wpgmp_api_key' ).'&callback=wpgmpInitMap&libraries=geometry,places&language='.$language;
+				$google_map_api = 'https://maps.google.com/maps/api/js?key='.get_option( 'wpgmp_api_key' ).'&callback=wpgmpInitMap&libraries=geometry,places&loading=async&language='.$language;
 			} else {
-				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places&language='.$language;
+				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places&loading=async&language='.$language;
 			}
 
 						
@@ -387,9 +434,9 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			$api_key = get_option( 'wpgmp_api_key' );
 
 			if ( $api_key != '' ) {
-				$google_map_api = 'https://maps.google.com/maps/api/js?key='.$api_key.'&callback=wpgmpInitMap&libraries=geometry,places,drawing&language=en';
+				$google_map_api = 'https://maps.google.com/maps/api/js?key='.$api_key.'&callback=wpgmpInitMap&libraries=geometry,places,drawing&loading=async&language=en';
 			} else {
-				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places,drawing&language=en';
+				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places,drawing&loading=async&language=en';
 			}
 
 			wp_enqueue_style( 'thickbox' );
@@ -519,7 +566,11 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 		 * Eneque scripts at backend overview page only.
 		 */
 		 function wpgmp_overview_page_styles( $hook ) {
-			 
+		 	if($hook == 'plugins.php'){
+		 		wp_enqueue_style('wpgmp-modal-css', plugin_dir_url(__FILE__) . 'assets/css/modal.css');
+				wpgmp_add_feedback_form();
+		 	}
+		 	
 			if ( 'toplevel_page_wpgmp_view_overview' != $hook )
 			return;
 			wp_enqueue_style( 'custom-mailchimp-style', plugin_dir_url( __FILE__ ) . 'assets/css/mailchimp.css"');
@@ -765,13 +816,13 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				}
 			}
 
-			if ( is_array( $tables ) ) {
+			if ( isset($tables) && !empty($tables) && is_array( $tables ) ) {
 				foreach ( $tables as $i => $sql ) {
 					dbDelta( $sql );
 				}
 			}
 
-			$data = unserialize(get_option('wpgmp_ignore_buy_pro'));
+			$data = maybe_unserialize(get_option('wpgmp_ignore_buy_pro'));
 			if( !isset($data['wpgmp_show_sample_notice_time']) || empty($data['wpgmp_show_sample_notice_time'])){
 				$data['wpgmp_show_sample_notice_time'] = date('Y-m-d', strtotime('+3days'));
 				update_option('wpgmp_ignore_buy_pro', serialize($data));
@@ -790,7 +841,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.5.7' );
+			define( 'WPGMP_VERSION', '4.6.1' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );
@@ -863,16 +914,20 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 		 * Load all required core classes.
 		 */
 		private function wpgmp_load_files() {
-
 			
 			$coreInitialisationFile = plugin_dir_path( __FILE__ ).'core/class.initiate-core.php';
 			if ( file_exists( $coreInitialisationFile ) ) {
 			   require_once( $coreInitialisationFile );
 			}
+
+			$blockFile = WPGMP_PLUGIN_CLASSES.'class-wp-maps-block.php';
+			if ( file_exists( $blockFile ) ) {
+			   require_once( $blockFile );
+			}
 			
 			//Load Plugin Files	
 			$plugin_files_to_include = array('wpgmp-check-cookies.php','wpgmp-template.php','wpgmp-controller.php',
-											 'wpgmp-model.php','class.map-widget.php');
+											 'wpgmp-model.php','class.map-widget.php','wpgmp-feedback-form.php');
 			foreach ( $plugin_files_to_include as $file ) {
 
 				if(file_exists(WPGMP_PLUGIN_CLASSES . $file))

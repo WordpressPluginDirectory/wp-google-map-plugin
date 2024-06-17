@@ -10,9 +10,9 @@ $wpgmp_settings = get_option( 'wpgmp_settings', true );
 $api_key = get_option( 'wpgmp_api_key' );
 
 if ( $api_key != '' ) {
-	$google_map_api = 'https://maps.google.com/maps/api/js?key=' . $api_key . '&callback=wpgmpInitMap&libraries=geometry,places,drawing&language=en';
+	$google_map_api = 'https://maps.google.com/maps/api/js?key=' . $api_key . '&callback=wpgmpInitMap&libraries=geometry,places,drawing&loading=async&language=en';
 } else {
-	$google_map_api = 'https://maps.google.com/maps/api/js?libraries=geometry,places,drawing&callback=wpgmpInitMap&language=en';
+	$google_map_api = 'https://maps.google.com/maps/api/js?libraries=geometry,places,drawing&callback=wpgmpInitMap&loading=async&language=en';
 }
 
 
@@ -29,7 +29,7 @@ $form->add_element( 'group', 'wpgmp_general_settings', array(
 	'tutorial_link' => 'https://www.wpmapspro.com/docs/how-to-create-an-api-key/'
 ));
 
-$referrer = '*.'.$_SERVER['HTTP_HOST'].'/*';
+$referrer = home_url();
 $referrer_two = '*'.$_SERVER['HTTP_HOST'].'/*';
 
 $form->add_element(
@@ -58,7 +58,7 @@ $form->add_element('text','wpgmp_api_key',array(
 
 if ( get_option( 'wpgmp_api_key' ) == '' ) {
 
-	$generate_link = '<a href="javascript:void(0);" class="wpgmp_map_key_missing wpgmp_key_btn fc-btn fc-btn-default btn-lg" >' . esc_html__( 'Generate API Key', 'wpgmp-google-map' ) . '</a>';
+	$generate_link = '<a href="https://www.wpmapspro.com/docs/how-to-create-an-api-key/" class="wpgmp_map_key_missing wpgmp_key_btn fc-btn fc-btn-default btn-lg" target="_blank" >' . esc_html__( 'Generate API Key', 'wpgmp-google-map' ) . '</a>';
 
 	$form->add_element(
 		'html', 'wpgmp_key_btn', array(

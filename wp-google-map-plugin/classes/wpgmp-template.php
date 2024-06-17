@@ -46,7 +46,7 @@ if ( ! class_exists( 'WPGMP_Template' ) ) {
                     'desc1' => esc_html__( 'If you have any question and need our help, click below button to create a support ticket and our support team will assist you asap.', 'wp-google-map-plugin' ),
                     'link' => array( 
 						'label' => esc_html__( 'Create Ticket', 'wp-google-map-plugin' ),
-						'url' => 'https://www.flippercode.com/support'
+						'url' => 'https://weplugins.com/support/'
 					)
                 ),
 
@@ -57,7 +57,7 @@ if ( ! class_exists( 'WPGMP_Template' ) ) {
                     'link' => array(
                                     
                         'label' => esc_html__( 'Request a quotation', 'wp-google-map-plugin' ),
-                        'url' => 'https://www.flippercode.com/contact/'
+                        'url' => 'https://weplugins.com/contact/'
 					)
                 ),
 			);  

@@ -44,7 +44,7 @@ $form->add_element( 'group', 'wpgmp_location_info', array(
 
 if( get_option( 'wpgmp_api_key' ) == '' ) {
 
-$link = '<a href="javascript:void(0);" class="wpgmp_map_key_missing">'.esc_html__('create google maps api key','wp-google-map-plugin').'</a>';
+$link = '<a href="https://www.wpmapspro.com/docs/how-to-create-an-api-key/" class="wpgmp_map_key_missing" target="_blank">'.esc_html__('create google maps api key','wp-google-map-plugin').'</a>';
 	$setting_link = '<a target="_blank" href="' . admin_url( 'admin.php?page=wpgmp_manage_settings' ) . '">'.esc_html__('here','wp-google-map-plugin').'</a>';
 	
 $form->add_element( 'message', 'wpgmp_key_required', array(

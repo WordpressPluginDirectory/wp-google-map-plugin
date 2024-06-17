@@ -191,14 +191,6 @@ jQuery(document).ready(function($) {
         }
     });
 
-    $(".wpgmp_map_key_missing").click(function(e) {
-
-        e.preventDefault();
-        window.open('http://bit.ly/29Rlmfc', '_blank');
-        return false;
-    });
-
-
 
     var maptable = $('#wpgmp_google_map_data_table').dataTable({
         "lengthMenu": [

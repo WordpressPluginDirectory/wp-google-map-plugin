@@ -1,17 +1,17 @@
-=== WordPress Plugin for Google Maps - WP MAPS ===
+=== WP Maps - Display Google Maps Perfectly with Ease ===
 Contributors:      flippercode
 Plugin Name:       WP MAPS
-Tags: wordpress org map, map, maps, google maps, wp google maps, google map plugin, wordpress google maps, gdpr google maps, gdpr maps, custom markers, google maps wordpress, google maps embed, custom infowindow, map locations, store locator 
+Tags: google map,google maps,map,maps,map block
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.5.2
-Stable tag: 4.5.8
+Tested up to: 6.5.3
+Stable tag: 4.6.1
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easy to use & most advanced google maps plugin for WordPress. Create multiple google maps with custom marker icons, marker categories, custom infowindow messages, images and more. Apply snazzy styles to maps. Integrates the google maps api perfectly for WordPress.
+Show Google Maps on your site with WP Maps. Enjoy easy settings for unlimited maps and precise locations.
 
 == Description ==
 
@@ -165,9 +165,37 @@ This section describes how to install the plugin and get it working.
     7. Assign locations to the map.
     8. Manage maps page.
     9. Plugin settings page.
+    10. Map block for Gutenberg editor.  
 
 == Upgrade Notice ==
 
+= 4.6.1 =
+  - New Gutenberg block added to display and customise the google map with live preview right inside the Gutenberg editor.
+  - Unlocked one more paid feature from pro version - Map Themes. User can apply color theme to Map UI.
+  - More hooks added to make plugin more extensible and scalable.
+
+= 4.6.0 =
+  - Implemented a popup to get feedback from the plugin user if user deactivates the plugin.
+  - Google API loaded via asynchronous way to speedup page load process.
+
+= 4.5.9 =
+  - Referrer link updated inside plugin and some internal links updated inside core framework
+
+= 4.5.8 =
+  - Plugin tags updated plus unsued file removed.
+
+= 4.5.7 =
+  - Get Direction link placeholder {get_directions_link} support added to display Get Direction link inside Infowindow.
+
+= 4.5.6 =
+  - Playground link added and support links updated
+
+= 4.5.5 =
+  - Design improvements using css
+
+= 4.5.4 =
+  - Remove entry of same category from parent category dropdown when editing that category in backend
+  
 = 4.5.3 =
   - Translated in 15 Languages.
   - Tutorial links added.

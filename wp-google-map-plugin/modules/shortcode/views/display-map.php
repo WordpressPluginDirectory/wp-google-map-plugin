@@ -59,7 +59,7 @@ if ( $atts ) {
 			$first_address = current( $address_array );
 			$rm_space_ads = str_replace( ' ','+',$first_address );
 			$explode_ads = explode( '|',$rm_space_ads );
-			$geocode = wp_remote_get( 'http://maps.google.com/maps/api/geocode/json?address='.$explode_ads[0].'&sensor=false' );
+			$geocode = wp_remote_get( 'http://maps.google.com/maps/api/geocode/json?address='.$explode_ads[0].'&loading=async&sensor=false' );
 
 			if ( ! isset( $geocode->errors ) ) {
 				$output = json_decode( $geocode['body'] );
@@ -162,7 +162,7 @@ if ( is_array( $address_array ) ) {
 		foreach ( $address_array as $address ) {
 			$explode_address = explode( '|',$address );
 			$rm_space_ads = str_replace( ' ','+',$explode_address[0] );
-			$geocode = wp_remote_get( 'http://maps.google.com/maps/api/geocode/json?address='.$rm_space_ads.'&sensor=false' );
+			$geocode = wp_remote_get( 'http://maps.google.com/maps/api/geocode/json?address='.$rm_space_ads.'&loading=async&sensor=false' );
 			if ( ! isset( $geocode->errors ) ) {
 				$output = json_decode( $geocode['body'] );
 				$lat = $output->results[0]->geometry->location->lat;
