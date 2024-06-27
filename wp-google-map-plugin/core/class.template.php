@@ -290,7 +290,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 			 		<div class="fc-4 col-sm-3 col-xs-3 product_header_desc">
                         <div class="product_name">'.$this->options['productName'].' <span class="fc-badge">'.$this->options['productVersion'].'</span></div>
                     </div>
-                    <div class="fc-6 col-sm-6 col-xs-6 product-annoucement">'.$plugin_updates['annoucement'].'</div>
+                    <div class="fc-6 col-sm-6 col-xs-6 product-annoucement"><a href="https://wordpress.org/support/plugin/'.$this->options['productSlug'].'/reviews/#new-post" target="_blank">' . sprintf(esc_html__("Add Your %s in %s", "wp-google-map-plugin"), '<span class="stars">★★★★★</span>', 'wordpress.org') . '</a></div>
                     <div class="fc-2 col-sm-3 col-xs-3 social_media_area">
                     <div class="social-media-links">
                            <a href="' . $this->options['docURL'] . '" target="_blank"><img src="'. plugin_dir_url( __DIR__ ).'assets/images/vector.png"></a>
@@ -301,10 +301,11 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
                     
             return apply_filters('fc_after_plugin_header', $output );        
 		}
+		
 		public function product_overview() {
 			
 			if( !isset($this->options['no_header']) && @$this->options['no_header'] !== true ) {
-				echo $this->show_header();
+				echo wp_kses_post($this->show_header());
 			}
     		$productOverviewObj = new Flippercode_Product_Overview($this->options);
 		
@@ -1877,8 +1878,8 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 				return; }
 
 			$output = '';
-			$output .= '<div id="message" class="' . $response['type'] . '">';
-			$output .= '<p><strong>' . $response['message'] . '</strong></p></div>';
+			$output .= '<div id="message" class="' . esc_attr($response['type']) . '">';
+			$output .= '<p><strong>' . esc_html($response['message']) . '</strong></p></div>';
 
 			return $output;
 		}

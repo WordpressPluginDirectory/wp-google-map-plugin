@@ -294,7 +294,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 			$map_obj = $this->fetch( array( array( 'map_id', '=', intval( wp_unslash( $_GET['map_id'] ) ) ) ) );
 			$map     = $map_obj[0];
 			if ( ! empty( $map ) ) {
-				$map->map_all_control = unserialize( $map->map_all_control );
+				$map->map_all_control = maybe_unserialize( $map->map_all_control );
 			}
 
 			$data = (array) $map;

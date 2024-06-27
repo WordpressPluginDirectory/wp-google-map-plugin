@@ -75,7 +75,7 @@ if ( ! class_exists( 'WPGMP_Model_Group_Map' ) ) {
 			foreach ( $objects as $object ) {
 				if ( strstr( $object->group_marker, 'wp-google-map-pro/icons/' ) !== false ) {
 					$object->group_marker = str_replace( 'icons', 'assets/images/icons', $object->group_marker ); }
-					$object->extensions_fields = unserialize( $object->extensions_fields );
+					$object->extensions_fields = maybe_unserialize( $object->extensions_fields );
 
 			}
 			if ( isset( $objects ) ) {

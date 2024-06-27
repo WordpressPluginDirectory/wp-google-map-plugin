@@ -12,8 +12,19 @@ $auto_fix = '';
 
 $options = apply_filters('wpgmp_shortcode_params', $options);
 
-if ( isset( $options['id'] ) ) {
-$map_id = $options['id'];
+if ( isset( $options['id'] ) && !empty($options['id']) ) {
+
+	$map_id = $options['id'];
+	$map_id = sanitize_text_field($map_id);
+
+	if (!is_numeric($map_id)) {
+        return '';
+    }
+    $map_id = intval($map_id);
+    if ($map_id <= 0) {
+        return '';
+    }
+    
 } else { return ''; }
 
 if ( isset($wpgmp_settings['wpgmp_gdpr']) && $wpgmp_settings['wpgmp_gdpr'] == true ) {
@@ -31,13 +42,13 @@ if ( isset($wpgmp_settings['wpgmp_gdpr']) && $wpgmp_settings['wpgmp_gdpr'] == tr
 }
 
 if ( isset( $options['show'] ) ) {
-$show_option = $options['show'];
+$show_option = sanitize_text_field($options['show']);
 } else {
 $show_option = 'default' ;
 }
 $shortcode_filters = array();
 if ( isset( $options['category'] ) ) {
-$shortcode_filters['category'] = $options['category'];
+$shortcode_filters['category'] = sanitize_text_field($options['category']);
 }
 // Fetch map information.
 $modelFactory = new WPGMP_Model();
@@ -98,11 +109,11 @@ $map_locations = array_slice($map_locations,0,$how_many);
 $apply_category_in = false;
 $apply_category_not_in = false;
 
-if( isset($location_criteria['category__in']) and is_array($location_criteria['category__in']) ) {
+if( isset($location_criteria['category__in']) && is_array($location_criteria['category__in']) ) {
 $apply_category_in = true;
 }
 
-if( isset($location_criteria['category__not_in']) and is_array($location_criteria['category__not_in']) ) {
+if( isset($location_criteria['category__not_in']) && is_array($location_criteria['category__not_in']) ) {
 $apply_category_not_in = true;
 }
 
@@ -132,7 +143,7 @@ $map->map_all_control['search_control'] = false;
 $map_data['map_options'] = array(
 'center_lat' => sanitize_text_field( $map->map_all_control['map_center_latitude'] ),
 'center_lng' => sanitize_text_field( $map->map_all_control['map_center_longitude'] ),
-'zoom' => (isset( $options['zoom'] )) ? intval( $options['zoom'] ): intval( $map->map_zoom_level ),
+'zoom' => (isset( $options['zoom'] )) ? intval( sanitize_text_field($options['zoom']) ): intval( sanitize_text_field($map->map_zoom_level) ),
 'map_type_id' => sanitize_text_field( $map->map_type ),
 'fit_bounds'  => ( 'true' == sanitize_text_field( $map->map_all_control['fit_bounds'] ) ),
 'draggable' => (!isset($map->map_all_control['map_draggable']) || sanitize_text_field( $map->map_all_control['map_draggable'] ) != 'false'),

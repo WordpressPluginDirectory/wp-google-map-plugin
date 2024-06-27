@@ -5,7 +5,7 @@ Plugin URI: https://weplugins.com/
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
 Author URI: https://weplugins.com/
-Version: 4.6.1
+Version: 4.6.2
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -140,7 +140,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				$font_families   = $styles_and_scripts['font_families'];
 				$fc_skin_styles  = $styles_and_scripts['fc_skin_styles']; 
 				if ( ! empty( $fc_skin_styles ) ) {
-					echo '<style>' . $fc_skin_styles . '</style>';
+					echo '<style>' . esc_html($fc_skin_styles) . '</style>';
 				}
 				if ( ! empty( $font_families ) ) {
 					$font_families = array_unique($font_families);
@@ -285,6 +285,20 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 		 */
 		function wpgmp_show_location_in_map($atts, $content = null) {
 			
+			if(!isset($atts['id']) || empty($atts['id']))
+				return '';
+
+			$atts['id'] = sanitize_text_field($atts['id']); 
+
+    	    if (!is_numeric($atts['id'])) {
+		        return '';
+		    }
+		    
+		    $atts['id'] = intval($atts['id']);
+		    if ($atts['id'] <= 0) {
+		        return '';
+		    }
+		    
 			try {
 				$factoryObject = new WPGMP_Controller();
 				$viewObject = $factoryObject->create_object( 'shortcode' );
@@ -292,7 +306,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				 return $output;
 
 			} catch (Exception $e) {
-				echo WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) );
+				echo wp_kses_post( WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) ) );
 
 			}
 
@@ -310,7 +324,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				 return $output;
 
 			} catch (Exception $e) {
-				echo WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) );
+				echo wp_kses_post( WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) ) );
 
 			}
 
@@ -345,7 +359,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				$viewObject->display( $obj_operation );
 
 			} catch (Exception $e) {
-				echo WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) );
+				echo wp_kses_post( WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) ) );
 
 			}
 
@@ -571,9 +585,6 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				wpgmp_add_feedback_form();
 		 	}
 		 	
-			if ( 'toplevel_page_wpgmp_view_overview' != $hook )
-			return;
-			wp_enqueue_style( 'custom-mailchimp-style', plugin_dir_url( __FILE__ ) . 'assets/css/mailchimp.css"');
 		 }
 		 
 		/**
@@ -702,7 +713,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			$file_display = array( 'jpg', 'jpeg', 'png', 'gif' );
 
 			if ( file_exists( $dir ) == false ) {
-				echo 'Directory \'', $dir, '\' not found!';
+				echo 'Directory \'', esc_html($dir), '\' not found!';
 
 			} else {
 				$dir_contents = scandir( $dir );
@@ -841,7 +852,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.6.1' );
+			define( 'WPGMP_VERSION', '4.6.2' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );

@@ -5,8 +5,8 @@ Tags: google map,google maps,map,maps,map block
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.5.3
-Stable tag: 4.6.1
+Tested up to: 6.5.5
+Stable tag: 4.6.2
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -167,7 +167,22 @@ This section describes how to install the plugin and get it working.
     9. Plugin settings page.
     10. Map block for Gutenberg editor.  
 
+== Changelog ==
+
+= 4.6.2 =
+* Fix : Security issue fixed
+* New : Backend UI improved
+
+= 4.6.1 =
+* New : Gutenberg map block component added
+
+= 4.6.0 =
+* New : API loaded asynchronously for faster map page load.
+
 == Upgrade Notice ==
+
+= 4.6.2 =
+  - Upgrade for more stable and secure version of plugin. Security issue was fixed.
 
 = 4.6.1 =
   - New Gutenberg block added to display and customise the google map with live preview right inside the Gutenberg editor.

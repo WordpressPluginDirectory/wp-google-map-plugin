@@ -72,31 +72,31 @@ if ( $atts ) {
 
 if ( empty( $atts['width'] ) ) {
 	$map_width = '100%';
-} else { $map_width = str_replace( 'px','',$atts['width'] ).'px'; }
+} else { $map_width = str_replace( 'px','',sanitize_text_field($atts['width']) ).'px'; }
 
 if ( empty( $atts['height'] ) ) {
 	$map_height = '500px';
-} else { $map_height = str_replace( 'px','',$atts['height'] ).'px'; }
+} else { $map_height = str_replace( 'px','',sanitize_text_field($atts['height']) ).'px'; }
 
 if ( empty( $atts['zoom'] ) ) {
 	$zoom = 14;
-} else { $zoom = (int)$atts['zoom']; }
+} else { $zoom = (int)sanitize_text_field($atts['zoom']); }
 
 if ( empty( $atts['map_type'] ) ) {
 	$map_type = 'ROADMAP';
-} else { $map_type = $atts['map_type']; }
+} else { $map_type = sanitize_text_field($atts['map_type']); }
 
 if ( empty( $atts['scroll_wheel'] ) ) {
 	$scroll_wheel = 'true';
-} else { $scroll_wheel = $atts['scroll_wheel']; }
+} else { $scroll_wheel = sanitize_text_field($atts['scroll_wheel']); }
 
 if ( empty( $atts['map_draggable'] ) ) {
 	$map_draggable = 'true';
-} else { $map_draggable = $atts['map_draggable']; }
+} else { $map_draggable = sanitize_text_field($atts['map_draggable']); }
 
 $wpgmp_local = array();
 if ( $atts['language'] ) {
-	$wpgmp_local['language'] = $atts['language'];
+	$wpgmp_local['language'] = sanitize_text_field($atts['language']);
 } else { $wpgmp_local['language'] = 'en'; }
 
 

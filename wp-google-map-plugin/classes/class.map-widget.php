@@ -33,18 +33,22 @@ if ( ! class_exists( 'WPGMP_Google_Map_Widget_Class' ) ) {
 		function widget( $args, $instance ) {
 
 			global $wpdb,$map;
+			
 			extract( $args );
 
 			$map_id = apply_filters( 'widget_title', empty( $instance['map_id'] ) ? '' : $instance['map_id'], $instance, $this->id_base );
 	   		$map_title = apply_filters( 'widget_text', empty( $instance['map_title'] ) ? '' : $instance['map_title'], $instance );
 
-    		echo $before_widget;
+    		echo wp_kses_post($before_widget);
 	      	if ( ! empty( $map_title ) ) {
-				echo $before_title.$map_title.$after_title; }
+				echo wp_kses_post($before_title.$map_title.$after_title);
+			}
 
 			if ( ! empty( $map_id ) ) {
-				echo do_shortcode( '[put_wpgm id='.$map_id.']' ); }
-			echo $after_widget;
+				echo wp_kses_post(do_shortcode( '[put_wpgm id='.$map_id.']' ));
+			}
+
+			echo wp_kses_post($after_widget);
 		}
 		/**
 		 * Update widget options.
@@ -69,7 +73,7 @@ if ( ! class_exists( 'WPGMP_Google_Map_Widget_Class' ) ) {
 			$map_records = $wpdb->get_results( 'SELECT * FROM '.TBL_MAP.'' );
 		?>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'map_title' );?>">
+				<label for="<?php echo esc_attr($this->get_field_id( 'map_title' ));?>">
 					<?php esc_html_e( 'Title:' , 'wp-google-map-plugin' );
 					
 					if(isset($instance) && !empty($instance) ){
@@ -80,13 +84,13 @@ if ( ! class_exists( 'WPGMP_Google_Map_Widget_Class' ) ) {
 		
 					?>
 				</label>
-			<input type="text" value="<?php echo esc_html($title); ?>" name="<?php echo $this->get_field_name( 'map_title' ); ?>" class="widefat" style="margin-top:6px;">
+			<input type="text" value="<?php echo esc_html($title); ?>" name="<?php echo esc_attr($this->get_field_name( 'map_title' )); ?>" class="widefat" style="margin-top:6px;">
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'map_id' );?>">
+				<label for="<?php echo esc_attr($this->get_field_id( 'map_id' ));?>">
 					<?php esc_html_e( 'Select Your Map:' , 'wp-google-map-plugin' );?>
 				</label>
-				<select id="<?php echo $this->get_field_id( 'map_id' ); ?>" name="<?php echo $this->get_field_name( 'map_id' ); ?>" class="widefat" style="margin-top:6px;">
+				<select id="<?php echo esc_attr($this->get_field_id( 'map_id' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'map_id' )); ?>" class="widefat" style="margin-top:6px;">
 		        <option value=""><?php esc_html_e( 'Select map', 'wp-google-map-plugin' ) ?></option>
 				<?php
 				

@@ -348,6 +348,6 @@ $map_data['page'] = 'edit_location';
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-var map = $("#wpgmp_map").maps("<?php echo base64_encode(wp_json_encode( $map_data )); ?>").data('wpgmp_maps');
+   var map = $("#wpgmp_map").maps("<?php echo esc_js( base64_encode( wp_json_encode( $map_data ) ) ); ?>").data('wpgmp_maps');
 });
 </script>

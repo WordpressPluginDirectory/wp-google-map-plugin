@@ -393,7 +393,7 @@ if ( ! class_exists( 'Flippercode_Product_Overview' ) ) {
 		function renderBlocks() {
 		
 			$this->finalproductOverviewMarkup = $this->commonBlockMarkup.$this->pluginSpecificBlockMarkup;
-			echo $this->finalproductOverviewMarkup;
+			echo wp_kses_post($this->finalproductOverviewMarkup);
 
 		}
 

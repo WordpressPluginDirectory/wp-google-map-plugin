@@ -32,7 +32,7 @@ if ( class_exists( 'WP_List_Table_Helper' ) and ! class_exists( 'WPGMP_Maps_Tabl
 	  	 * @param array $item Map Row.
 	  	 */
 		public function column_shortcodes($item) {
-			echo '[put_wpgm id='.$item->map_id.']';	}
+			echo esc_html('[put_wpgm id='.$item->map_id.']');	}
 		/**
 		 * Clone of the map.
 		 * @param  integer $item Map ID.

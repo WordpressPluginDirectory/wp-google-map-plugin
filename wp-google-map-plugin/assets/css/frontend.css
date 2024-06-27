@@ -2618,3 +2618,28 @@ Accordion layout
     float: none;
     display: inline-block;
 }
+
+
+.gm-ui-hover-effect{
+    position: absolute !important;
+    right: 0;
+}
+.gm-style-iw-d{
+    padding-right: 20px;
+}
+.wpgmp_infowindow.fc-infowindow-default .fc-badge.info{
+    margin-left: 8px;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .wpgmp_map_container .gm-style-iw {
+        max-width: 36vh !important;
+    }
+}
+@media (max-width: 768px) {
+    .gm-style .gm-style-iw-a {
+        width: 40vh !important;
+    }
+    .wpgmp_infowindow.fc-infowindow-default .fc-badge.info{
+        margin-left: 0px;
+    }
+}

@@ -29,7 +29,7 @@ img.noclass.selected_image {
     width: auto;
     height: auto;
     float: left;
-    margin-right: 10px;
+    margin: 0 10px 0 0 !important;
 }
 
 .wpgmp-overview .hiderow {
@@ -925,11 +925,19 @@ padding-left: 10px;
     clear: both;
 }
 .choose_image,  .remove_image {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 0px;
-    border: none;
-    padding: 10px;
+        padding: 0 12px;
+    min-height: 32px;
+    width: auto;
+    border-radius: 4px !important;
+    margin-top: 0px !important;
+    line-height: 2.30769231 !important;
+    font-size: 13px;
+} 
+.remove_image {
+    margin-left: 15px !important;
+}
+.choose_image:hover,.remove_image:hover {
+    opacity: 0.8;
 }
 .fc-fixed-footer {
     position: fixed;
@@ -1321,4 +1329,21 @@ box-shadow: 0 1px 3px rgb(25 143 217 / 30%), inset 0 -1px 0 rgb(0 0 0 / 5%);
 
 .wpgmp_location_selection{
     margin-top: -30px;
+}
+
+.product-annoucement{
+    text-align: left;
+}
+.product-annoucement a{
+    text-decoration: none;
+}
+.product-annoucement a:hover{
+    opacity: 0.9;
+}
+.product-annoucement a span{
+    color: #F4D03E;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
 }

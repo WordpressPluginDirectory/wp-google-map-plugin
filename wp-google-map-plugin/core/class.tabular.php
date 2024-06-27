@@ -298,12 +298,13 @@ if ( ! class_exists( 'WP_List_Table_Helper' ) ) {
 											$form_attr .= "id = {$this->form_id}";
 										}
 										if(!empty($this->form_class)){
+											$this->form_class = esc_attr($this->form_class);
 											$form_attr .= " class  = 'wpgmp_manage_form {$this->form_class}'";
 										}
 										
 									?>
 									
-									<form method="post" action="<?php echo admin_url( 'admin.php?page='.$this->admin_listing_page_name ); ?>" <?php echo $form_attr; ?> >
+									<form method="post" action="<?php echo esc_url ( admin_url( 'admin.php?page='.$this->admin_listing_page_name ) ); ?>" <?php echo esc_html($form_attr); ?> >
 									<?php
 									$this->search_box( 'search', 'search_id' );
 									$this->display();
@@ -452,9 +453,9 @@ if ( ! class_exists( 'WP_List_Table_Helper' ) ) {
 		function no_items(){
 			
 			if(!empty($this->translation['no_records_found']))
-			echo $this->translation['no_records_found'];
+			echo esc_html($this->translation['no_records_found']);
 			else
-			_e( 'No items found.' );
+			esc_html_e( 'No items found.' );
 			
 		}
 		
@@ -776,7 +777,7 @@ if ( ! class_exists( 'WP_List_Table_Helper' ) ) {
 			}
 			$this->_pagination = "<div class='tablenav-pages{$page_class}'>$output</div>";
 
-			echo $this->_pagination;
+			echo wp_kses_post($this->_pagination);
 		}
 
 	}

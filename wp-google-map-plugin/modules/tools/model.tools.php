@@ -168,7 +168,7 @@ if ( ! class_exists( 'WPGMP_Model_Tools' ) ) {
 
 						$import_code = wp_unslash( $export_code );
 						if ( trim( $import_code ) != '' ) {
-							$map_settings = unserialize( base64_decode( $import_code ) );
+							$map_settings = maybe_unserialize( base64_decode( $import_code ) );
 
 							if ( is_object( $map_settings ) ) {
 								$sdata                  = array();

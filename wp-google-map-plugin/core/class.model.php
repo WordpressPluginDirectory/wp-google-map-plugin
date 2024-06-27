@@ -166,72 +166,88 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		 * @param boolean $ascending Order by.
 		 * @param string  $limit     Limit.
 		 */
+
 		function get($table = '', $fcv_array = array(), $sortBy = '', $ascending = true, $limit = '') {
 
-			$connection = FlipperCode_Database::connect();
+		    global $wpdb;
+		    $connection = FlipperCode_Database::connect();
 
-			$sqlLimit = ('' != $limit ? "LIMIT $limit" : '');
-			$this->query = "SELECT * FROM $this->table ";
-			$ruleList = array();
-			$objects  = array();
+		    $table = esc_sql($table);
 
-			if ( count( $fcv_array ) > 0 ) {
+		    $sqlLimit = ('' != $limit ? "LIMIT %d" : '');
+		    $this->query = "SELECT * FROM {$this->table} ";
+		    $params = array();
 
-				$this->query .= ' WHERE ';
+		    if (count($fcv_array) > 0) {
+		        $this->query .= ' WHERE ';
 
-				for ( $i = 0, $c = count( $fcv_array ); $i < $c; $i++ ) {
+		        for ($i = 0, $c = count($fcv_array); $i < $c; $i++) {
+		            if (count($fcv_array[$i]) == 1) {
+		                $this->query .= ' ' . $fcv_array[$i][0] . ' ';
+		                continue;
+		            } else {
+		                if ($i > 0 && count($fcv_array[$i - 1]) != 1) {
+		                    $this->query .= ' AND ';
+		                }
+		                if (isset($this->pog_attribute_type[$fcv_array[$i][0]]['db_attributes']) && 'NUMERIC' != $this->pog_attribute_type[$fcv_array[$i][0]]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[$fcv_array[$i][0]]['db_attributes'][0]) {
+		                    if (1 == $GLOBALS['configuration']['db_encoding']) {
+		                        $value = $this->is_column($fcv_array[$i][2]) ? 'BASE64_DECODE(' . $fcv_array[$i][2] . ')' : '%s';
+		                        $this->query .= 'BASE64_DECODE(`' . $fcv_array[$i][0] . '`) ' . $fcv_array[$i][1] . ' ' . $value;
+		                        if (!$this->is_column($fcv_array[$i][2])) $params[] = $fcv_array[$i][2];
+		                    } else {
+		                        $value = $this->is_column($fcv_array[$i][2]) ? $fcv_array[$i][2] : '%s';
+		                        $this->query .= '`' . $fcv_array[$i][0] . '` ' . $fcv_array[$i][1] . ' ' . $value;
+		                        if (!$this->is_column($fcv_array[$i][2])) $params[] = $this->escape($fcv_array[$i][2]);
+		                    }
+		                } else {
+		                    $value = $this->is_column($fcv_array[$i][2]) ? $fcv_array[$i][2] : '%s';
+		                    if ('in' == strtolower($fcv_array[$i][1])) {
+		                        $values = explode(',', $fcv_array[$i][2]);
+		                        $placeholders = implode(',', array_fill(0, count($values), '%s'));
+		                        $params = array_merge($params, $values); // Assuming IN clause values are handled properly
+		                        $value = "($placeholders)";
+		                    } else {
+		                        $params[] = $fcv_array[$i][2];
+		                    }
+		                    $this->query .= '`' . $fcv_array[$i][0] . '` ' . $fcv_array[$i][1] . ' ' . $value;
+		                }
+		            }
+		        }
+		    }
 
-					if ( count( $fcv_array[ $i ] ) == 1 ) {
-						 $this->query .= ' '.$fcv_array[ $i ][0].' ';
-						continue;
-					} else {
-						if ( $i > 0 && count( $fcv_array[ $i -1 ] ) != 1 ) {
-							$this->query .= ' AND ';
-						}
-						if ( isset( $this->pog_attribute_type[ $fcv_array[ $i ][0] ]['db_attributes'] ) && 'NUMERIC' != $this->pog_attribute_type[ $fcv_array[ $i ][0] ]['db_attributes'][0]  &&  'SET' != $this->pog_attribute_type[ $fcv_array[ $i ][0] ]['db_attributes'][0] ) {
-							if ( 1 == $GLOBALS['configuration']['db_encoding'] ) {
-								$value = $this->is_column( $fcv_array[ $i ][2] ) ? 'BASE64_DECODE('.$fcv_array[ $i ][2].')' : "'".$fcv_array[ $i ][2]."'";
-								$this->query .= 'BASE64_DECODE(`'.$fcv_array[ $i ][0].'`) '.$fcv_array[ $i ][1].' '.$value;
-							} else {
-								$value = $this->is_column( $fcv_array[ $i ][2] ) ? $fcv_array[ $i ][2] : "'".$this->escape( $fcv_array[ $i ][2] )."'";
-								$this->query .= '`'.$fcv_array[ $i ][0].'` '.$fcv_array[ $i ][1].' '.$value;
-							}
-						} else {
+		    if (!empty($sortBy)) {
+		        if (isset($this->pog_attribute_type[$sortBy]['db_attributes']) && 'NUMERIC' != $this->pog_attribute_type[$sortBy]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[$sortBy]['db_attributes'][0]) {
+		            if (1 == $GLOBALS['configuration']['db_encoding']) {
+		                $sortBy = "BASE64_DECODE($sortBy) ";
+		            } else {
+		                $sortBy = "$sortBy ";
+		            }
+		        } else {
+		            $sortBy = "$sortBy ";
+		        }
+		    } else {
+		        $sortBy = $this->unique;
+		    }
 
-							$value = $this->is_column( $fcv_array[ $i ][2] ) ? $fcv_array[ $i ][2] : "'".$fcv_array[ $i ][2]."'";
-							if ( 'in' == strtolower( $fcv_array[ $i ][1] ) ) {
-								$value = str_replace( "'",'',$value );
-								$value = '('.$value.')';
-							}
-							 $this->query .= '`'.$fcv_array[ $i ][0].'` '.$fcv_array[ $i ][1].' '.$value;
-						}
-					}
-				}
-			}
+		    $sort_order = ($ascending) ? 'ASC' : 'DESC';
+		    $order_by_clause = sanitize_sql_orderby($sortBy . ' ' . $sort_order);
+		    $this->query .= ' ORDER BY ' . $order_by_clause . " $sqlLimit";
 
-			if ( ! empty( $sortBy ) ) {
-				if ( isset( $this->pog_attribute_type[ $sortBy ]['db_attributes'] ) && 'NUMERIC' != $this->pog_attribute_type[ $sortBy ]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[ $sortBy ]['db_attributes'][0] ) {
-					if ( 1 == $GLOBALS['configuration']['db_encoding'] ) {
-						$sortBy = "BASE64_DECODE($sortBy) ";
-					} else {
-						$sortBy = "$sortBy ";
-					}
-				} else {
-					$sortBy = "$sortBy ";
-				}
-			} else {
-				$sortBy = $this->unique;
-			}
+		    if ('' != $limit) {
+		        $params[] = (int) $limit;
+		    }
+
+		    // Use $wpdb->prepare to safely prepare the query only if there are placeholders
+		    if (!empty($params)) {
+		        $prepared_query = $wpdb->prepare($this->query, $params);
+		    } else {
+		        $prepared_query = $this->query;
+		    }
 			
-			$sort_order = ($ascending) ? 'ASC' : 'DESC';
-			//Sanitise the order and order by clause now using sanitize_sql_orderby
-			$order_by_clause = sanitize_sql_orderby($sortBy.' '.$sort_order);
-			$this->query .= ' ORDER BY '.$order_by_clause." $sqlLimit";
-			$thisObjectName = get_class( $this );
-			$cursors = FlipperCode_Database::reader( $this->query, $connection );
-
-			return $cursors;
+			$results = FlipperCode_Database::reader( $prepared_query, $connection );
+			return $results;
 		}
+
 		/**
 		 * Query to be executed.
 		 * @param  string $query SQL Query.
@@ -302,9 +318,11 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		 */
 		protected function throw_errors() {
 
-			if ( isset( $this->errors ) and is_array( $this->errors ) ) {
+			if ( isset( $this->errors ) && is_array( $this->errors ) ) {
 
-				throw new Exception( implode( '<br>',$this->errors ) );
+				$escaped_errors = array_map( 'esc_html', $this->errors );
+				$final_error_message = implode( '<br>', $escaped_errors );
+				throw new Exception( wp_kses_post($final_error_message) );
 
 			}
 		}

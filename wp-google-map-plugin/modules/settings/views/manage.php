@@ -278,8 +278,10 @@ $map_data['map_options'] = array(
 );
 $map_data['map_property'] = array('map_id' => 1);
 ?>
+
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-var map = $("#wpgmp_map_preview").maps("<?php echo base64_encode(wp_json_encode( $map_data )); ?>").data('wpgmp_maps');
+    var map = $("#wpgmp_map_preview").maps("<?php echo esc_js( base64_encode( wp_json_encode( $map_data ) ) ); ?>").data('wpgmp_maps');
 });
 </script>
+
