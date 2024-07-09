@@ -2130,6 +2130,10 @@
                                 }
                             }
                         }
+                        temp_listing_placeholder = temp_listing_placeholder.replace(/{#if (.*?)}([\s\S]*?){\/if}/g, function(match, p1, p2) {
+                            return replaceData['{' + p1 + '}'] ? p2 : '';
+                        });
+
                         temp_listing_placeholder = temp_listing_placeholder.replace(/{[^{}]+}/g, function(match) {
                             if (match in replaceData) {
                                 return (replaceData[match]);

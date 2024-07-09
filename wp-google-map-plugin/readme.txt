@@ -5,8 +5,8 @@ Tags: google map,google maps,map,maps,map block
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.5.5
-Stable tag: 4.6.2
+Tested up to: 6.5.3
+Stable tag: 4.6.3
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -168,6 +168,9 @@ This section describes how to install the plugin and get it working.
     10. Map block for Gutenberg editor.  
 
 == Changelog ==
+
+= 4.6.3 =
+* New : Added feature of CodeMirror editor for Infowindow Message for Locations backend.
 
 = 4.6.2 =
 * Fix : Security issue fixed

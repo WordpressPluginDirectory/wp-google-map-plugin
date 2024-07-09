@@ -194,6 +194,10 @@ jQuery(document).ready(function($) {
 
 jQuery(document).ready(function($) {
 
+    if($('.fc_view_source').length > 0){
+        var editor = wp.codeEditor.initialize($('.fc_view_source'), null);
+    }
+
     var currentDeletedTemplate = '';
     $('.yes-remove-current-template').on("click", function() {
 
@@ -534,13 +538,28 @@ jQuery(document).ready(function($) {
 
                         var new_sourcecode = new DOMParser().parseFromString(data.sourcecode, "text/html").body.innerHTML;
 
-                        $(parent_div).find('.fc_view_source').val(new_sourcecode);
+                        var html = editor.codemirror.getValue();
+
+                        $(parent_div).find('.fc_view_source').val(html);
+                        setTimeout(function() {
+                            editor.codemirror.refresh();
+                        },1);
+
                         //Apply Styles here back
 
                     }
                 });
 
             });
+
+        $('.custom-accordion > dt > section > div.fc-type-infowindow > h4').add('.fc-form-container .fc-form-group.fc-locked').on('click', function() {
+            
+            if ($(this).closest('dt').hasClass('accordion-active')) {
+                setTimeout(function() {
+                    editor.codemirror.refresh();
+                },50);
+            }
+        });
 
         //Set Default Template
         $(".set-default-template").click(function(e) {
@@ -637,8 +656,11 @@ jQuery(document).ready(function($) {
 
                             });
                         }
-                        $(parent_div).parent().find('.fc_view_source').val(data.sourcecode);
-                        //$(parent_div).parent().find(".custom_sourcecode").val(data.sourcecode);
+                        editor.codemirror.setValue(data.sourcecode);
+                        setTimeout(function() {
+                            editor.codemirror.refresh();
+                        },50);
+
                     }
                 });
 
@@ -1109,9 +1131,14 @@ jQuery(document).ready(function($) {
 
             $('#fc_custom_styles').val(JSON.stringify(all_custom_style));
 
+            var html = editor.codemirror.getValue();
             $(".fc_view_source").each(function(index, elem) {
-                $(elem).closest('.fc_customizer').parent().find('.custom_sourcecode').val($(elem).val());
+                $(elem).closest('.fc_customizer').parent().find('.custom_sourcecode').val(html);
             });
+
+            setTimeout(function() {
+                editor.codemirror.refresh();
+            },1);
 
             return true;
         });

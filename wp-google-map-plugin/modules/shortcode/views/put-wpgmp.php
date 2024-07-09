@@ -150,7 +150,7 @@ $map_data['map_options'] = array(
 'scroll_wheel' => (sanitize_text_field( $map->map_scrolling_wheel ) != 'false'),
 'display_45_imagery' => sanitize_text_field( $map->map_45imagery ),
 'marker_default_icon' => (isset( $map->map_all_control['marker_default_icon'] ) ) ? esc_url( $map->map_all_control['marker_default_icon'] ) : WPGMP_IMAGES.'default_marker.png',
-'infowindow_setting' => wpautop( wp_unslash( $infowindow_sourcecode ) ),
+'infowindow_setting' => wp_unslash( $infowindow_sourcecode ),
 'infowindow_bounce_animation' => (isset( $map->map_all_control['infowindow_bounce_animation'] ) ) ? $map->map_all_control['infowindow_bounce_animation'] : '',
 'infowindow_drop_animation' => (isset($map->map_all_control['infowindow_drop_animation']) && 'true' == $map->map_all_control['infowindow_drop_animation'] ),
 'close_infowindow_on_map_click' => (isset($map->map_all_control['infowindow_close']) && 'true' == $map->map_all_control['infowindow_close'] ),

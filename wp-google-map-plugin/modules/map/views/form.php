@@ -5,6 +5,9 @@
  * @package Maps
  */
 
+if(function_exists('wp_enqueue_code_editor'))
+      wp_enqueue_code_editor(array('type' => 'text/html'));
+
 global $wpdb;
 $modelFactory = new WPGMP_Model();
 $map_obj = $modelFactory->create_object( 'map' );
