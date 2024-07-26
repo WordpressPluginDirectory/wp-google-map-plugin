@@ -480,7 +480,7 @@ if ( $map->map_all_control['search_control'] == 'true' ) {
 
 $map_div  = apply_filters('wpgmp_before_map','',$map);
 
-$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map '.apply_filters('wpgmp_map_container_class','',$map).'" style="width:'.$width.'; height:'.$height.';" id="map'.$map->map_id.'" ></div></div>';
+$map_div .= '<div class="wpgmp_map_parent"><div class="wpgmp_map '.apply_filters('wpgmp_map_container_class','',$map).'" style="width:'.$width.'; height:'.$height.';" id="map'.$map->map_id.'" data-map-id="'.$map->map_id.'"></div></div>';
 
 $map_div .= apply_filters('wpgmp_after_map','',$map);
 
@@ -557,8 +557,13 @@ if ( isset( $map->map_all_control['fc_custom_styles'] ) ) {
 $map_data = apply_filters('wpgmp_map_data',$map_data,$map);
 $map_data_obj = json_encode( $map_data );
 $map_data_obj = base64_encode($map_data_obj);
+$map_data_obj_escaped = htmlspecialchars($map_data_obj, ENT_QUOTES, 'UTF-8');
+$map_output .= '<script id="script-map-data-'.$map_id.'">';
+$map_output .= 'jQuery(document).ready(function($){ ';
+$map_output .= 'window.wpgmp = window.wpgmp || {}; ';
+$map_output .= 'window.wpgmp.mapdata' . $map_id . ' = "' . $map_data_obj_escaped . '"; ';
+$map_output .= '});</script>';
 
-$map_output .= '<div style="display:none !important;visiblity:hidden !important:width:0px;height:0px;padding:0px;margin:0px;" class="wpgmp-map-data-container" data-map-id="'. $map_id . '">'.$map_data_obj.'</div>';
 
 $base_font_size = isset($map->map_all_control['wpgmp_base_font_size'] ) ? trim( str_replace( 'px', '', $map->map_all_control['wpgmp_base_font_size'] ) ) : '';
 $css_rules      = array();

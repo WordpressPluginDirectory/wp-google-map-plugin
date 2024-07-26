@@ -2361,15 +2361,25 @@
 
 }(jQuery, window, document));
 
-
 function wpgmpInitMap() {
+
     jQuery(document).ready(function($) {
+
         if ($.fn.maps) {
-          $(".wpgmp-map-data-container").each(function() {
-            var mapId = $(this).data("map-id");
-            var mapData = $(this).text();
-            $("#map" + mapId).maps(mapData).data("wpgmp_maps");
-          });
+            
+            $(".wpgmp_map").each(function() {
+
+                var mapId = $(this).data("map-id");
+                var mapVarName = 'mapdata' + mapId;
+                var mapData = window.wpgmp && window.wpgmp[mapVarName];
+                if (mapData) {
+                    $("#map" + mapId).maps(mapData).data("wpgmp_maps");
+                } else {
+                    console.warn("Map data missing for map : " + mapId);
+                }
+
+            });
         }
-      });
-  }
+    });
+}
+
