@@ -5,7 +5,7 @@ Plugin URI: https://weplugins.com/
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
 Author URI: https://weplugins.com/
-Version: 4.6.4
+Version: 4.6.5
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -218,9 +218,9 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			
 
 			if ( get_option( 'wpgmp_api_key' ) != '' ) {
-				$google_map_api = 'https://maps.google.com/maps/api/js?key='.get_option( 'wpgmp_api_key' ).'&callback=wpgmpInitMap&libraries=geometry,places&loading=async&language='.$language;
+				$google_map_api = 'https://maps.google.com/maps/api/js?key='.get_option( 'wpgmp_api_key' ).'&callback=wpgmpInitMap&libraries=geometry,places&language='.$language;
 			} else {
-				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places&loading=async&language='.$language;
+				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places&language='.$language;
 			}
 
 						
@@ -448,9 +448,9 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			$api_key = get_option( 'wpgmp_api_key' );
 
 			if ( $api_key != '' ) {
-				$google_map_api = 'https://maps.google.com/maps/api/js?key='.$api_key.'&callback=wpgmpInitMap&libraries=geometry,places,drawing&loading=async&language=en';
+				$google_map_api = 'https://maps.google.com/maps/api/js?key='.$api_key.'&callback=wpgmpInitMap&libraries=geometry,places,drawing&language=en';
 			} else {
-				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places,drawing&loading=async&language=en';
+				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places,drawing&language=en';
 			}
 
 			wp_enqueue_style( 'thickbox' );
@@ -750,7 +750,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				 $result = array('status' => '0');	 
 				
 			} else {
-				$data = unserialize(get_option('wpgmp_ignore_buy_pro'));
+				$data = maybe_unserialize(get_option('wpgmp_ignore_buy_pro'));
 				$data['wpgmp_hide_buy_notice'] = 'true';
 				update_option('wpgmp_ignore_buy_pro', serialize($data));
 				$result = array('status' => '1');
@@ -764,7 +764,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			
 			if( isset($_GET['page']) && !empty($_GET['page']) && strpos( sanitize_key( $_GET['page'] ), 'wpgmp' ) !== false ){
 
-				$ignore = unserialize(get_option('wpgmp_ignore_buy_pro'));
+				$ignore = maybe_unserialize(get_option('wpgmp_ignore_buy_pro'));
 				
 				if(isset($ignore['wpgmp_hide_buy_notice']) && !empty($ignore['wpgmp_hide_buy_notice'])){}
 				else {
@@ -792,7 +792,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 
 				$result = array('status' => '0');
 			} else {
-				$data = unserialize(get_option('wpgmp_ignore_buy_pro'));
+				$data = maybe_unserialize(get_option('wpgmp_ignore_buy_pro'));
 				$data['wpgmp_hide_sample_notice'] = 'true';
 				update_option('wpgmp_ignore_buy_pro', serialize($data));
 				$result = array('status' => '1');
@@ -852,7 +852,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.6.4' );
+			define( 'WPGMP_VERSION', '4.6.5' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );

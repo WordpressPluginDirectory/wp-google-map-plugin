@@ -137,6 +137,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 		 * @var string
 		 */
 		public $spliter = '';
+		public $options;
 		/**
 		 * Intialize form properties.
 		 */
@@ -278,7 +279,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 
 		public function show_header() {
 			
-			$plugin_updates = unserialize( get_option('fc_'.$this->options['productSlug'] ) );
+			$plugin_updates = maybe_unserialize( get_option('fc_'.$this->options['productSlug'] ) );
 
 			if( !isset($plugin_updates) || !isset($plugin_updates['annoucement'])){
 				$plugin_updates = [];

@@ -354,9 +354,9 @@ if( !class_exists('WP_Maps_Block') ) {
 			if ( $language == '' )
 				$language = 'en';
 			if ( get_option( 'wpgmp_api_key' ) != '' ) {
-				$google_map_api = 'https://maps.google.com/maps/api/js?key='.get_option( 'wpgmp_api_key' ).'&callback=wpgmpInitMap&libraries=geometry,places&loading=async&language='.$language;
+				$google_map_api = 'https://maps.google.com/maps/api/js?key='.get_option( 'wpgmp_api_key' ).'&callback=wpgmpInitMap&libraries=geometry,places&language='.$language;
 			} else {
-				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places&loading=async&language='.$language;
+				$google_map_api = 'https://maps.google.com/maps/api/js?&callback=wpgmpInitMap&libraries=geometry,places&language='.$language;
 			}
 						
 			$where = get_option( 'wpgmp_scripts_place' );

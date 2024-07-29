@@ -201,7 +201,7 @@ if ( ! class_exists( 'Flippercode_Product_Overview' ) ) {
 				$this->$pluginProperty = $value;
 			}
 
-		    $this->newVersion = unserialize(get_option( $this->productSlug.'_latest_version' ));
+		    $this->newVersion = maybe_unserialize(get_option( $this->productSlug.'_latest_version' ));
 
 		}
 

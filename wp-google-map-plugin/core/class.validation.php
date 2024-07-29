@@ -12,10 +12,13 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 	 * @author Flipper Code <hello@flippercode.com>
 	 * @package Core
 	 */
+
 	class FlipperCode_Validator {
 		/**
 		 * FlipperCode_Validator Constructer.
 		 */
+		public $id;
+		public $check_vars = array();
 		public function __construct() {
 
 			$this->id = 0;

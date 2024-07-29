@@ -10,9 +10,9 @@ $wpgmp_settings = get_option( 'wpgmp_settings', true );
 $api_key = get_option( 'wpgmp_api_key' );
 
 if ( $api_key != '' ) {
-	$google_map_api = 'https://maps.google.com/maps/api/js?key=' . $api_key . '&callback=wpgmpInitMap&libraries=geometry,places,drawing&loading=async&language=en';
+	$google_map_api = 'https://maps.google.com/maps/api/js?key=' . $api_key . '&callback=wpgmpInitMap&libraries=geometry,places,drawing&language=en';
 } else {
-	$google_map_api = 'https://maps.google.com/maps/api/js?libraries=geometry,places,drawing&callback=wpgmpInitMap&loading=async&language=en';
+	$google_map_api = 'https://maps.google.com/maps/api/js?libraries=geometry,places,drawing&callback=wpgmpInitMap&language=en';
 }
 
 
