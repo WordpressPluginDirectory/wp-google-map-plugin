@@ -152,6 +152,10 @@ if ( ! class_exists( 'Flippercode_Product_Overview' ) ) {
 		 */
 		private $isUpdateAvailable;
 
+		private $product_tag_line;
+
+		private $videoURL;
+
 		private $multisiteLicence;
 
 		private $productSaleURL;
@@ -185,7 +189,7 @@ if ( ! class_exists( 'Flippercode_Product_Overview' ) ) {
 			$changelog .= '<a href="'.$this->productSaleURL.'" target="_blank" class="fc-btn fc-btn-default fc-buy-btn">Buy on Codecanyon</a>';
 			$html = '<div class="fc-divider">
 			 <ul class="fc-tabs fc-tabs-list">
-			  <li class=""><a id="pro_link" target="_blank" href="https://codecanyon.net/item/advanced-google-maps-plugin-for-wordpress/5211638">List Of Amazing Features In Pro Version!!</a></li>
+			  <li class=""><a id="pro_link" target="_blank" href="https://1.envato.market/wpmaps">List Of Amazing Features In Pro Version!!</a></li>
 			 </ul>
 			 <div class="fc-tabs-container">
 			  <div class="fc-tabs-content active" id="changelog">'.wp_kses_post($changelog).'</div>
