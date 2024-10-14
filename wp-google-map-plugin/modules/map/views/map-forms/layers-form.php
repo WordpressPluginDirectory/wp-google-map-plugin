@@ -101,7 +101,7 @@ if( isset( $data['map_all_control']['infowindow_setting'] ) && !empty( $data['ma
 $form->add_element(
 	'templates', 'map_all_control[location_infowindow_skin]', array(
 		'parent_class'	=> 'fc-type-infowindow',
-		'lable'	=> esc_html__( 'Infowindow Message for Locations', 'wpgmp-google-map' ),
+		'lable'	=> esc_html__( 'Infowindow Message for Locations', 'wp-google-map-plugin' ),
 		'template_types'      => 'infowindow',
 		'templatePath'        => WPGMP_TEMPLATES,
 		'templateURL'         => WPGMP_TEMPLATES_URL,
@@ -121,7 +121,7 @@ $form->add_element(
 	'group',
 	'map_infowindow_post_message_settings',
 	array(
-		'value'  => esc_html__('Infowindow Message for Posts', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Infowindow Message for Posts', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',
@@ -132,7 +132,7 @@ $form->add_element(
 	'group',
 	'map_infowindow_settings',
 	array(
-		'value'  => esc_html__('Infowindow Customization Settings', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Infowindow Customization Settings', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',

@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPGMP_Model_Drawing' ) ) {
 		 */
 		function navigation() {
 			return array(
-				'wpgmp_manage_drawing' => esc_html__( 'Map Drawing', 'wpgmp-google-map' ),
+				'wpgmp_manage_drawing' => esc_html__( 'Map Drawing', 'wp-google-map-plugin' ),
 			);
 		}
 

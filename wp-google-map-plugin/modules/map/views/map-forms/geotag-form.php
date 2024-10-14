@@ -10,7 +10,7 @@ $form->add_element(
 	'group',
 	'map_geotags_settings',
 	array(
-		'value'  => esc_html__('Show Posts Using Custom Fields', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Show Posts Using Custom Fields', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',
@@ -21,7 +21,7 @@ $form->add_element(
 	'group',
 	'map_acf_settings',
 	array(
-		'value'  => esc_html__('Show Posts using ACF Plugin', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Show Posts using ACF Plugin', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',

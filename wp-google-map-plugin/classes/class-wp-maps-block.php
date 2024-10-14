@@ -433,7 +433,7 @@ if( !class_exists('WP_Maps_Block') ) {
 			foreach ( $screens as $screen ) {
 				add_meta_box(
 					'wp_maps_block_metabox',
-					esc_html__( 'WP Maps Block', 'wpgmp-google-map' ),
+					esc_html__( 'WP Maps Block', 'wp-google-map-plugin' ),
 					array( $this, 'wpmb_add_meta_box' ),
 					$screen
 				);

@@ -179,11 +179,11 @@ $form->add_element( 'select', 'location_settings[redirect_link_window]', array(
 
 $form->add_element(
 	'image_picker', 'location_settings[featured_image]', array(
-		'lable'         => esc_html__( 'Location Image', 'wpgmp-google-map' ),
+		'lable'         => esc_html__( 'Location Image', 'wp-google-map-plugin' ),
 		'src'           => isset( $_POST['location_settings']['featured_image'] ) ? wp_unslash( $_POST['location_settings']['featured_image'] ) : '',
 		'required'      => false,
-		'choose_button' => esc_html__( 'Choose', 'wpgmp-google-map' ),
-		'remove_button' => esc_html__( 'Remove', 'wpgmp-google-map' ),
+		'choose_button' => esc_html__( 'Choose', 'wp-google-map-plugin' ),
+		'remove_button' => esc_html__( 'Remove', 'wp-google-map-plugin' ),
 		'id' => 'loc_img',
 	)
 );
@@ -216,7 +216,7 @@ $form->add_element(
 	'group',
 	'location_extra_fields',
 	array(
-		'value'  => esc_html__('Extra Fields Values', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Extra Fields Values', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',

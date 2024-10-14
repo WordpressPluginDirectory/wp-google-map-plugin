@@ -5,7 +5,7 @@ Plugin URI: https://weplugins.com/
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
 Author URI: https://weplugins.com/
-Version: 4.6.6
+Version: 4.6.7
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -772,7 +772,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 				$premium_plugin = '<a target="_blank" href="https://www.wpmapspro.com/?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium">'.esc_html__('Pro','wp-google-map-plugin').'</a>';
              	
 				$pluginheader .= '<div class="flippercode-ui">
-						<div class="fc-main"><div class="buy_premium notice notice-success is-dismissible">'.sprintf( esc_html__('Upgrade hassle-free to %s version & unlock listing, routes,  directions, filtration, drawing & many more features.','wp-google-map-plugin' ), $premium_plugin).' <a class="buy_now_link" href="https://www.wpmapspro.com/?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium" target="_blank">'.esc_html__('Upgrade Now','wp-google-map-plugin').'</a> or <a onclick="return false;" class="fc_ignore_notice hide_buy_notice" href="#">'.esc_html('Don\'t show again','wp-google-map-plugin').'</a></div></div></div>';	
+						<div class="fc-main"><div class="buy_premium notice notice-success is-dismissible">'.sprintf( esc_html__('Upgrade hassle-free to %s version & unlock listing, routes,  directions, filtration, drawing & more features.','wp-google-map-plugin' ), $premium_plugin).' <a class="buy_now_link" href="https://www.wpmapspro.com/?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium" target="_blank">'.esc_html__('Upgrade Now','wp-google-map-plugin').'</a> or <a onclick="return false;" class="fc_ignore_notice hide_buy_notice" href="#">'.esc_html('Don\'t show again','wp-google-map-plugin').'</a></div></div></div>';	
 				}
 			}
 			
@@ -852,7 +852,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.6.6' );
+			define( 'WPGMP_VERSION', '4.6.7' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );

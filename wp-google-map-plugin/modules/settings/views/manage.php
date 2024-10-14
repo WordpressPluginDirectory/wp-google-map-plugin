@@ -58,7 +58,7 @@ $form->add_element('text','wpgmp_api_key',array(
 
 if ( get_option( 'wpgmp_api_key' ) == '' ) {
 
-	$generate_link = '<a href="https://www.wpmapspro.com/docs/how-to-create-an-api-key/" class="wpgmp_map_key_missing wpgmp_key_btn fc-btn fc-btn-default btn-lg" target="_blank" >' . esc_html__( 'Generate API Key', 'wpgmp-google-map' ) . '</a>';
+	$generate_link = '<a href="https://www.wpmapspro.com/docs/how-to-create-an-api-key/" class="wpgmp_map_key_missing wpgmp_key_btn fc-btn fc-btn-default btn-lg" target="_blank" >' . esc_html__( 'Generate API Key', 'wp-google-map-plugin' ) . '</a>';
 
 	$form->add_element(
 		'html', 'wpgmp_key_btn', array(
@@ -70,7 +70,7 @@ if ( get_option( 'wpgmp_api_key' ) == '' ) {
 
 } else {
 
-	$generate_link = '<a href="javascript:void(0);" class="wpgmp_check_key fc-btn fc-btn-default btn-lg" >' . esc_html__( 'Test API Key', 'wpgmp-google-map' ) . '</a>';
+	$generate_link = '<a href="javascript:void(0);" class="wpgmp_check_key fc-btn fc-btn-default btn-lg" >' . esc_html__( 'Test API Key', 'wp-google-map-plugin' ) . '</a>';
 
 	$form->add_element(
 		'html', 'wpgmp_key_btn', array(
@@ -173,7 +173,7 @@ $form->add_element(
 	'group',
 	'meta_box_setting',
 	array(
-		'value'  => esc_html__('Meta Box Settings', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Meta Box Settings', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',
@@ -184,7 +184,7 @@ $form->add_element(
 	'group',
 	'create_extra_fields',
 	array(
-		'value'  => esc_html__('Create Extra Field(s)', 'wpgmp-google-map').WPGMP_PREMIUM_LINK,
+		'value'  => esc_html__('Create Extra Field(s)', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'parent_class'		=> 'fc-locked',
@@ -193,7 +193,7 @@ $form->add_element(
 
 $form->add_element(
 	'group', 'map_troubleshooting', array(
-		'value'  => esc_html__( 'Troubleshooting', 'wpgmp-google-map' ),
+		'value'  => esc_html__( 'Troubleshooting', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'tutorial_link' => 'https://www.wpmapspro.com/docs/what-to-do-when-google-maps-is-not-visible/'
@@ -204,27 +204,27 @@ $form->add_element(
 
 $form->add_element(
 	'checkbox', 'wpgmp_auto_fix', array(
-		'lable'   => esc_html__( 'Auto Fix', 'wpgmp-google-map' ),
+		'lable'   => esc_html__( 'Auto Fix', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'current' => isset($wpgmp_settings['wpgmp_auto_fix']) ? $wpgmp_settings['wpgmp_auto_fix'] : '',
-		'desc'    => esc_html__( 'If map is not visible somehow, turn on auto fix and check the map.', 'wpgmp-google-map' ),
+		'desc'    => esc_html__( 'If map is not visible somehow, turn on auto fix and check the map.', 'wp-google-map-plugin' ),
 		'class'   => 'chkbox_class',
 	)
 );
 
 $form->add_element(
 	'checkbox', 'wpgmp_debug_mode', array(
-		'lable'   => esc_html__( 'Turn On Debug Mode', 'wpgmp-google-map' ),
+		'lable'   => esc_html__( 'Turn On Debug Mode', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'current' => isset($wpgmp_settings['wpgmp_debug_mode']) ? $wpgmp_settings['wpgmp_debug_mode'] : '',
-		'desc'    => esc_html__( 'If map is not visible somehow even auto fix in turned on, please turn on debug mode and contact support team to analysis javascript console output.', 'wpgmp-google-map' ),
+		'desc'    => esc_html__( 'If map is not visible somehow even auto fix in turned on, please turn on debug mode and contact support team to analysis javascript console output.', 'wp-google-map-plugin' ),
 		'class'   => 'chkbox_class',
 	)
 );
 
 $form->add_element(
 	'group', 'map_gdpr', array(
-		'value'  => esc_html__( 'Cookies Acceptance', 'wpgmp-google-map' ),
+		'value'  => esc_html__( 'Cookies Acceptance', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
 		'tutorial_link' => 'https://www.wpmapspro.com/topic/cookies/'
@@ -233,9 +233,9 @@ $form->add_element(
 
 $form->add_element(
 	'checkbox', 'wpgmp_gdpr', array(
-		'lable'   => esc_html__( 'Enable Cookies Acceptance', 'wpgmp-google-map' ),
+		'lable'   => esc_html__( 'Enable Cookies Acceptance', 'wp-google-map-plugin' ),
 		'value'   => 'true',
-		'desc'    => esc_html__( 'Maps will remain hidden until the visitor accepts the cookie policy. This feature is intended for developers who wish to monitor cookies access and limit map access.', 'wpgmp-google-map' ),
+		'desc'    => esc_html__( 'Maps will remain hidden until the visitor accepts the cookie policy. This feature is intended for developers who wish to monitor cookies access and limit map access.', 'wp-google-map-plugin' ),
 		'current' => isset($wpgmp_settings['wpgmp_gdpr']) ? $wpgmp_settings['wpgmp_gdpr'] : "",
 		'class'   => 'chkbox_class',
 	)
@@ -243,9 +243,9 @@ $form->add_element(
 
 $form->add_element(
 	'textarea', 'wpgmp_gdpr_msg', array(
-		'lable'                => esc_html__( '"No Map" Notice', 'wpgmp-google-map' ),
-		'desc'                 => esc_html__( 'Show message instead of map until visitor accept the cookies policy. HTML Tags are allowed. Leave it blank for no message.', 'wpgmp-google-map' ),
-		'value'                => isset($wpgmp_settings['wpgmp_gdpr_msg']) ? $wpgmp_settings['wpgmp_gdpr_msg'] : esc_html__( 'Please accept cookies to show google maps.', 'wpgmp-google-map' ),
+		'lable'                => esc_html__( '"No Map" Notice', 'wp-google-map-plugin' ),
+		'desc'                 => esc_html__( 'Show message instead of map until visitor accept the cookies policy. HTML Tags are allowed. Leave it blank for no message.', 'wp-google-map-plugin' ),
+		'value'                => isset($wpgmp_settings['wpgmp_gdpr_msg']) ? $wpgmp_settings['wpgmp_gdpr_msg'] : esc_html__( 'Please accept cookies to show google maps.', 'wp-google-map-plugin' ),
 		'textarea_fc-dividers' => 10,
 		'textarea_name'        => 'wpgmp_gdpr_msg',
 		'class'                => 'form-control wpgmp_gdpr_setting',
@@ -254,9 +254,9 @@ $form->add_element(
 
 $form->add_element(
 	'checkbox', 'wpgmp_gdpr_show_placeholder', array(
-		'lable'   => esc_html__( 'Show Placeholder', 'wpgmp-google-map' ),
+		'lable'   => esc_html__( 'Show Placeholder', 'wp-google-map-plugin' ),
 		'value'   => 'true',
-		'desc'    => esc_html__( 'Until you accept cookies, show a map image along with a consent message in place of Google Maps', 'wpgmp-google-map' ),
+		'desc'    => esc_html__( 'Until you accept cookies, show a map image along with a consent message in place of Google Maps', 'wp-google-map-plugin' ),
 		'current' => isset($wpgmp_settings['wpgmp_gdpr_show_placeholder']) ? $wpgmp_settings['wpgmp_gdpr_show_placeholder'] : "",
 		'class'   => 'chkbox_class',
 	)

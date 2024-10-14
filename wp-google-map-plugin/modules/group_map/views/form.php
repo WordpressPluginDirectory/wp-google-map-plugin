@@ -48,7 +48,7 @@ if ( is_array( $categories ) ) {
 	$form->add_element('select', 'group_parent', array(
 		'lable' => esc_html__( 'Parent Category', 'wp-google-map-plugin' ),
 		'current' => (isset( $_POST['group_parent'] ) && ! empty( $_POST['group_parent'] )) ? intval( wp_unslash( $_POST['group_parent'] ) ) : '',
-		'desc' => esc_html__( 'You can optionally assign a parent marker category to the new marker category you are creating. Assign parent category if you want.', 'wp-google-map-plugin' ),
+		'desc' => esc_html__( 'You can optionally assign a parent marker category to the new marker category that you are creating.', 'wp-google-map-plugin' ),
 		'options' => $markers,
 	));
 

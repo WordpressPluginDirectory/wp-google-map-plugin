@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPGMP_Model_Route' ) ) {
 		function __construct() {
 
 			$this->validations = array(
-				'route_title' => array( 'req' => esc_html__( 'Please enter route title.', 'wpgmp-google-map' ) ),
+				'route_title' => array( 'req' => esc_html__( 'Please enter route title.', 'wp-google-map-plugin' ) ),
 			);
 
 			$this->table  = TBL_ROUTES;
@@ -42,8 +42,8 @@ if ( ! class_exists( 'WPGMP_Model_Route' ) ) {
 		 */
 		function navigation() {
 			return array(
-				'wpgmp_form_route'   => esc_html__( 'Add Route', 'wpgmp-google-map' ),
-				'wpgmp_manage_route' => esc_html__( 'Manage Routes', 'wpgmp-google-map' ),
+				'wpgmp_form_route'   => esc_html__( 'Add Route', 'wp-google-map-plugin' ),
+				'wpgmp_manage_route' => esc_html__( 'Manage Routes', 'wp-google-map-plugin' ),
 			);
 		}
 		

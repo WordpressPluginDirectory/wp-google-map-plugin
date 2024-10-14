@@ -7,7 +7,7 @@
  */
 
 	$form = new WPGMP_Template();
-	$form->set_header( esc_html__( 'Premium Add-Ons / Extentions For WP Google Maps Pro', 'wpgmp-google-map' ), array() );
+	$form->set_header( esc_html__( 'Premium Add-Ons / Extentions For WP Google Maps Pro', 'wp-google-map-plugin' ), array() );
 	$extentions = array();
 
 	$listing = array('url' => 'https://www.wpmapspro.com/product/listing-designs-for-google-maps', 'thumb' => 'listing-designs-on-google-maps.png', 'demo_url' => 'https://www.wpmapspro.com/listing-designs-for-google-maps/');
@@ -57,13 +57,13 @@
 
 		if($key == $count -1) {
 
-			$links = '<a target="_blank" href="'.$addon['url'].'">'.esc_html__( 'Contact Now', 'wpgmp-google-map' ).'</a>';
+			$links = '<a target="_blank" href="'.$addon['url'].'">'.esc_html__( 'Contact Now', 'wp-google-map-plugin' ).'</a>';
 		}else{
 
 			$addon['url'] = add_query_arg( array(  'utm_source' => 'extensions', 'utm_medium' => 'proplugin', 'utm_campaign' => 'pro_extensions'  ),  $addon['url'] );
 			
-			$links = '<a target="_blank" href="'.$addon['url'].'">'.esc_html__( 'Buy Now', 'wpgmp-google-map' ).'</a>
-				<a target="_blank" href="'.$addon['demo_url'].'">'.esc_html__( 'View Demo', 'wpgmp-google-map' ).'</a>';
+			$links = '<a target="_blank" href="'.$addon['url'].'">'.esc_html__( 'Buy Now', 'wp-google-map-plugin' ).'</a>
+				<a target="_blank" href="'.$addon['demo_url'].'">'.esc_html__( 'View Demo', 'wp-google-map-plugin' ).'</a>';
 		}
 
 		$html .= '<div class="fc-3">

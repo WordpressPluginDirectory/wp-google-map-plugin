@@ -26,11 +26,11 @@ $form->add_element( 'text', 'map_all_control[map_center_longitude]', array(
 
 $form->add_element(
 	'checkbox', 'map_all_control[fit_bounds]', array(
-		'lable'   => esc_html__( 'Center by Assigned Locations', 'wpgmp-google-map' ),
+		'lable'   => esc_html__( 'Center by Assigned Locations', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'class'   => 'chkbox_class',
 		'id'      => 'wpgmp_fit_bounds_location',
 		'current' => isset( $data['map_all_control']['fit_bounds'] ) ? $data['map_all_control']['fit_bounds'] : '',
-		'desc'    => esc_html__( 'Center the map based on locations assigned to the map to show all locations at once.', 'wpgmp-google-map' ).'<br><b>'.esc_html__('( Most recommended way for centering the map according to assigned locations. )', 'wpgmp-google-map').'</b>',
+		'desc'    => esc_html__( 'Center the map based on locations assigned to the map to show all locations at once.', 'wp-google-map-plugin' ).'<br><b>'.esc_html__('( Most recommended way for centering the map according to assigned locations. )', 'wp-google-map-plugin').'</b>',
 	)
 );

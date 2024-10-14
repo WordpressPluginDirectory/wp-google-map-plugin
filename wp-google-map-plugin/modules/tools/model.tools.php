@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPGMP_Model_Tools' ) ) {
 		 */
 		function navigation() {
 			return array(
-				'wpgmp_manage_tools' => esc_html__( 'Plugin Tools', 'wpgmp-google-map' ),
+				'wpgmp_manage_tools' => esc_html__( 'Plugin Tools', 'wp-google-map-plugin' ),
 			);
 		}
 		/**
@@ -65,7 +65,7 @@ if ( ! class_exists( 'WPGMP_Model_Tools' ) ) {
 			if ( isset( $data['wpgmp_cleandatabase_tools'] ) ) {
 
 				if( empty($data['wpgmp_clean_consent']) || (!empty($data['wpgmp_clean_consent']) && $data['wpgmp_clean_consent'] != 'DELETE' ) ){
-					$response['error'] = esc_html__( 'Please entery "DELETE" in the provided textbox and then proceed to clear plugin\'s database.', 'wpgmp-google-map' );
+					$response['error'] = esc_html__( 'Please entery "DELETE" in the provided textbox and then proceed to clear plugin\'s database.', 'wp-google-map-plugin' );
 					return $response;
 				}  
 
@@ -78,11 +78,11 @@ if ( ! class_exists( 'WPGMP_Model_Tools' ) ) {
 						FlipperCode_Database::non_query( $this->query, $connection );
 					}
 
-					$response['success'] = esc_html__( 'All the saved locations, marker categories and maps were removed.', 'wpgmp-google-map' );
+					$response['success'] = esc_html__( 'All the saved locations, marker categories and maps were removed.', 'wp-google-map-plugin' );
 				} 
 			} else {
 
-				$response['error'] = esc_html__( 'Something went wrong. Please try again.', 'wpgmp-google-map' );
+				$response['error'] = esc_html__( 'Something went wrong. Please try again.', 'wp-google-map-plugin' );
 			}
 			return $response;
 
@@ -239,14 +239,14 @@ if ( ! class_exists( 'WPGMP_Model_Tools' ) ) {
 
 					if ( $success == true ) {
 
-						$response['success'] = esc_html__( 'Sample Data has been created successfully. Go to Manage Maps and use the map shortcode.', 'wpgmp-google-map' );
+						$response['success'] = esc_html__( 'Sample Data has been created successfully. Go to Manage Maps and use the map shortcode.', 'wp-google-map-plugin' );
 
 					} else {
-						$response['error'] = esc_html__( 'Something went wrong. Please try again.', 'wpgmp-google-map' );
+						$response['error'] = esc_html__( 'Something went wrong. Please try again.', 'wp-google-map-plugin' );
 					}
 				} else {
 					
-					$response['error'] = esc_html__( 'Please enter "YES" in the provided textbox and then submit the form to install sample data.', 'wpgmp-google-map' );
+					$response['error'] = esc_html__( 'Please enter "YES" in the provided textbox and then submit the form to install sample data.', 'wp-google-map-plugin' );
 				}
 				
 				return $response;

@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPGMP_Model_Permissions' ) ) {
 		 */
 		function navigation() {
 			return array(
-				'wpgmp_manage_permissions' => esc_html__( 'Manage Permissions', 'wpgmp-google-map' ),
+				'wpgmp_manage_permissions' => esc_html__( 'Manage Permissions', 'wp-google-map-plugin' ),
 			);
 		}
 		
