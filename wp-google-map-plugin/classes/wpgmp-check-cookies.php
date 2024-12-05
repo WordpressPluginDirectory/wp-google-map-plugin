@@ -31,7 +31,9 @@ function wpgmp_accept_cookies($is_allowed) {
 		$is_allowed = true;
 	} elseif (function_exists('cn_cookies_accepted') && (bool) Cookie_Notice::cookies_accepted()) {
 		$is_allowed = true;
-	}
+	} elseif (function_exists('cookiebot_active') && cookiebot_active() && isset($_COOKIE["CookieConsent"])) {
+        $is_allowed = true;
+   	}
 	
 	return $is_allowed;
 }

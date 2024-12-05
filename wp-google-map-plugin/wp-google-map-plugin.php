@@ -5,7 +5,7 @@ Plugin URI: https://weplugins.com/
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
 Author URI: https://weplugins.com/
-Version: 4.6.7
+Version: 4.6.8
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -582,7 +582,9 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 		 function wpgmp_overview_page_styles( $hook ) {
 		 	if($hook == 'plugins.php'){
 		 		wp_enqueue_style('wpgmp-modal-css', plugin_dir_url(__FILE__) . 'assets/css/modal.css');
-				wpgmp_add_feedback_form();
+				if(function_exists('wpgmp_add_feedback_form')){
+					wpgmp_add_feedback_form();
+				}
 		 	}
 		 	
 		 }
@@ -668,7 +670,6 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			$tables[] = str_replace( $wpdb->base_prefix, $wpdb->prefix, TBL_GROUPMAP );
 			$tables[] = str_replace( $wpdb->base_prefix, $wpdb->prefix, TBL_MAP );
 			$tables[] = str_replace( $wpdb->base_prefix, $wpdb->prefix, TBL_ROUTES );
-			$tables[] = str_replace( $wpdb->base_prefix, $wpdb->prefix, TBL_BACKUPS );
             return $tables; 
 
 		 }
@@ -852,7 +853,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.6.7' );
+			define( 'WPGMP_VERSION', '4.6.8' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );
