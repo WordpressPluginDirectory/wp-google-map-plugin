@@ -68,7 +68,6 @@ $form->add_element('text', 'group_map_title', array(
 $form->add_element('image_picker', 'group_marker', array(
 	'lable' => esc_html__( 'Select Marker Category Icon', 'wp-google-map-plugin' ),
 	'src' => (isset( $_POST['group_marker'] ) ) ? wp_unslash( $_POST['group_marker'] ) : WPGMP_IMAGES.'/default_marker.png',
-	'required' => true,
 	'choose_button' => esc_html__( 'Choose', 'wp-google-map-plugin' ),
 	'remove_button' => esc_html__( 'Remove','wp-google-map-plugin' ),
 	'id' => 'marker_category_icon',

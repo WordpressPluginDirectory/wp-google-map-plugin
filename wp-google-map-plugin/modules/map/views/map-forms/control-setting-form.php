@@ -49,6 +49,17 @@ $form->add_element( 'checkbox', 'map_all_control[street_view_control]', array(
 	'class' => 'chkbox_class',
 ));
 
+$form->add_element(
+	'checkbox', 'map_all_control[camera_control]', array(
+		'lable'   => esc_html__( 'Turn On Camera Control', 'wp-google-map-plugin' ),
+		'value'   => 'false',
+		'id'      => 'camera_control',
+		'current' => isset( $_POST['map_all_control']['camera_control'] ) ? $_POST['map_all_control']['camera_control'] : '',
+		'desc'    => esc_html__( 'Please check to enable camera control.', 'wp-google-map-plugin' ),
+		'class'   => 'chkbox_class',
+	)
+);
+
 $form->add_element( 'checkbox', 'map_all_control[search_control]', array(
 	'lable' => esc_html__( 'Turn On Search Control', 'wp-google-map-plugin' ),
 	'value' => 'true',

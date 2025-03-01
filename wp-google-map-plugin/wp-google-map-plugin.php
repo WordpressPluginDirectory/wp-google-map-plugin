@@ -5,7 +5,7 @@ Plugin URI: https://weplugins.com/
 Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
 Author: flippercode
 Author URI: https://weplugins.com/
-Version: 4.6.8
+Version: 4.7.0
 Text Domain: wp-google-map-plugin
 Domain Path: /lang
 */
@@ -853,7 +853,7 @@ if ( ! class_exists( 'FC_Google_Maps_Lite' ) ) {
 			define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
 			
 			if ( ! defined( 'WPGMP_VERSION' ) )
-			define( 'WPGMP_VERSION', '4.6.8' );
+			define( 'WPGMP_VERSION', '4.7.0' );
 			
 			if ( ! defined( 'WPGMP_FOLDER' ) )
 			define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );

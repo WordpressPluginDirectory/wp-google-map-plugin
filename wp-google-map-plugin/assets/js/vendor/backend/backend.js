@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
 		
+          
     if( $('.toplevel_page_wpgmp_view_overview ul li a').find('.fc-fire-sale').length > 0 ) { 
         $('.toplevel_page_wpgmp_view_overview ul li a').find('.fc-fire-sale').parent('a').attr('target','_blank');
     }    
@@ -120,6 +121,25 @@ jQuery(document).ready(function($) {
         } else {
             return false;
         }
+    });
+
+    $('.wp-list-table .copy_to_clipboard').click( function(){
+
+         $('.fc-tooltip').removeClass('active');
+          var value = $(this).data('clipboard-text'); 
+          var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val(value).select();
+          document.execCommand("copy");
+          $temp.remove();
+          $(this).closest('.fc-tooltip').addClass('active');
+        
+          setTimeout(
+            function() { 
+             $('.fc-tooltip').removeClass('active');
+             $('tr').removeClass('active');
+          }, 2000);
+
     });
 
     $(".wpgmp_check_key").click(function() {
@@ -325,7 +345,7 @@ jQuery(document).ready(function($) {
 
     });
 
-    $(".copy_to_clipboard").click(function () {
+    $(".wp-maps_page_wpgmp_manage_settings .copy_to_clipboard").click(function () {
 
         let referrer_to_copy  = $(this).parent('.tooltip').prev('.referrer_to_create').val();
         navigator.clipboard.writeText(referrer_to_copy);

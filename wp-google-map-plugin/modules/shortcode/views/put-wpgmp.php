@@ -137,6 +137,10 @@ $map->map_all_control['infowindow_openoption'] = 'click';
 $infowindow_setting = isset($map->map_all_control['infowindow_setting'])? $map->map_all_control['infowindow_setting']: '';
 
 $infowindow_sourcecode = apply_filters('wpgmp_infowindow_message',do_shortcode($infowindow_setting) , $map );
+
+if ( ! isset( $map->map_all_control['camera_control'] ) )
+$map->map_all_control['camera_control'] = false;
+
 if ( ! isset( $map->map_all_control['search_control'] ) )
 $map->map_all_control['search_control'] = false;
 
@@ -158,12 +162,14 @@ $map_data['map_options'] = array(
 'default_infowindow_open' => (isset($map->map_all_control['infowindow_open']) && 'true' == $map->map_all_control['infowindow_open'] ),
 'infowindow_open_event' => ($map->map_all_control['infowindow_openoption']) ? $map->map_all_control['infowindow_openoption'] : 'click',
 'full_screen_control' => (!isset($map->map_all_control['full_screen_control']) || $map->map_all_control['full_screen_control'] != 'false'),
+'camera_control' => (isset($map->map_all_control['camera_control'])) ? $map->map_all_control['camera_control'] : false,
 'search_control' => (!isset($map->map_all_control['search_control']) || $map->map_all_control['search_control'] != 'false'),
 'zoom_control' => (!isset($map->map_all_control['zoom_control']) || $map->map_all_control['zoom_control'] != 'false'),
 'map_type_control' => (!isset($map->map_all_control['map_type_control']) || $map->map_all_control['map_type_control'] != 'false'),
 'street_view_control' => (!isset($map->map_all_control['street_view_control']) || $map->map_all_control['street_view_control'] != 'false'),
 'full_screen_control_position' => (isset( $map->map_all_control['full_screen_control_position'] ) ) ? $map->map_all_control['full_screen_control_position'] : 'TOP_RIGHT',
 'search_control' => (!isset($map->map_all_control['search_control']) || $map->map_all_control['search_control'] != 'false'),
+'camera_control_position'        => (isset($map->map_all_control['camera_control_position']) ) ? $map->map_all_control['camera_control_position'] : '',
 'search_control_position' => ( isset($map->map_all_control['search_control_position']) && !empty($map->map_all_control['search_control_position'])) ? $map->map_all_control['search_control_position'] : 'TOP_LEFT',
 'zoom_control_position' => $map->map_all_control['zoom_control_position'],
 'map_type_control_position' => $map->map_all_control['map_type_control_position'],

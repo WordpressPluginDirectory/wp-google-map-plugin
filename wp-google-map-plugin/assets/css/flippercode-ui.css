@@ -2198,6 +2198,57 @@ Tooltip
     top: -10px;
     left: 50%;
 }
+
+.shortcodes .copy_to_clipboard:focus,
+.shortcodes .copy_to_clipboard {
+    outline: none;
+    box-shadow: none;
+}
+
+.shortcodes .fc-tooltip {
+    padding:  0px;
+}
+.shortcodes .fc-tooltip .fc-tooltiptext {
+    background: #25B75F;
+/*    width:  218px;*/
+    padding:  10px 12px;
+    border-radius:  25px;
+    margin-bottom:6px;
+}
+
+.shortcodes .fc-tooltip .fc-tooltiptext: :after  {
+    border-color:  #25B75F transparent transparent transparent;
+}
+.shortcodes .fc-tooltip:hover .fc-tooltiptext  {
+    visibility:  hidden;
+    opacity: 0;
+}
+.shortcodes .fc-tooltip.active .fc-tooltiptext, .wpdf_shortcode .fc-tooltip.active:hover .fc-tooltiptext  {
+    visibility:  visible;
+    opacity:  1;
+}
+.column-shortcodes .fc-tooltip .fc-tooltiptext::after {
+    border-color: #25B75F transparent transparent transparent;
+}
+
+@media(max-width: 780px) {
+
+    .shortcodes .fc-tooltip .fc-tooltiptext {
+        top:  0px;
+        right:  105%;
+        bottom:  inherit;
+        left:  inherit;
+        transform:  translateX(0);
+        font-size:  10px;
+            width:  227px;
+        padding:  3px 8px;
+    }
+    .shortcodes .fc-tooltip {
+        float:  right;
+    }
+}
+
+
 /*
 =================================================== 
 Modal 

@@ -75,6 +75,15 @@ $form->add_element( 'select', 'map_all_control[street_view_control_position]', a
 	'options' => $positions,
 ));
 
+$form->add_element(
+	'select', 'map_all_control[camera_control_position]', array(
+		'lable'   => esc_html__( 'Camera Control', 'wp-google-map-plugin' ),
+		'current' => isset( $_POST['map_all_control']['camera_control_position'] ) ? $_POST['map_all_control']['camera_control_position'] : '',
+		'desc'    => esc_html__( 'Please select position of camera control.', 'wp-google-map-plugin' ),
+		'options' => $positions,
+	)
+);
+
 // Search Control Position
 $form->add_element( 'select', 'map_all_control[search_control_position]', array(
 	'lable' => esc_html__( 'Search Control', 'wp-google-map-plugin' ),

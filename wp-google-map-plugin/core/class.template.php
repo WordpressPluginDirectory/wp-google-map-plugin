@@ -291,7 +291,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 			 		<div class="fc-4 col-sm-3 col-xs-3 product_header_desc">
                         <div class="product_name">'.$this->options['productName'].' <span class="fc-badge">'.$this->options['productVersion'].'</span></div>
                     </div>
-                    <div class="fc-6 col-sm-6 col-xs-6 product-annoucement"><a href="https://wordpress.org/support/plugin/'.$this->options['productSlug'].'/reviews/#new-post" target="_blank">' . sprintf(esc_html__("Add Your %s in %s", "wp-google-map-plugin"), '<span class="stars">★★★★★</span>', 'wordpress.org') . '</a></div>
+                    <div class="fc-6 col-sm-6 col-xs-6 product-annoucement"><a href="https://wordpress.org/support/plugin/'.$this->options['productSlug'].'/reviews/#new-post" target="_blank">' . sprintf(esc_html__("Please provide us %s rating at %s", "wp-google-map-plugin"), '<span class="stars">★★★★★</span>', ' wordpress.org') . '</a></div>
                     <div class="fc-2 col-sm-3 col-xs-3 social_media_area">
                     <div class="social-media-links">
                            <a href="' . $this->options['docURL'] . '" target="_blank"><img src="'. plugin_dir_url( __DIR__ ).'assets/images/vector.png"></a>

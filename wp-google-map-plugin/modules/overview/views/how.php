@@ -160,7 +160,7 @@ $allowed_html = array( 'a' => array( 'href' => array(), 'class' => array(), 'tar
             $premium_plugin = '<a target="_blank" href="' . esc_url( 'https://www.wpmapspro.com/?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium' ) . '">' . esc_html__( 'WP Maps Pro', 'wp-google-map-plugin' ) . '</a>';
 
             $output_string = sprintf(
-                esc_html__( "If you are looking for even more features, please have a look on the pro version: %s. It's the number #1 selling (13k+ happy customers), most loved & trusted advanced Google Maps plugin for WordPress. We are continuously adding more features to it based on the suggestions of esteemed customers / users like you. With the pro version, you can set up Google Maps with very advanced features in just a few seconds. Also, both our free and pro version plugins can be customized to achieve specific requirements.", 'wp-google-map-plugin' ),
+                esc_html__( "If you are looking for even more features, please have a look on the pro version: %s. It's the number #1 selling (15k+ happy customers), most loved & trusted advanced Google Maps plugin for WordPress. We are continuously adding more features to it based on the suggestions of esteemed customers / users like you. With the pro version, you can set up Google Maps with very advanced features in just a few seconds. Also, both our free and pro version plugins can be customized to achieve specific requirements.", 'wp-google-map-plugin' ),
                 wp_kses( $premium_plugin, $allowed_html )
             );
 

@@ -838,6 +838,7 @@
             "map_type_control": true,
             "map_type_control_style": "HORIZONTAL_BAR",
             "map_type_control_position": "RIGHT_TOP",
+            "camera_control_position" : "BOTTOM_RIGHT",
             "scale_control": true,
             "street_view_control": true,
             "street_view_control_position": "TOP_LEFT",
@@ -914,6 +915,9 @@
                     style: eval("google.maps.MapTypeControlStyle." + map_obj.settings.map_type_control_style),
                     position: eval("google.maps.ControlPosition." + map_obj.settings.map_type_control_position)
                 },
+                cameraControlOptions: {
+                    position: eval("google.maps.ControlPosition." + map_obj.settings.camera_control_position)
+                },
                 scaleControl: (map_obj.settings.scale_control == true),
                 streetViewControl: (map_obj.settings.street_view_control == true),
                 streetViewControlOptions: {
@@ -925,7 +929,8 @@
                 },
                 draggable: map_obj.settings.draggable,
                 mapTypeId: eval("google.maps.MapTypeId." + map_obj.settings.map_type_id),
-                styles: eval(map_obj.map_data.styles)
+                styles: eval(map_obj.map_data.styles),
+                cameraControl:map_obj.settings.camera_control,
             });
 
             map_obj.map_loaded();

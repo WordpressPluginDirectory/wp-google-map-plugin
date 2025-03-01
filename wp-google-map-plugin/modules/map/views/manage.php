@@ -32,7 +32,53 @@ if ( class_exists( 'WP_List_Table_Helper' ) and ! class_exists( 'WPGMP_Maps_Tabl
 	  	 * @param array $item Map Row.
 	  	 */
 		public function column_shortcodes($item) {
-			echo esc_html('[put_wpgm id='.$item->map_id.']');	}
+
+			
+		    // Sanitize map ID and image URL
+		    $map_id = intval($item->map_id);
+		    $image_url = esc_url(WPGMP_IMAGES . "copy-to-clipboard.png");
+
+		    // Define allowed HTML tags and attributes
+		    $allowed_html = [
+		        'div' => [
+		            'class' => [],
+		        ],
+		        'a' => [
+		            'href' => [],
+		            'data-toggle' => [],
+		            'title' => [],
+		            'data-clipboard-text' => [],
+		            'class' => [],
+		            'role' => [],
+		        ],
+		        'img' => [
+		            'src' => [],
+		        ],
+		        'span' => [
+		            'class' => [],
+		        ],
+		        'b' => [],
+		    ];
+
+		    // Construct the HTML with placeholders
+		    $tooltip = "<div class='fc-tooltip'>
+		                    <a href='#' role='button' data-toggle='tooltip' 
+		                       title='Copy Shortcode To Clipboard!' 
+		                       data-clipboard-text='[put_wpgm id=$map_id]' 
+		                       class='copy_to_clipboard' 
+		                       onclick='return false;'>
+		                        <img src='$image_url'>
+		                    </a>
+		                    <span class='fc-tooltiptext fc-tooltip-top'>Shortcode has been copied to clipboard.</span>
+		                </div>";
+
+		    // Sanitize the HTML using wp_kses()
+		    $safe_tooltip = wp_kses($tooltip, $allowed_html);
+
+		    // Output the sanitized HTML
+		    echo '<b>' . esc_html('[put_wpgm id=' . $map_id . ']') . '</b>&nbsp;&nbsp;' . $safe_tooltip;
+		}
+
 		/**
 		 * Clone of the map.
 		 * @param  integer $item Map ID.

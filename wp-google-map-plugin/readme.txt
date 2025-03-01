@@ -5,8 +5,8 @@ Tags: google map,google maps,map,maps,map block
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.6.2
-Stable tag: 4.6.8
+Tested up to: 6.7.1
+Stable tag: 4.7.0
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,8 +17,8 @@ Show Google Maps on your site with WP Maps. Enjoy easy settings for unlimited ma
 
 The most advanced yet easy to use Google maps plugin for WordPress. Create beautifully styled, modern & responsive google maps with multiple locations, custom marker icons, marker categories, custom infowindow messages, images and more. Enable marker category filter on frontend to allow users to filter the locations.
 
-* Create multiple google maps with different marker icons, marker categories and locations assigned to them. 
-* We have seamlessly integrated support for the major WordPress GDPR plugins – Complianz – GDPR/CCPA Cookie Consent, GDPR Cookie Compliance (CCPA, DSGVO, Cookie Consent), CookieYes | GDPR Cookie Consent & Compliance Notice (CCPA Ready), iubenda | All-in-one Compliance for GDPR and Cookie Notice.
+> 👉 Create multiple google maps with different marker icons, marker categories and locations assigned to them. 
+> 👉 We have seamlessly integrated support for the major WordPress GDPR plugins – Complianz – GDPR/CCPA Cookie Consent, GDPR Cookie Compliance (CCPA, DSGVO, Cookie Consent), CookieYes | GDPR Cookie Consent & Compliance Notice (CCPA Ready), iubenda | All-in-one Compliance for GDPR and Cookie Notice.
 
 With just few clicks, you will be able to add beautifully designed custom google maps to any page / post or widget with help of generated shortcode.
 
@@ -34,43 +34,43 @@ Google autosuggest enabled location form helps you as site administrator to crea
  
 
 = Lite Version (Free) = 
-*  It's fully GDPR-compliant, ensuring secure and privacy-conscious Google Maps integration.
-*  Create multiple google maps with different marker icons, marker categories and locations assigned to them. 
-*  Add unlimited locations with various information.
-*  Assign multiple locations to a single google maps.
-*  Display a info window message to any location.
-*  Maps Marker Infowindow Open On: Mouse Click or Mouse Hover. 
-*  Display Google Maps on posts/pages using shortcode.
-*  Centering the map according to assigned locations.
-*  Decide center latitude and longitude for each map separtely.
-*  Easy way to assign category to any location.
-*  Select your marker icon for markers.
-*  Enable marker cluster functionality for markers.
-*  Easily edit or delete google map functionality.
-*  Assign your own markers to categories or choose colorful markers from +500 readymade markers provided by the [Maps Icons Collection](https://mapicons.mapsmarker.com).
-*  Select among 4 map type : Roadmap,Satellite,Hybrid,Terrain
-*  Set your map height and width. 
-*  Set Google maps zoom level.
-*  Google Maps can be Draggable
-*  Display traffic real time conditions and overlays using Layers.
-*  Add bicycle path information to your maps using the Bicycling Layer.
-*  Enable Google Map Transit layer
-*  Marker Animation on Click or Mouse hover the marker.
-*  45° imagery functionality
-*  Add circle in your Maps plugin
-*  Create a Google maps just in seconds.
-*  Street view supported
-*  widget supportive : Display Google Maps on sidebars using widget.
-*  Pov Heading and Pov Pitch for street view.
-*  Fully Responsive.Display your map perfectly on all devices.
-*  Create 100% responsive maps effortlessly.Tested on real devices.
-*  A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
-*  Multi-lingual Supported.
-*  Multisite Enabled and ability to activate it network wide.
-*  Map Stylization : Customizable Google maps style from https://snazzymaps.com.
-*  Search control on frontend map to search location easily.
-*  Filter markers by category.
-*  No content / data loss when migrating from free version to pro version.
+> ➡️  It's fully GDPR-compliant, ensuring secure and privacy-conscious Google Maps integration.
+> ➡️  Create multiple google maps with different marker icons, marker categories and locations assigned to them. 
+> ➡️  Add unlimited locations with various information.
+> ➡️  Assign multiple locations to a single google maps.
+> ➡️  Display a info window message to any location.
+> ➡️  Maps Marker Infowindow Open On: Mouse Click or Mouse Hover. 
+> ➡️  Display Google Maps on posts/pages using shortcode.
+> ➡️  Centering the map according to assigned locations.
+> ➡️  Decide center latitude and longitude for each map separtely.
+> ➡️  Easy way to assign category to any location.
+> ➡️  Select your marker icon for markers.
+> ➡️  Enable marker cluster functionality for markers.
+> ➡️  Easily edit or delete google map functionality.
+> ➡️  Assign your own markers to categories or choose colorful markers from +500 readymade markers provided by the [Maps Icons Collection](https://mapicons.mapsmarker.com).
+> ➡️  Select among 4 map type : Roadmap,Satellite,Hybrid,Terrain
+> ➡️  Set your map height and width. 
+> ➡️  Set Google maps zoom level.
+> ➡️  Google Maps can be Draggable
+> ➡️  Display traffic real time conditions and overlays using Layers.
+> ➡️  Add bicycle path information to your maps using the Bicycling Layer.
+> ➡️  Enable Google Map Transit layer
+> ➡️  Marker Animation on Click or Mouse hover the marker.
+> ➡️  45° imagery functionality
+> ➡️  Add circle in your Maps plugin
+> ➡️  Create a Google maps just in seconds.
+> ➡️  Street view supported
+> ➡️  widget supportive : Display Google Maps on sidebars using widget.
+> ➡️  Pov Heading and Pov Pitch for street view.
+> ➡️  Fully Responsive.Display your map perfectly on all devices.
+> ➡️  Create 100% responsive maps effortlessly.Tested on real devices.
+> ➡️  A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
+> ➡️  Multi-lingual Supported.
+> ➡️  Multisite Enabled and ability to activate it network wide.
+> ➡️  Map Stylization : Customizable Google maps style from https://snazzymaps.com.
+> ➡️  Search control on frontend map to search location easily.
+> ➡️  Filter markers by category.
+> ➡️  No content / data loss when migrating from free version to pro version.
 
 
 <strong> <a href='https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium' target='_blank'> Additional Features Available In Pro</a> </strong>
@@ -79,53 +79,53 @@ Google autosuggest enabled location form helps you as site administrator to crea
 
 Pro version plugin contains all the features of free version plugin plus some additional features which are listed below
 
-*  Listing : Display listing in grid or list style under map. Fully responsive listing.
-*  Map Layers : Display Traffic Layer , Bicycling Layer, Transit layer
-*  Import/Export Locations : Import Export Locations supported using CSV.Sample csv is attached in pro version.
-*  Draw shapes : rectangle, circle, polygon and polyline.
-*  Display unlimited shapes. Display Message on shape click or Redirect to external link. 
-*  Direction & Route : Directions & Route Suggestion. Display directions results in KM and MILES.
-*  Sort listing by location, category and address alphabetically in location listing.
-*  Marker Category : Assign multiple categories to a location. 
-*  Infowindow Contents: Customize infowindow contents with help of Placeholders.
-*  Display Posts Information, custom fields, taxonomies and featured images on infowindow message using placeholders.
-*  Unlimited number of map markers and locations.
-*  Set your own google map marker icon
-*  Drag and drop feature for markers, custom animation support
-*  Allows to display the user location on map.
-*  Nearby locations based on user’s current location.
-*  Display Posts/Pages or Custom Post Types on google maps using **custom fields**.
-*  Center the map based on visitor’s current location.
-*  Define overlays on Google maps via an easy to use interface.
-*  Integrate GEOJSON in to google maps.
-*  Display multiple Kml/Kmz Layer on the map.
-*  Fusion Table Layers.
-*  Add Geo location
-*  Add any number of Google maps on pages/posts/sidebars.
-*  Allows to insert the map as widget on sidebars.
-*  Add unlimited locations using an easy to use interface for Google Maps.
-*  Display location title, location category, location latitude, location longitude with location message in the infowindow.
-*  Create unlimited maps and display on posts/pages using shortcode or in sidebar using widget.
-*  Design your own Google map skins easily. Turn ON/OFF roads, places, water area. 
-*  Ability to display infowindow on mouse click on mouse hover.
-*  Display your map perfectly on all devices. Create 100% responsive maps effortlessly.
-*  Multi-lingual Supported.
-*  Display physical maps based on terrain information.
-*  Display Google Earth satellite images on just one click.
-*  Display maps in a blend of normal and satellite views.
-*  Setup POV Heading and POV Pitch of Street View to customize Street View output of a location.
-*  Full support of controls of the Google map, such as zoom control, map type control, scale control, street view control, fullscreen and rotate control
-*  Drag and drop feature for markers, custom animation support
-*  Modify Locating Listing using Placeholder.
-*  Hooks Supported - Use actions & filters to modify map,markers,listing and associated html on fly.
-*  Display locations listing with filters & pagination. Fully customizable using backend settings and hooks.
-*  Use "wpgmp_geo_tags_args", "wpgmp_geo_featured_image", "wpgmp_geotags_placeholder", "wpgmp_geotags_content" hooks to extend Posts on google maps functionality as you want.
-*  Use External Database or Sources to add markers on google maps using new filter wpgmp_marker_source.
-*  Load markers from external database or API sources with help of filters (Hooks).
-*  A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
-*  Multisite Enabled and ability to activate it network wide.
-*  Visit our Pro Edition [WP MAPS PRO](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)
-*  Fully extensible & scalable plugin to make it ready for customisations according to website / business requirements.
+> 👉  Listing : Display listing in grid or list style under map. Fully responsive listing.
+> 👉  Map Layers : Display Traffic Layer , Bicycling Layer, Transit layer
+> 👉  Import/Export Locations : Import Export Locations supported using CSV.Sample csv is attached in pro version.
+> 👉  Draw shapes : rectangle, circle, polygon and polyline.
+> 👉  Display unlimited shapes. Display Message on shape click or Redirect to external link. 
+> 👉  Direction & Route : Directions & Route Suggestion. Display directions results in KM and MILES.
+> 👉  Sort listing by location, category and address alphabetically in location listing.
+> 👉  Marker Category : Assign multiple categories to a location. 
+> 👉  Infowindow Contents: Customize infowindow contents with help of Placeholders.
+> 👉  Display Posts Information, custom fields, taxonomies and featured images on infowindow message using placeholders.
+> 👉  Unlimited number of map markers and locations.
+> 👉  Set your own google map marker icon
+> 👉  Drag and drop feature for markers, custom animation support
+> 👉  Allows to display the user location on map.
+> 👉  Nearby locations based on user’s current location.
+> 👉  Display Posts/Pages or Custom Post Types on google maps using **custom fields**.
+> 👉  Center the map based on visitor’s current location.
+> 👉  Define overlays on Google maps via an easy to use interface.
+> 👉  Integrate GEOJSON in to google maps.
+> 👉  Display multiple Kml/Kmz Layer on the map.
+> 👉  Fusion Table Layers.
+> 👉  Add Geo location
+> 👉  Add any number of Google maps on pages/posts/sidebars.
+> 👉  Allows to insert the map as widget on sidebars.
+> 👉  Add unlimited locations using an easy to use interface for Google Maps.
+> 👉  Display location title, location category, location latitude, location longitude with location message in the infowindow.
+> 👉  Create unlimited maps and display on posts/pages using shortcode or in sidebar using widget.
+> 👉  Design your own Google map skins easily. Turn ON/OFF roads, places, water area. 
+> 👉  Ability to display infowindow on mouse click on mouse hover.
+> 👉  Display your map perfectly on all devices. Create 100% responsive maps effortlessly.
+> 👉  Multi-lingual Supported.
+> 👉  Display physical maps based on terrain information.
+> 👉  Display Google Earth satellite images on just one click.
+> 👉  Display maps in a blend of normal and satellite views.
+> 👉  Setup POV Heading and POV Pitch of Street View to customize Street View output of a location.
+> 👉  Full support of controls of the Google map, such as zoom control, map type control, scale control, street view control, fullscreen and rotate control
+> 👉  Drag and drop feature for markers, custom animation support
+> 👉  Modify Locating Listing using Placeholder.
+> 👉  Hooks Supported - Use actions & filters to modify map,markers,listing and associated html on fly.
+> 👉  Display locations listing with filters & pagination. Fully customizable using backend settings and hooks.
+> 👉  Use "wpgmp_geo_tags_args", "wpgmp_geo_featured_image", "wpgmp_geotags_placeholder", "wpgmp_geotags_content" hooks to extend Posts on google maps functionality as you want.
+> 👉  Use External Database or Sources to add markers on google maps using new filter wpgmp_marker_source.
+> 👉  Load markers from external database or API sources with help of filters (Hooks).
+> 👉  A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
+> 👉  Multisite Enabled and ability to activate it network wide.
+> 👉  Visit our Pro Edition [WP MAPS PRO](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)
+> 👉  Fully extensible & scalable plugin to make it ready for customisations according to website / business requirements.
 
 = Live Examples =
 
@@ -169,6 +169,13 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
+= 4.7.0 =
+* Add : Fix the cookie consent hook callback issue.
+* Add : Add Camera control manageable settings.
+
+= 4.6.9 =
+* Add : Copy map shortcode by icon functionality added.
+
 = 4.6.8 =
 * Fix : compatible with cookiebot plugin.
 * Fix : Backup Table Constant issue solved.
@@ -200,6 +207,27 @@ This section describes how to install the plugin and get it working.
 * New : API loaded asynchronously for faster map page load.
 
 == Upgrade Notice ==
+
+= 4.6.9 =
+  - Upgrade for more stable release.
+
+= 4.6.8 =
+  - Upgrade for compatibility with cookiebot plugin.
+
+= 4.6.7 =
+  - Upgrade for using more translatable strings
+
+= 4.6.6 =
+  - Upgrade for more stable release.
+
+= 4.6.5 =
+  - Upgrade for PHP version 8 compatibility.
+
+= 4.6.4 =
+  - Upgrade for compatibility with Google Tags Manager.
+
+= 4.6.3 =
+  - Upgrade for code mirror editor in the backend.
 
 = 4.6.2 =
   - Upgrade for more stable and secure version of plugin. Security issue was fixed.

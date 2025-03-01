@@ -1,5 +1,5 @@
 <?php
-add_filter('wpgmp_accept_cookies','wpgmp_accept_cookies');
+add_filter('wpgmp_accept_cookies','wpgmp_accept_cookies_consent');
 
 function check_cookieyes_consent() {
     if (isset($_COOKIE['cookieyes-consent'])) {
@@ -19,7 +19,7 @@ function check_cookieyes_consent() {
     }
 }
 
-function wpgmp_accept_cookies($is_allowed) {
+function wpgmp_accept_cookies_consent($is_allowed) {
 
 	if (function_exists('cmplz_has_consent') && cmplz_has_consent('marketing')) {
 		$is_allowed = true;
