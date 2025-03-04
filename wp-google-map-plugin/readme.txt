@@ -6,7 +6,7 @@ Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
 Tested up to: 6.7.1
-Stable tag: 4.7.0
+Stable tag: 4.7.1
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -168,6 +168,12 @@ This section describes how to install the plugin and get it working.
     10. Map block for Gutenberg editor.  
 
 == Changelog ==
+
+= 4.7.1 =
+* Fix : Maps was not showing error fixed.
+
+= 4.7.0 =
+* Add : Fix the issue of Camera control position.
 
 = 4.7.0 =
 * Add : Fix the cookie consent hook callback issue.

@@ -169,7 +169,7 @@ $map_data['map_options'] = array(
 'street_view_control' => (!isset($map->map_all_control['street_view_control']) || $map->map_all_control['street_view_control'] != 'false'),
 'full_screen_control_position' => (isset( $map->map_all_control['full_screen_control_position'] ) ) ? $map->map_all_control['full_screen_control_position'] : 'TOP_RIGHT',
 'search_control' => (!isset($map->map_all_control['search_control']) || $map->map_all_control['search_control'] != 'false'),
-'camera_control_position'        => (isset($map->map_all_control['camera_control_position']) ) ? $map->map_all_control['camera_control_position'] : '',
+'camera_control_position'        => (isset($map->map_all_control['camera_control_position']) ) ? $map->map_all_control['camera_control_position'] : 'TOP_RIGHT',
 'search_control_position' => ( isset($map->map_all_control['search_control_position']) && !empty($map->map_all_control['search_control_position'])) ? $map->map_all_control['search_control_position'] : 'TOP_LEFT',
 'zoom_control_position' => $map->map_all_control['zoom_control_position'],
 'map_type_control_position' => $map->map_all_control['map_type_control_position'],
