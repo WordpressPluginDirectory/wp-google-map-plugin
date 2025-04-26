@@ -1,12 +1,12 @@
 === WP Maps - Display Google Maps Perfectly with Ease ===
 Contributors:      flippercode
 Plugin Name:       WP MAPS
-Tags: google map,google maps,map,maps,map block
+Tags: google map,google maps,map,wordpress google maps,map block
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.7.1
-Stable tag: 4.7.1
+Tested up to: 6.7.2
+Stable tag: 4.7.3
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -169,10 +169,14 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
-= 4.7.1 =
-* Fix : Maps was not showing error fixed.
+= 4.7.3 =
+* Add : Fixed the _load_textdomain_just_in_time issue.
+* Add : Fixed the headers already sent issue.
 
-= 4.7.0 =
+= 4.7.2 =
+* Add : Fixed the security issues related to map controls.
+
+= 4.7.1 =
 * Add : Fix the issue of Camera control position.
 
 = 4.7.0 =
@@ -214,6 +218,15 @@ This section describes how to install the plugin and get it working.
 
 == Upgrade Notice ==
 
+= 4.7.2 =
+  - Upgrade for more stable release.
+
+= 4.7.1 =
+  - Upgrade for more stable release.
+
+= 4.7.0 =
+  - Upgrade for more stable release.
+  
 = 4.6.9 =
   - Upgrade for more stable release.
 

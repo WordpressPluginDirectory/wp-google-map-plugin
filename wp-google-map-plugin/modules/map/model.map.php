@@ -91,6 +91,36 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 				return $objects;
 			}
 		}
+
+		function sanitize_custom_css($css) {
+			
+			// Remove all HTML and PHP tags
+			$css = wp_strip_all_tags($css);
+		
+			// Allow only valid CSS properties using regex
+			$css = preg_replace('/<\/?(script|style|iframe|object|embed|applet|meta|link|form|input|button)[^>]*>/i', '', $css);
+		
+			return $css;
+		}
+
+		function validate_float_with_decimal( $value ) {
+
+			// Remove whitespace and ensure it's a string
+			$value = trim( (string) $value );
+		
+			// Validate as a float
+			if ( filter_var( $value, FILTER_VALIDATE_FLOAT ) === false ) {
+				return false;
+			}
+		
+			// Ensure it has a decimal point (i.e., not an integer)
+			if ( strpos( $value, '.' ) === false ) {
+				return false;
+			}
+		
+			return floatval( $value );
+		}
+
 		/**
 		 * Add or Edit Operation.
 		 */
@@ -111,7 +141,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 			die( 'You are not allowed to save changes!' );
 			if ( isset( $_REQUEST['_wpnonce'] ) && ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wpgmp-nonce' ) )
 			die( 'You are not allowed to save changes!' );
-	
+
 			//Check Validations
 			$this->verify( $_POST );
 			
@@ -131,7 +161,17 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 				}
 				
 			}
-			
+
+			// sanitise and check for proper decimal values.
+			$map_center_latitude = isset( $_POST['map_all_control']['map_center_latitude'] ) ? $_POST['map_all_control']['map_center_latitude'] : '';
+			$map_center_longitude = isset( $_POST['map_all_control']['map_center_longitude'] ) ? $_POST['map_all_control']['map_center_longitude'] : '';
+			if(!$this->validate_float_with_decimal( $map_center_latitude )){
+				$this->errors[] = esc_html__( 'Please enter a valid decimal value for latitude.','wp-google-map-plugin' );
+			}
+			if(!$this->validate_float_with_decimal( $map_center_longitude )){
+				$this->errors[] = esc_html__( 'Please enter a valid decimal value for longitude.','wp-google-map-plugin' );
+			}
+
 			if ( is_array( $this->errors ) && ! empty( $this->errors ) ) {
 				$this->throw_errors();
 			}
@@ -169,12 +209,43 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 						unset($_POST['map_all_control']['custom_filters'][$k]);
 				}
 			}
-			
+			// Sanitize source code for allowed HTML tags
 			if ( isset( $_POST['map_all_control']['location_infowindow_skin']['sourcecode'] ) ) {
-				$_POST['map_all_control']['infowindow_setting'] = $_POST['map_all_control']['location_infowindow_skin']['sourcecode'];
+				$_POST['map_all_control']['infowindow_setting'] = wp_kses_post($_POST['map_all_control']['location_infowindow_skin']['sourcecode']);
 			}
 
+			$keys_to_be_check_for_safe_css_inputs = [
+				'wpgmp_custom_css',
+				'wpgmp_base_font_size',
+				'wpgmp_primary_color',
+				'wpgmp_secondary_color',
+				'additional_css'
+			];
 
+			$keys_to_be_check_for_safe_inputs = [
+				'map_center_latitude',
+				'map_center_longitude',
+				'wpgmp_before_listing',
+			];
+			
+			// sanitise css related inputs
+			foreach ($keys_to_be_check_for_safe_css_inputs as $key) {
+				if (!empty($_POST['map_all_control'][$key])) {
+					$_POST['map_all_control'][$key] = $this->sanitize_custom_css($_POST['map_all_control'][$key]);
+				}
+			}
+
+			//sanitise all textboxes inputs
+			foreach ($keys_to_be_check_for_safe_inputs as $key) {
+				if (!empty($_POST['map_all_control'][$key])) {
+					$_POST['map_all_control'][$key] = sanitize_text_field( wp_unslash($_POST['map_all_control'][$key] ) );
+				}
+			}
+
+			//sanitise marker icon url
+			if (!empty($_POST['map_all_control']['marker_default_icon'])) {
+				$_POST['map_all_control']['marker_default_icon'] = esc_url_raw( $_POST['map_all_control']['marker_default_icon'] );
+			}
 			
 			//Preparing secure and safe data to save
 			$data['map_title'] = sanitize_text_field( wp_unslash( $_POST['map_title'] ) );
