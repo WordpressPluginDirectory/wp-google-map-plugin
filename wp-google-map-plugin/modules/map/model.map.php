@@ -165,10 +165,10 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 			// sanitise and check for proper decimal values.
 			$map_center_latitude = isset( $_POST['map_all_control']['map_center_latitude'] ) ? $_POST['map_all_control']['map_center_latitude'] : '';
 			$map_center_longitude = isset( $_POST['map_all_control']['map_center_longitude'] ) ? $_POST['map_all_control']['map_center_longitude'] : '';
-			if(!$this->validate_float_with_decimal( $map_center_latitude )){
+			if( $map_center_latitude != '' && !$this->validate_float_with_decimal( $map_center_latitude ) ){
 				$this->errors[] = esc_html__( 'Please enter a valid decimal value for latitude.','wp-google-map-plugin' );
 			}
-			if(!$this->validate_float_with_decimal( $map_center_longitude )){
+			if($map_center_longitude != '' && !$this->validate_float_with_decimal( $map_center_longitude )){
 				$this->errors[] = esc_html__( 'Please enter a valid decimal value for longitude.','wp-google-map-plugin' );
 			}
 

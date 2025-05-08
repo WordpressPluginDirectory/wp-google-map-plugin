@@ -6,7 +6,7 @@ Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
 Tested up to: 6.7.2
-Stable tag: 4.7.3
+Stable tag: 4.7.4
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -168,6 +168,9 @@ This section describes how to install the plugin and get it working.
     10. Map block for Gutenberg editor.  
 
 == Changelog ==
+
+= 4.7.4 =
+* Add : Fixed the empty latitude and longitude vaildation error message.
 
 = 4.7.3 =
 * Add : Fixed the _load_textdomain_just_in_time issue.
