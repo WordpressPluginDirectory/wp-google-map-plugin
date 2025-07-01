@@ -1,0 +1,51 @@
+.wpgmp_listing_grid .fc-item-default.fc-wait .wpgmp_locations {
+  padding: 24px !important;
+}
+
+.wpgmp_listing_grid .fc-item-default.fc-wait .wpgmp_location_meta {
+  margin-top: 0;
+}
+
+.fc-item-default.fc-wait .wpgmp_locations {
+  background: #fff;
+  border: 0 none;
+  margin-bottom: 20px;
+  box-shadow: 0 0 8px rgba(74, 74, 74, 0.15);
+  border-radius: 8px;
+}
+
+.fc-item-default.fc-wait .wpgmp_locations img {
+  padding: 0px;
+  margin-right: 15px !important;
+}
+
+.fc-item-default.fc-wait .wpgmp_locations_foot {
+  margin: 0px;
+}
+
+.fc-item-default .wpgmp_location_meta {
+  margin-right: 0px;
+}
+
+.wpgmp_listing_list .fc-item-default .wpgmp_locations {
+  padding: 15px !important;
+}
+
+.fc-item-default span.wpgmp_location_category.fc-badge.info {
+  padding: 4px 10px 6px;
+  border-radius: 50px;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.fc-item-default .wpgmp-actions {
+  margin: 10px 0 0;
+}
+.fc-item-default .wpgmp-actions a.wpgmp-action-link {
+  font-size: 14px;
+}
+
+.fc-item-default .wpgmp_locations .wpgmp_location_title {
+  font-size: 20px;
+  line-height: 28px;
+}

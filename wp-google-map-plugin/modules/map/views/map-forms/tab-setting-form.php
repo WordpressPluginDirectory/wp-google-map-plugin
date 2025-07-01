@@ -7,12 +7,22 @@
  */
 
 $form->add_element(
-	'group',
-	'tabs_settings',
-	array(
-		'value'  => esc_html__('Tabs Settings', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
+	'group', 'map_tabs_setting', array(
+		'value'  => esc_html__( 'Tabs Settings', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
-		'parent_class'		=> 'fc-locked',
+		'tutorial_link' => 'https://www.wpmapspro.com/tutorials/',
+		'pro' => true
+	)
+);
+
+$form->add_element(
+	'html',
+	'wpgmp_map_tabs_setting_msg',
+	array(
+		'html' => WPGMP_Helper::wpgmp_instructions('tabs'),
+		'show'  => 'true',
+		'before' => '<div class="fc-7">',
+		'after'  => '</div>',
 	)
 );

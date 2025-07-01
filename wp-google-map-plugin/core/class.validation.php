@@ -1,6 +1,7 @@
 <?php
 /**
  * WPGMP Validator class File.
+ *
  * @package Core
  * @author Flipper Code <hello@flippercode.com>
  */
@@ -9,30 +10,34 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 
 	/**
 	 * FlipperCode_Validator Class
+	 *
 	 * @author Flipper Code <hello@flippercode.com>
 	 * @package Core
 	 */
-
 	class FlipperCode_Validator {
+
+		private $id;
+
+		private $check_vars;
+
 		/**
 		 * FlipperCode_Validator Constructer.
 		 */
-		public $id;
-		public $check_vars = array();
-		public function __construct() {
+		function __construct() {
 
 			$this->id = 0;
 		}
 		/**
 		 * Check if rule already exists.
+		 *
 		 * @param  string $varname Element name.
 		 * @param  string $authType Validation Type.
 		 * @return boolean           True or False.
 		 */
-		function is_exist($varname, $authType) {
+		function is_exist( $varname, $authType ) {
 
 			for ( $i = 0;$i < $this->id;$i++ ) {
-				if ( $this->check_vars[ $i ]['name'] == $varname	&& $this->check_vars[ $i ]['authtype'] == $authType ) {
+				if ( $this->check_vars[ $i ]['name'] == $varname && $this->check_vars[ $i ]['authtype'] == $authType ) {
 					return true; }
 			}
 
@@ -40,29 +45,31 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 		}
 		/**
 		 * Add rule in queue.
+		 *
 		 * @param string $varname  Element name.
 		 * @param array  $postVar Post Variable.
 		 * @param string $authType Validation Type.
 		 * @param string $error    Error message.
 		 */
-		public function add($varname, $postVar, $authType, $error) {
+		public function add( $varname, $postVar, $authType, $error ) {
 
 			global $frmdata;
 
-			$is_exist = $this->is_exist( $varname,$authType );
+			$is_exist = $this->is_exist( $varname, $authType );
 
 			if ( true == $is_exist ) {
 				return; }
 
-			$index = $this->id++;
-			$this->check_vars[ $index ]['name'] = $varname;
-			$this->check_vars[ $index ]['data'] = $postVar;
+			$index                                  = $this->id++;
+			$this->check_vars[ $index ]['name']     = $varname;
+			$this->check_vars[ $index ]['data']     = $postVar;
 			$this->check_vars[ $index ]['authtype'] = $authType;
-			$this->check_vars[ $index ]['error'] = $error;
+			$this->check_vars[ $index ]['error']    = $error;
 		}
 
 		/**
 		 * Validate all rules.
+		 *
 		 * @return string Validation response.
 		 */
 		public function validate() {
@@ -72,11 +79,11 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 			for ( $i = 0; $i < $this->id; $i++ ) {
 
 				$errorMsg = '';
-				$name = $this->check_vars[ $i ]['name'];
+				$name     = $this->check_vars[ $i ]['name'];
 				$postVar  = $this->check_vars[ $i ]['data'];
 				$authType = $this->check_vars[ $i ]['authtype'];
 				$error    = $this->check_vars[ $i ]['error'];
-				$pos = strpos( $authType, '=' );
+				$pos      = strpos( $authType, '=' );
 
 				if ( false != $pos ) {
 					$authType = substr( $this->check_vars[ $i ]['authtype'], 0, $pos );
@@ -94,18 +101,18 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 							for ( $j = 0; $j < $count; $j++ ) {
 								$length = strlen( trim( $postVar['name'][ $j ] ) );
 								if ( ! $length ) {
-									$errorMsg .= $error.' :File '.($j + 1).''; }
+									$errorMsg .= $error . ' :File ' . ( $j + 1 ) . ''; }
 							}
 						} elseif ( isset( $postVar['name'] ) && empty( $postVar['name'] ) ) {
 
 								$length = strlen( trim( $postVar['name'] ) );
 							if ( ! $length ) {
-								$errorMsg .= $error.''; }
+								$errorMsg .= $error . ''; }
 						} else {
 
 							$length = strlen( trim( $postVar ) );
 							if ( ! $length ) {
-								$errorMsg .= $error.''; }
+								$errorMsg .= $error . ''; }
 						}
 
 						break;
@@ -114,44 +121,44 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 					case 'alpha': {
 						$regexp = '/^[A-za-z]$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'alphanum': {
 						$regexp = '/^[A-za-z0-9]$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'num': {
 						$regexp = '/^[0-9]*$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
-	    			case 'max': {
+					case 'max': {
 						$length = strlen( trim( $postVar ) );
 						if ( $length > $value ) {
-							$errorMsg .= $error.'<br>'; }
+							$errorMsg .= $error . '<br>'; }
 						break;
 					}
 
 					case 'min': {
 						$length = strlen( trim( $postVar ) );
 						if ( $length < $value && 0 != $length ) {
-							$errorMsg .= $error.'<br>'; }
+							$errorMsg .= $error . '<br>'; }
 						break;
 					}
 
@@ -159,25 +166,25 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						if ( is_array( $postVar ) ) {
 							$count = count( $postVar );
 							if ( $count > $value ) {
-								$errorMsg .= $error.'<br>'; }
+								$errorMsg .= $error . '<br>'; }
 						} else {
 							if ( $postVar > $value ) {
-								$errorMsg .= $error.'<br>'; }
+								$errorMsg .= $error . '<br>'; }
 						}
-					    break;
+						break;
 					}
 
 					case 'gte':{
 						if ( is_array( $postVar ) ) {
-						   	$count = count( $postVar );
+							$count = count( $postVar );
 							if ( $count < $value ) {
-								$errorMsg .= $error.'<br>'; }
+								$errorMsg .= $error . '<br>'; }
 						} else {
 							if ( $postVar < $value ) {
 								$length = strlen( trim( $postVar ) );
 								if ( $length ) {
-									$errorMsg .= $error.'<br>'; }
-	                        }
+									$errorMsg .= $error . '<br>'; }
+							}
 						}
 						break;
 					}
@@ -186,30 +193,30 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						$regexp1 = '/^[0-9]$/';
 						$regexp2 = '/^[a-zA-Z]+[a-zA-Z0-9\.\_]*[a-zA-Z0-9]+$/';
 						if ( ! preg_match( $regexp1, trim( $postVar ) ) && ! preg_match( $regexp2, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'name':{
 						$regexp = '/^[a-zA-Z]+[a-zA-Z\.\- ]*[a-zA-Z]+$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'address':{
 						$regexp = '/^[a-zA-Z0-9]+.*$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
@@ -232,13 +239,14 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 									$patternMatch = 1;
 								}
 							}
-						    if ( $patternMatch ) { break; }
+							if ( $patternMatch ) {
+								break; }
 						}
 
 						if ( ! $patternMatch ) {
-	  						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
+								$errorMsg .= $error . '<br>'; }
 						}
 						break;
 					}
@@ -258,18 +266,18 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						if ( ! preg_match( $regexp1, trim( $postVar ) ) && ! preg_match( $regexp2, trim( $postVar ) ) && ! preg_match( $regexp3, trim( $postVar ) ) && ! preg_match( $regexp4, trim( $postVar ) ) && ! preg_match( $regexp5, trim( $postVar ) ) && ! preg_match( $regexp6, trim( $postVar ) ) ) {
 							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'zip':{
 						$regexp = '/^[0-9]{6,10}$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
@@ -277,10 +285,10 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						// 12345-6789
 						$regexp = '/^[0-9]{5}[\-]{1}[0-9]{4}$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
@@ -288,20 +296,20 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 
 						$regexp = '/^[a-zA-Z]{2}[0-9]{1}[ ]{1}[0-9]{1}[a-zA-Z]{2}$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'ssn':{
 						$regexp = '/^(?!000)([0-6][0-9]{2}|7([0-6][0-9]|7[012]))([ -]?)(?!00)[0-9][0-9]\3(?!0000)[0-9]{4}$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
@@ -309,26 +317,26 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						$regexp1 = '/^[0-9]+\.[0-9]+$/';
 						$regexp2 = '/^[0-9]+$/';
 						if ( ! preg_match( $regexp1, trim( $postVar ) ) && ! preg_match( $regexp2, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 
 					case 'email':{
-					    if ( function_exists( 'is_email' ) ) {
+						if ( function_exists( 'is_email' ) ) {
 
-						  	if ( ! is_email( trim( $postVar ) ) ) {
+							if ( ! is_email( trim( $postVar ) ) ) {
 
-								$errorMsg .= $error.'<br>';
-						  	}
+								$errorMsg .= $error . '<br>';
+							}
 						} else {
-						    $regexp = '/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/';
+							$regexp = '/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/';
 							if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
 								$length = strlen( trim( $postVar ) );
 								if ( $length ) {
-									$errorMsg .= $error.'<br>'; }
+									$errorMsg .= $error . '<br>'; }
 							}
 						}
 						break;
@@ -337,9 +345,9 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 					case 'url':{
 						$regexp = '|^http(s)?://[a-z0-9-]+(\.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
+								$errorMsg .= $error . '<br>'; }
 						}
 						break;
 					}
@@ -347,14 +355,14 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 					case 'ip':{
 						$regexp = '/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/';
 						if ( ! preg_match( $regexp, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
+								$errorMsg .= $error . '<br>'; }
 						}
 						break;
 					}
 
-	    			case 'date':{
+					case 'date':{
 						$errorMsg .= $this->validate_date( trim( $postVar ), $value, $error );
 						break;
 					}
@@ -365,21 +373,21 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 					}
 
 					case 'fsize':{
-		                $errorMsg .= $this->validate_file_size( $postVar, $value, $error );
+						$errorMsg .= $this->validate_file_size( $postVar, $value, $error );
 						break;
 					}
 
 					case 'imgwh':{
-	                	$errorMsg .= $this->validate_image_height_width( $postVar, $value, $error );
+						$errorMsg .= $this->validate_image_height_width( $postVar, $value, $error );
 						break;
 					}
 
 					case 'custom':{
 						if ( ! preg_match( $value, trim( $postVar ) ) ) {
-	   						$length = strlen( trim( $postVar ) );
+							$length = strlen( trim( $postVar ) );
 							if ( $length ) {
-								$errorMsg .= $error.'<br>'; }
-	                    }
+								$errorMsg .= $error . '<br>'; }
+						}
 						break;
 					}
 				}
@@ -390,18 +398,20 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 
 			if ( $errordata ) {
 				return $errordata;
-			} else { 			return false; }
+			} else {
+				return false; }
 		}
 		/**
 		 * Validate data input.
+		 *
 		 * @param  string $postVar Element name.
 		 * @param  string $value   Element value.
 		 * @param  string $error   Error message.
 		 * @return string          Error message if not valid.
 		 */
-	    function validate_date($postVar, $value, $error) {
+		function validate_date( $postVar, $value, $error ) {
 
-	    	$errorMsg = '';
+			$errorMsg = '';
 
 			$length = strlen( trim( $postVar ) );
 			if ( $length ) {
@@ -430,7 +440,8 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						if ( 2 == $pos1 ) {
 							if ( strlen( $opt ) == 8 ) {
 								$regexp = '/^[0-9]{2}[\-][0-9]{2}[\-][0-9]{2}$/';
-							} else { 							$regexp = '/^[0-9]{2}[\-][0-9]{2}[\-][0-9]{4}$/'; }
+							} else {
+								$regexp = '/^[0-9]{2}[\-][0-9]{2}[\-][0-9]{4}$/'; }
 						}
 						if ( 4 == $pos1 ) {
 							$regexp = '/^[0-9]{4}[\-][0-9]{2}[\-][0-9]{2}$/'; }
@@ -440,7 +451,8 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						if ( 2 == $pos2 ) {
 							if ( strlen( $opt ) == 8 ) {
 								$regexp = '/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{2}$/';
-							} else { 							$regexp = '/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/'; }
+							} else {
+								$regexp = '/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/'; }
 						}
 						if ( 4 == $pos2 ) {
 							$regexp = '/^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}$/'; }
@@ -450,7 +462,8 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 						if ( 2 == $pos3 ) {
 							if ( 8 == strlen( $opt ) ) {
 								$regexp = '/^[0-9]{2}[\.][0-9]{2}[\.][0-9]{2}$/';
-							} else { 							$regexp = '/^[0-9]{2}[\.][0-9]{2}[\.][0-9]{4}$/'; }
+							} else {
+								$regexp = '/^[0-9]{2}[\.][0-9]{2}[\.][0-9]{4}$/'; }
 						}
 						if ( 4 == $pos3 ) {
 							$regexp = '/^[0-9]{4}[\.][0-9]{2}[\.][0-9]{2}$/'; }
@@ -459,7 +472,7 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 					if ( preg_match( $regexp, $postVar ) ) {
 
 						$patternMatch = 1;
-						if ( (isset( $pos1 ) && 2 == $pos1 ) || (isset( $pos2 ) && 2 == $pos2 ) || (isset( $pos3 ) && 2 == $pos3 ) ) {
+						if ( ( isset( $pos1 ) && 2 == $pos1 ) || ( isset( $pos2 ) && 2 == $pos2 ) || ( isset( $pos3 ) && 2 == $pos3 ) ) {
 							$str1 = substr( $opt, 0, 2 );
 							$str2 = substr( $opt, 3, 2 );
 
@@ -486,7 +499,7 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 							}
 						}
 
-						if ( (isset( $pos1 ) && 4 == $pos1) || (isset( $pos2 ) && 4 == $pos2) || (isset( $pos3 ) && 4 == $pos3) ) {
+						if ( ( isset( $pos1 ) && 4 == $pos1 ) || ( isset( $pos2 ) && 4 == $pos2 ) || ( isset( $pos3 ) && 4 == $pos3 ) ) {
 							$str = substr( $opt, 5, 2 );
 
 							if ( 'dd' == $str ) {
@@ -518,36 +531,39 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 									if ( $DD > 31 ) {
 										$errorMsg .= 'Selected month has maximum 31 days.<br>';
 									}
-								break;
+									break;
 							}
 						}
 
-						if ( ($YY % 4) == 0 ) {
-							if ( (2 == $MM) && ($DD > 29) ) {
+						if ( ( $YY % 4 ) == 0 ) {
+							if ( ( 2 == $MM ) && ( $DD > 29 ) ) {
 								$errorMsg .= 'Invalid days in February for leap year.<br>';
 							}
 						} else {
-							if ( (2 == $MM) && ($DD > 28) ) {
+							if ( ( 2 == $MM ) && ( $DD > 28 ) ) {
 								$errorMsg .= 'Invalid days in February for non leap year.<br>';
 							}
 						}
 					}
 
-					if ( $patternMatch ) {           break; }
+					if ( $patternMatch ) {
+						break; }
 				}
 
-				if ( ! $patternMatch ) {	$errorMsg .= $error.'<br>'; }
+				if ( ! $patternMatch ) {
+					$errorMsg .= $error . '<br>'; }
 			}
-	        return $errorMsg;
-	    }
-	    /**
-	     * Validate file type.
-	     * @param  string $postVar Element name.
-	     * @param  string $value   Element value.
-	     * @param  string $error   Error message.
-	     * @return string          Error message.
-	     */
-	    function validate_file_type($postVar, $value, $error) {
+			return $errorMsg;
+		}
+		/**
+		 * Validate file type.
+		 *
+		 * @param  string $postVar Element name.
+		 * @param  string $value   Element value.
+		 * @param  string $error   Error message.
+		 * @return string          Error message.
+		 */
+		function validate_file_type( $postVar, $value, $error ) {
 
 			$errorMsg = '';
 			if ( isset( $value ) ) {
@@ -564,45 +580,48 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 
 				for ( $i = 0; $i < $totalFiles; $i++ ) {
 					if ( $postVar['name'][ $i ] ) {
-	                			$fileTypeMatch = 0;
+								$fileTypeMatch = 0;
 						foreach ( $options as $id => $type ) {
 							$typeArray = $this->available_file_types( $type );
 							if ( in_array( $postVar['type'][ $i ], $typeArray ) ) {
-	                        			$fileTypeMatch = 1;
+										$fileTypeMatch = 1;
 							}
-							if ( $fileTypeMatch ) {	break; }
+							if ( $fileTypeMatch ) {
+								break; }
 						}
 
 						if ( ! $fileTypeMatch ) {
-							$errorMsg .= $error.' ('.$postVar['name'][ $i ].')<br>';
+							$errorMsg .= $error . ' (' . $postVar['name'][ $i ] . ')<br>';
 						}
 					}
 				}
 			} else {
-		        if ( $postVar['name'] ) {
-		            $fileTypeMatch = 0;
-		            foreach ( $options as $id => $type ) {
-		                $typeArray = $this->available_file_types( $type );
-		                if ( in_array( $postVar['type'], $typeArray ) ) {
-		                    $fileTypeMatch = 1;
-		                }
-		                if ( $fileTypeMatch ) {  break; }
-		            }
+				if ( $postVar['name'] ) {
+					$fileTypeMatch = 0;
+					foreach ( $options as $id => $type ) {
+						$typeArray = $this->available_file_types( $type );
+						if ( in_array( $postVar['type'], $typeArray ) ) {
+							$fileTypeMatch = 1;
+						}
+						if ( $fileTypeMatch ) {
+							break; }
+					}
 
-		            if ( ! $fileTypeMatch ) {
-		                $errorMsg .= $error.' ('.$postVar['name'].')<br>';
-		            }
-	            }
+					if ( ! $fileTypeMatch ) {
+						$errorMsg .= $error . ' (' . $postVar['name'] . ')<br>';
+					}
+				}
 			}
 
-	        return $errorMsg;
+			return $errorMsg;
 		}
 		/**
 		 * Available file valid extensions.
+		 *
 		 * @param  string $ext Extension.
 		 * @return array      File types.
 		 */
-		function available_file_types($ext) {
+		function available_file_types( $ext ) {
 
 			switch ( $ext ) {
 
@@ -682,50 +701,52 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 		}
 		/**
 		 * Validate file size.
+		 *
 		 * @param  string $postVar Element name.
 		 * @param  string $value   Element value.
 		 * @param  string $error   Error message.
 		 * @return string          Error message.
 		 */
-	    function validate_file_size($postVar, $value, $error) {
+		function validate_file_size( $postVar, $value, $error ) {
 
-	       	$errorMsg = '';
-	        if ( is_array( $postVar['name'] ) ) {
+			$errorMsg = '';
+			if ( is_array( $postVar['name'] ) ) {
 				$totalFiles = count( $postVar['name'] );
 
-		        for ( $i = 0; $i < $totalFiles; $i++ ) {
-		            if ( $postVar['name'][ $i ] ) {
-		                if ( $postVar['size'][ $i ] > $value ) {
-		                    $errorMsg .= $error.' ('.$postVar['name'][ $i ].')<br>';
-		                }
-		            }
-		        }
+				for ( $i = 0; $i < $totalFiles; $i++ ) {
+					if ( $postVar['name'][ $i ] ) {
+						if ( $postVar['size'][ $i ] > $value ) {
+							$errorMsg .= $error . ' (' . $postVar['name'][ $i ] . ')<br>';
+						}
+					}
+				}
 			} else {
 				if ( $postVar['size'] > $value ) {
-					$errorMsg .= $error.' ('.$postVar['name'].')<br>';
+					$errorMsg .= $error . ' (' . $postVar['name'] . ')<br>';
 				}
 			}
 
-	        return $errorMsg;
-	    }
+			return $errorMsg;
+		}
 		/**
 		 * Validate image height and width.
+		 *
 		 * @param  string $postVar Element name.
 		 * @param  string $value   Element value.
 		 * @param  string $error   Error message.
 		 * @return string          Error message.
 		 */
-	    function validate_image_height_width($postVar, $value, $error) {
+		function validate_image_height_width( $postVar, $value, $error ) {
 
-	       	$errorMsg = '';
-	    	if ( isset( $value ) ) {
+			$errorMsg = '';
+			if ( isset( $value ) ) {
 				$found = strpos( $value, ',' );
 				if ( false === $found ) {
 					$options[0] = $value;
 				} else {
 					$options = explode( ',', $value );
-					$W = $options[0];
-					$H = $options[1];
+					$W       = $options[0];
+					$H       = $options[1];
 				}
 			}
 
@@ -737,40 +758,41 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 
 					if ( $postVar['name'][ $i ] ) {
 
-		                list($width, $height) = getimagesize( $postVar['tmp_name'][ $i ] );
+						list($width, $height) = getimagesize( $postVar['tmp_name'][ $i ] );
 
-		                if ( ($height > $W || $width > $H) && $postVar['tmp_name'][ $i ] ) {
-		                    $errorMsg .= $error.' ('.$postVar['name'][ $i ].')<br>';
-		                }
+						if ( ( $height > $W || $width > $H ) && $postVar['tmp_name'][ $i ] ) {
+							$errorMsg .= $error . ' (' . $postVar['name'][ $i ] . ')<br>';
+						}
 					}
 				}
 			} else {
 
 				list($width, $height) = getimagesize( $postVar['tmp_name'] );
-				if ( ($height < $H || $width < $W) && $postVar['tmp_name'] ) {
-					$errorMsg .= $error.' ('.$postVar['name'].')<br>';
+				if ( ( $height < $H || $width < $W ) && $postVar['tmp_name'] ) {
+					$errorMsg .= $error . ' (' . $postVar['name'] . ')<br>';
 				}
 			}
 
-	        return $errorMsg;
-	    }
+			return $errorMsg;
+		}
 		/**
 		 * Available phone type.
+		 *
 		 * @param  string $country Country name.
 		 * @return array          Phone type expressions.
 		 */
-	    function available_phone_type($country) {
+		function available_phone_type( $country ) {
 
 			switch ( $country ) {
 
 				case 'in': // India.
-					$type[0]  = '/^[0-9]{6,10}$/';
+					$type[0] = '/^[0-9]{6,10}$/';
 					// (+91)[022]111111.
-					$type[1]  = '/^[\(][\+][0-9]{2}[\)][\[][0-9]{3,5}[\]][0-9]{6,10}$/';
+					$type[1] = '/^[\(][\+][0-9]{2}[\)][\[][0-9]{3,5}[\]][0-9]{6,10}$/';
 					// +91022111111.
-					$type[2]  = '/^[\+][0-9]{2}[0-9]{3,5}[0-9]{6,10}$/';
+					$type[2] = '/^[\+][0-9]{2}[0-9]{3,5}[0-9]{6,10}$/';
 					// 91-111111.
-					$type[3]  = '/^[0-9]{2}[\-][0-9]{6,10}$/';
+					$type[3] = '/^[0-9]{2}[\-][0-9]{6,10}$/';
 					break;
 
 				case 'br': // Brazil.
@@ -791,6 +813,6 @@ if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 			}
 
 			return $type;
-	    }
+		}
 	}
 }

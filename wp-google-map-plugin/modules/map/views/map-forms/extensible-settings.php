@@ -1,5 +1,6 @@
 <?php
 $extensibleSettings = '';
-$markup = apply_filters('wpgmp_add_MoreSettings',$extensibleSettings);
-echo wp_kses_post($markup);
-?>
+$markup             = apply_filters( 'wpgmp_add_more_settings', $extensibleSettings );
+$allowed_tags = wp_kses_allowed_html( 'post' );
+echo wp_kses( $markup, $allowed_tags );
+

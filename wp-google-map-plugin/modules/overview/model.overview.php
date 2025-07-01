@@ -1,8 +1,9 @@
 <?php
 /**
  * Class: WPGMP_Model_Overview
+ *
  * @author Flipper Code <hello@flippercode.com>
- * @version 4.1.6
+ * @version 3.0.0
  * @package Maps
  */
 
@@ -10,6 +11,7 @@ if ( ! class_exists( 'WPGMP_Model_Overview' ) ) {
 
 	/**
 	 * Overview model for Plugin Overview.
+	 *
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
@@ -23,9 +25,7 @@ if ( ! class_exists( 'WPGMP_Model_Overview' ) ) {
 		 * Admin menu for Settings Operation
 		 */
 		function navigation() {
-			return array(
-			'wpgmp_how_overview' => esc_html__( 'How to Use', 'wp-google-map-plugin' ),
-			);
+
 		}
 	}
 }

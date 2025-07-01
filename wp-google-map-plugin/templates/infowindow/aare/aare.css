@@ -73,7 +73,7 @@
     padding: 0px;
 }
 
-.gm-style .gm-style-iw {
+/* .gm-style .gm-style-iw {
 
     top: 1px;
     left: 1px !important;
@@ -83,7 +83,7 @@
 
 }
 
-.gm-style .gm-style-iw>div {}
+.gm-style .gm-style-iw>div {} */
 
 .fc-infowindow-aare .fc-item-no-padding {
     padding: 0px !important;

@@ -92,7 +92,7 @@ function wpgmp_add_feedback_form()
     </li>';
     }
     $modal_html .= '</ul>
-    <div class="fc-backend-loader" style="display:none;"><img id="wpdf_loader_image" src="'.WPGMP_IMAGES.'svg-loader.svg"></div>
+    <div class="fc-backend-loader" style="display:none;"><img id="wpdf_loader_image" src="'.WPGMP_IMAGES.'loader.gif"></div>
                     <label class="wpgmp-modal-anonymous-label">
                         <input type="checkbox" checked/>
                         Send website data and allow to contact me back 

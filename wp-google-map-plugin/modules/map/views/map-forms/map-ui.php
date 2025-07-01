@@ -18,7 +18,7 @@ $form->add_element(
 
 $form->add_element(
 	'checkbox', 'map_all_control[apply_custom_design]', array(
-		'lable'   => esc_html__( 'Apply Custom Design', 'wp-google-map-plugin' ),
+		'label'   => esc_html__( 'Apply Custom Design', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'current' => isset( $data['map_all_control']['apply_custom_design'] ) ? $data['map_all_control']['apply_custom_design'] : '',
 		'desc'    => esc_html__( 'Apply your own design everywhere.', 'wp-google-map-plugin' ),
@@ -29,7 +29,7 @@ $form->add_element(
 
 $form->add_element(
 	'textarea', 'map_all_control[wpgmp_custom_css]', array(
-		'lable'         => esc_html__( 'Custom CSS', 'wp-google-map-plugin' ),
+		'label'         => esc_html__( 'Custom CSS', 'wp-google-map-plugin' ),
 		'value'         => isset( $data['map_all_control']['wpgmp_custom_css'] ) ? $data['map_all_control']['wpgmp_custom_css'] : '',
 		'desc'          => esc_html__( 'Enter any custom css here that needs to be loaded on frontend.', 'wp-google-map-plugin' ),
 		'placeholder'   => esc_html__( 'Enter custom css here to load on frontend.', 'wp-google-map-plugin' ),
@@ -42,7 +42,7 @@ $form->add_element(
 
 $form->add_element(
 	'text', 'map_all_control[wpgmp_base_font_size]', array(
-		'lable'         => esc_html__( 'Base Font Size', 'wp-google-map-plugin' ),
+		'label'         => esc_html__( 'Base Font Size', 'wp-google-map-plugin' ),
 		'value'         => isset( $data['map_all_control']['wpgmp_base_font_size'] ) ? $data['map_all_control']['wpgmp_base_font_size'] : '',
 		'desc'          => esc_html__( 'Change it according to your site\'sf ont family and font size. The default base font size is 16px.', 'wp-google-map-plugin' ),
 		'placeholder'   => esc_html__( 'Enter base font size.', 'wp-google-map-plugin' ),
@@ -72,18 +72,20 @@ $color_schema = array(
 
 $form->add_element(
 	'radio', 'map_all_control[color_schema]', array(
-		'lable'           => esc_html__( 'Map Color Schema', 'wp-google-map-plugin' ),
+		'label'           => esc_html__( 'Map Color Schema', 'wp-google-map-plugin' ),
 		'radio-val-label' => $color_schema,
 		'current'         => isset( $data['map_all_control']['color_schema'] ) ? $data['map_all_control']['color_schema'] : '',
 		'class'           => 'chkbox_class wpgmp_design_listing',
 		'show'            => 'false',
 		'default_value'   => '4.png',
+		'before' => '<div class="fc-6"><div class="fc-d-flex fc-flex-wrap fc-gap-10">',
+		'after'  => '</div></div>',
 	)
 );
 
 $form->add_element(
 	'checkbox', 'map_all_control[apply_own_schema]', array(
-		'lable'   => esc_html__( 'Apply Own Schema', 'wp-google-map-plugin' ),
+		'label'   => esc_html__( 'Apply Own Schema', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'current' => isset( $data['map_all_control']['apply_own_schema'] ) ? $data['map_all_control']['apply_own_schema'] : '',
 		'desc'    => esc_html__( 'Apply your own color schema. Above selected map color schema will be ignored.', 'wp-google-map-plugin' ),
@@ -94,7 +96,7 @@ $form->add_element(
 
 $form->add_element(
 	'text', 'map_all_control[wpgmp_primary_color]', array(
-		'lable' => esc_html__( 'Primary Color', 'wp-google-map-plugin' ),
+		'label' => esc_html__( 'Primary Color', 'wp-google-map-plugin' ),
 		'value' => isset( $data['map_all_control']['wpgmp_primary_color'] ) ? $data['map_all_control']['wpgmp_primary_color'] : '',
 		'desc'  => esc_html__( 'Choose your primary color.', 'wp-google-map-plugin' ),
 		'class' => 'color {pickerClosable:true} form-control wpgmp_own_schema',
@@ -104,14 +106,12 @@ $form->add_element(
 
 $form->add_element(
 	'text', 'map_all_control[wpgmp_secondary_color]', array(
-		'lable' => esc_html__( 'Secondary Color', 'wp-google-map-plugin' ),
+		'label' => esc_html__( 'Secondary Color', 'wp-google-map-plugin' ),
 		'value' => isset( $data['map_all_control']['wpgmp_secondary_color'] ) ? $data['map_all_control']['wpgmp_secondary_color'] : '',
 		'desc'  => esc_html__( 'Choose your secondary color.', 'wp-google-map-plugin' ),
 		'class' => 'color {pickerClosable:true} form-control wpgmp_own_schema',
 		'show'  => 'false',
 	)
 );
-
-
 
 

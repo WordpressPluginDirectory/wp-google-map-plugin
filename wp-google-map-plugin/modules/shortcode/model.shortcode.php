@@ -1,8 +1,9 @@
 <?php
 /**
  * Class: WPGMP_Model_Shortcode
+ *
  * @author Flipper Code <hello@flippercode.com>
- * @version 4.1.6
+ * @version 3.0.0
  * @package Maps
  */
 
@@ -10,6 +11,7 @@ if ( ! class_exists( 'WPGMP_Model_Shortcode' ) ) {
 
 	/**
 	 * Shortcode model to display output on frontend.
+	 *
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
@@ -21,6 +23,7 @@ if ( ! class_exists( 'WPGMP_Model_Shortcode' ) ) {
 		}
 		/**
 		 * Admin menu for Settings Operation
+		 *
 		 * @return array Admin menu navigation(s).
 		 */
 		function navigation() {

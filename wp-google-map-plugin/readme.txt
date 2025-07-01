@@ -1,171 +1,233 @@
-=== WP Maps - Display Google Maps Perfectly with Ease ===
+
+=== WP Maps - Store Locator, Listing, Filters & Google/OpenStreetMap Maps ===
 Contributors:      flippercode
 Plugin Name:       WP MAPS
-Tags: google map,google maps,map,wordpress google maps,map block
+Tags: store locator, google maps, openstreetmap, map, directory
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.7.2
-Stable tag: 4.7.4
+Tested up to: 6.8.1
+Stable tag: 4.8.0
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Show Google Maps on your site with WP Maps. Enjoy easy settings for unlimited maps and precise locations.
+WordPress map plugin for Google Maps, OpenStreetMap & Mapbox with store locator, filterable listings, custom markers.
 
 == Description ==
 
-The most advanced yet easy to use Google maps plugin for WordPress. Create beautifully styled, modern & responsive google maps with multiple locations, custom marker icons, marker categories, custom infowindow messages, images and more. Enable marker category filter on frontend to allow users to filter the locations.
+**WP Maps** is a powerful and user-friendly WordPress map plugin that supports both Google Maps and OpenStreetMap. With just a few clicks, you can create unlimited maps with custom markers, filterable listings, store locators, and dynamic infowindows. Perfect for real estate listings, directories, multi-location businesses, and more.
 
-> 👉 Create multiple google maps with different marker icons, marker categories and locations assigned to them. 
-> 👉 We have seamlessly integrated support for the major WordPress GDPR plugins – Complianz – GDPR/CCPA Cookie Consent, GDPR Cookie Compliance (CCPA, DSGVO, Cookie Consent), CookieYes | GDPR Cookie Consent & Compliance Notice (CCPA Ready), iubenda | All-in-one Compliance for GDPR and Cookie Notice.
+* Unlimited maps and locations
+* Store locator with search and filters
+* Custom markers, SVG support, and clustering
+* Info windows on click or hover
+* KML, KMZ, GeoJSON, and layer integration
+* OpenStreetMap Maps require no API key; Google Maps support available
 
-With just few clicks, you will be able to add beautifully designed custom google maps to any page / post or widget with help of generated shortcode.
+== Try It Now ==
 
-= Try it Now =
+Explore the plugin instantly using the WordPress Playground:
+👉 [Try WP Maps](https://playground.wordpress.net/?plugin=wp-google-map-plugin)
 
-Explore the WP Maps plugin in the WordPress playground without any installation. [Try WP Maps](https://playground.wordpress.net/?plugin=wp-google-map-plugin) 
+== Features ==
 
-Contact [Dedicated Support team](https://weplugins.com/support) for setup configurations needs or for any other assistance.
+### 🗺️ Map Creation & Display
+* Create unlimited maps with shortcode support
+* Display maps in posts, pages, widgets
+* Auto-center by visitor location or assigned locations
+* Show/hide markers on load
 
-Google autosuggest enabled location form helps you as site administrator to create unlimited markers and then assign these markers to a google map. It's super easy.  
+### 📌 Marker & Infowindow Controls
+* Use custom or pre-built marker icons (SVG supported)
+* Infowindows on click or hover
+* Bounce/drop animation effects
+* Center or zoom on marker click
+
+### 📋 Listings & Filters
+* Show listing below map with search and filters
+* Enable category, sort, per-page, and filters
+* Customize listing layout
+* Show info window when listing title is clicked
+
+### 🎨 Design & Themes
+* Custom map color schema
+* Set primary/secondary color
+* Add custom CSS
+* Responsive & mobile-friendly design
+
+### ⚙️ Controls & Settings
+* Enable/disable zoom, fullscreen, map type, scale, street view
+* Enable search box and "locate me" controls
+* Limit panning using SW/NE coordinates
+
+### 🌐 Map Layers & Data
+* KML/KMZ, Traffic, Transit, Bicycling layers
+* GeoJSON support
+* Import/export settings via JSON
+
+### 💻 Compatibility
+Works with all major page builders and themes:
+* Elementor, WPBakery, Divi, Gutenberg, Brizy, Beaver Builder
+* Astra, Avada, OceanWP, GeneratePress, Hello Elementor
 
 >Here is a quick highlight on the numerous customizable features offered by the free and pro versions of the <strong>[WP MAPS PRO Version](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)</strong>.
  
+* NO API Key required for OpenStreetMap Maps and API Keys is required for Google Maps.
+* Fully GDPR-compliant Google Maps integration for secure and privacy-friendly usage
+* Use Google Maps, OpenStreetMap or Mapbox as your map provider. Easy switching between each map provider.
+* Show a listing of locations below the map with built-in search and filter controls
+* Use SVG as marker icons – choose from pre-built SVGs or upload your own
+* Apply multiple Infowindow designs for custom popup layouts
+* Create unlimited Google/Leaflet Maps with custom marker icons, categories, and assigned locations
+* Add and manage multiple locations with rich content and info windows
+* Assign multiple locations to a single map for complex layouts
+* Show info windows on click or hover with customizable content
+* Display maps on any post, page, or widget using shortcode or sidebar widget
+* Define custom center latitude/longitude for each map
+* Auto-center map based on assigned locations
+* Categorize locations for filterable maps and better organization
+* Choose from over 100+ ready-to-use colorful markers via [Map Icons Collection](https://mapicons.mapsmarker.com/)
+* Enable marker clustering to handle dense location areas
+* Choose from 4 map types: Roadmap, Satellite, Hybrid, and Terrain
+* Set custom map height, width, and zoom level easily
+* Enable or disable map drag, scroll zoom, and interactivity
+* Add layers like Traffic, Transit, Bicycling, and more for enhanced context
+* Support for Street View, 45° imagery, and POV controls
+* Add visual elements like circles to highlight areas
+* Fully responsive maps – looks perfect on desktop, tablet, and mobile
+* Cross-browser compatible – tested on IE8+, Chrome, Firefox, Safari
+* Multilingual ready – supports WPML and translation plugins
+* Works across WordPress Multisite, with network-wide activation support
+* Easily style maps using Snazzy Maps
+* Built-in search control to locate places directly on the frontend map
+* Filter markers on the frontend by category
+* Seamless upgrade to Pro – no data loss when switching from free to paid
 
-= Lite Version (Free) = 
-> ➡️  It's fully GDPR-compliant, ensuring secure and privacy-conscious Google Maps integration.
-> ➡️  Create multiple google maps with different marker icons, marker categories and locations assigned to them. 
-> ➡️  Add unlimited locations with various information.
-> ➡️  Assign multiple locations to a single google maps.
-> ➡️  Display a info window message to any location.
-> ➡️  Maps Marker Infowindow Open On: Mouse Click or Mouse Hover. 
-> ➡️  Display Google Maps on posts/pages using shortcode.
-> ➡️  Centering the map according to assigned locations.
-> ➡️  Decide center latitude and longitude for each map separtely.
-> ➡️  Easy way to assign category to any location.
-> ➡️  Select your marker icon for markers.
-> ➡️  Enable marker cluster functionality for markers.
-> ➡️  Easily edit or delete google map functionality.
-> ➡️  Assign your own markers to categories or choose colorful markers from +500 readymade markers provided by the [Maps Icons Collection](https://mapicons.mapsmarker.com).
-> ➡️  Select among 4 map type : Roadmap,Satellite,Hybrid,Terrain
-> ➡️  Set your map height and width. 
-> ➡️  Set Google maps zoom level.
-> ➡️  Google Maps can be Draggable
-> ➡️  Display traffic real time conditions and overlays using Layers.
-> ➡️  Add bicycle path information to your maps using the Bicycling Layer.
-> ➡️  Enable Google Map Transit layer
-> ➡️  Marker Animation on Click or Mouse hover the marker.
-> ➡️  45° imagery functionality
-> ➡️  Add circle in your Maps plugin
-> ➡️  Create a Google maps just in seconds.
-> ➡️  Street view supported
-> ➡️  widget supportive : Display Google Maps on sidebars using widget.
-> ➡️  Pov Heading and Pov Pitch for street view.
-> ➡️  Fully Responsive.Display your map perfectly on all devices.
-> ➡️  Create 100% responsive maps effortlessly.Tested on real devices.
-> ➡️  A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
-> ➡️  Multi-lingual Supported.
-> ➡️  Multisite Enabled and ability to activate it network wide.
-> ➡️  Map Stylization : Customizable Google maps style from https://snazzymaps.com.
-> ➡️  Search control on frontend map to search location easily.
-> ➡️  Filter markers by category.
-> ➡️  No content / data loss when migrating from free version to pro version.
+### 🏬 Use Cases – Map Solutions for Every Business
 
+WP Maps helps you build advanced location maps for any industry. From store locators to real estate maps, here are popular use cases powered by Google Maps or Leaflet:
 
-<strong> <a href='https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium' target='_blank'> Additional Features Available In Pro</a> </strong>
+* 🛍️ Retail Store Locator – Showcase nearby outlets, branches, or chain locations  
+* 🍽️ Restaurant Locator – Help users find your cafes, diners, or food franchises  
+* 🏠 Real Estate Property Map – Display properties with filters for listings  
+* 🏥 Hospital & Clinic Map – Show medical centers, diagnostic labs & walk-ins  
+* 🏋️ Gym & Fitness Center Locator – Promote local gyms, yoga studios & wellness hubs  
+* 🛒 Shopping Mall Directory – Build interactive directories with category filters  
+* 🏨 Hotel & Resort Locator – List resorts, BnBs, and vacation rentals by location  
+* 🚗 Car Dealership Map – Map showrooms, service centers, and authorized dealers  
+* 🏦 Bank & ATM Locator – Help customers locate ATMs and branches  
+* 💊 Pharmacy Finder – Display medical stores and 24/7 pharmacy locations  
+* 💅 Salon & Spa Locator – Show salons, nail bars, and beauty spas nearby  
+* ✂️ Barber Shop Locator – Map grooming centers, barbershops, and hair stylists  
+* 🎓 School & University Maps – Display educational institutions with filters  
+* 🎤 Event Venue Locator – Help users find event halls, venues, and stadiums  
+* 🎬 Cinema & Entertainment Map – List theaters, gaming zones, and arcades  
+* 🖼️ Museum & Art Gallery Locator – Showcase local exhibitions and museums  
+* 🏛️ Government Office Map – Map municipal offices, courts, or embassies  
+* 📦 Post Office & Courier Center Locator – Find shipping centers and drop boxes  
+* ⛪ Religious Center Locator – Show churches, mosques, temples, or community halls  
+* 📚 Library Map – Display public and academic library locations  
+* 🐾 Veterinary & Pet Store Map – Highlight vets, clinics, or pet supply stores  
+* 🔧 Hardware & Home Services Map – Show electricians, repair centers, or hardware stores  
+* 💼 Co-working Space Locator – Help users find shared office spaces or business hubs  
+* 🏗️ Construction & Project Map – Showcase new projects or development plots  
+* 🍷 Wine & Liquor Store Map – Find wine shops and liquor outlets with filters  
+* 🚴 Outdoor & Sports Store Map – Locate gear shops, bike rental points, etc.  
+* 🧸 Toy Store Locator – Promote branded or local toy stores  
+* 🌻 Garden Center & Nursery Map – Help users find garden shops and nurseries  
+* 📖 Bookstore Locator – Showcase independent and chain bookstores  
+* 📱 Electronics Store Map – Map mobile, computer, and appliance retailers  
+* 👗 Clothing Store Locator – Help users find fashion outlets and boutiques  
+* 🛠️ Service Center Locator – Map repair centers for electronics, cars, or devices  
+* ⚖️ Legal & Consultancy Locator – List law firms, advisors, and service offices  
+* 📄 Insurance Office Map – Show agents, offices, and policy assistance centers  
+* 🚛 Dealer & Warehouse Locator – Display regional warehouses and distributors  
+* 🍼 Childcare & Preschool Finder – Help parents locate daycares and nurseries  
+* 🛒 Supermarket & Grocery Store Map – Show supermarkets, mini-markets, or organic stores
 
-[WP MAPS PRO](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium) 
-
-Pro version plugin contains all the features of free version plugin plus some additional features which are listed below
-
-> 👉  Listing : Display listing in grid or list style under map. Fully responsive listing.
-> 👉  Map Layers : Display Traffic Layer , Bicycling Layer, Transit layer
-> 👉  Import/Export Locations : Import Export Locations supported using CSV.Sample csv is attached in pro version.
-> 👉  Draw shapes : rectangle, circle, polygon and polyline.
-> 👉  Display unlimited shapes. Display Message on shape click or Redirect to external link. 
-> 👉  Direction & Route : Directions & Route Suggestion. Display directions results in KM and MILES.
-> 👉  Sort listing by location, category and address alphabetically in location listing.
-> 👉  Marker Category : Assign multiple categories to a location. 
-> 👉  Infowindow Contents: Customize infowindow contents with help of Placeholders.
-> 👉  Display Posts Information, custom fields, taxonomies and featured images on infowindow message using placeholders.
-> 👉  Unlimited number of map markers and locations.
-> 👉  Set your own google map marker icon
-> 👉  Drag and drop feature for markers, custom animation support
-> 👉  Allows to display the user location on map.
-> 👉  Nearby locations based on user’s current location.
-> 👉  Display Posts/Pages or Custom Post Types on google maps using **custom fields**.
-> 👉  Center the map based on visitor’s current location.
-> 👉  Define overlays on Google maps via an easy to use interface.
-> 👉  Integrate GEOJSON in to google maps.
-> 👉  Display multiple Kml/Kmz Layer on the map.
-> 👉  Fusion Table Layers.
-> 👉  Add Geo location
-> 👉  Add any number of Google maps on pages/posts/sidebars.
-> 👉  Allows to insert the map as widget on sidebars.
-> 👉  Add unlimited locations using an easy to use interface for Google Maps.
-> 👉  Display location title, location category, location latitude, location longitude with location message in the infowindow.
-> 👉  Create unlimited maps and display on posts/pages using shortcode or in sidebar using widget.
-> 👉  Design your own Google map skins easily. Turn ON/OFF roads, places, water area. 
-> 👉  Ability to display infowindow on mouse click on mouse hover.
-> 👉  Display your map perfectly on all devices. Create 100% responsive maps effortlessly.
-> 👉  Multi-lingual Supported.
-> 👉  Display physical maps based on terrain information.
-> 👉  Display Google Earth satellite images on just one click.
-> 👉  Display maps in a blend of normal and satellite views.
-> 👉  Setup POV Heading and POV Pitch of Street View to customize Street View output of a location.
-> 👉  Full support of controls of the Google map, such as zoom control, map type control, scale control, street view control, fullscreen and rotate control
-> 👉  Drag and drop feature for markers, custom animation support
-> 👉  Modify Locating Listing using Placeholder.
-> 👉  Hooks Supported - Use actions & filters to modify map,markers,listing and associated html on fly.
-> 👉  Display locations listing with filters & pagination. Fully customizable using backend settings and hooks.
-> 👉  Use "wpgmp_geo_tags_args", "wpgmp_geo_featured_image", "wpgmp_geotags_placeholder", "wpgmp_geotags_content" hooks to extend Posts on google maps functionality as you want.
-> 👉  Use External Database or Sources to add markers on google maps using new filter wpgmp_marker_source.
-> 👉  Load markers from external database or API sources with help of filters (Hooks).
-> 👉  A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
-> 👉  Multisite Enabled and ability to activate it network wide.
-> 👉  Visit our Pro Edition [WP MAPS PRO](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)
-> 👉  Fully extensible & scalable plugin to make it ready for customisations according to website / business requirements.
-
-= Live Examples =
-
-* [WP MAPS PRO LIVE DEMOS](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)
+**💡 Whether you're running a small local shop or a global brand, WP Maps helps you build responsive, searchable, and filterable maps tailored to your business.**
 
 
 == Installation ==
-This section describes how to install the plugin and get it working.
-	
-	1.	Upload the <strong>wp-google-map-plugin</strong> directory to the <strong>/wp-content/plugins/</strong> folder
 
-	2.	Once the plugin is uploaded log into WordPress and go to <strong>Plugins</strong>
+1. Upload the **wp-google-map-plugin** folder to the `/wp-content/plugins/` directory.
+2. Log in to your WordPress dashboard and navigate to **Plugins**.
+3. Locate **WP Maps** in the plugin list and click **Activate**.
+4. After activation, go to **WP Maps > Tools**.
+5. Scroll to the **Install Sample Data** section.
+6. Enter `YES` to confirm and click the **Create Sample Data** button.
+   - This will create 2 sample categories, 5 sample locations, 2 demo routes, and 1 sample map for demonstration.
 
-	3.	Find the <strong>wp-google-map-plugin</strong>plugin and click Activate Plugin
+*Note: Installing sample data is optional, but highly recommended for new users to explore plugin features quickly.*
 
-    =How to work=
+== How It Works ==
 
-	1. Go to <strong>settings</strong> page of plugin and insert your google maps api key. see full instruction [How to create Api key](https://www.wpmapspro.com/docs/how-to-create-an-api-key/)
+1. Add your locations from **Add Location**
+2. Create a map from **Add Map** and assign locations
+3. Use the shortcode (from **Manage Maps**) in posts, pages, or widgets
 
-	2. First create your locations using 'Add Location' page.
+*Note: Google Maps requires an API key. OpenStreetMap works without a key.*
 
-	3. Then create your first map using 'Add Map' page and assign your locations.
+== Frequently Asked Questions ==
 
-	4. Each map is assoicated to a shortcode. You can view shortcode on 'Manage Maps' and copy and paste it on your pages or posts. You can display your google maps in the sidebar using widget.  
+= Is this plugin GDPR-compliant? =
+Yes, WP Maps is fully GDPR-compliant for both Google Maps and OpenStreetMap integrations.
 
-= Documentation =
-* [Get Started](https://www.wpmapspro.com/docs/how-to-create-an-api-key/)
+= Do I need a Google Maps API key? =
+Only for Google Maps. OpenStreetMap requires no API key.
+
+= Can I use my own marker icons? =
+Yes, upload PNG or SVG icons or choose from 100+ pre-designed icons.
+
+= How many locations can I add? =
+You can add unlimited locations.
+
+= Can I display maps with shortcodes? =
+Yes, each map has a unique shortcode you can place anywhere.
+
+= Is there widget support? =
+Yes, you can show maps in sidebars using the widget.
+
+= Do you offer documentation and tutorials? =
+Yes! Visit [WP Maps Tutorials](https://www.wpmapspro.com/tutorials/).
+
+= What if I need help or support? =
+Contact us at [Support](https://weplugins.com/support/).
+
+== Important Links ==
+
+* [Live Demos](https://www.wpmapspro.com/try-now/)
+* [Tutorials](https://www.wpmapspro.com/tutorials/)
+* [Hooks & Filters](https://www.wpmapspro.com/map-hooks/)
+* [Support](https://weplugins.com/support/)
 
 == Screenshots ==
-    
-    1. Add marker category page.
-    2. Add custom icon to marker category.
-    3. Manage marker categories page.
-    4. Add location page.
-    5. Manage locations page.
-    6. Add map page.
-    7. Assign locations to the map.
-    8. Manage maps page.
-    9. Plugin settings page.
-    10. Map block for Gutenberg editor.  
+
+1. Google Map Page
+2. Open Source map Page
+3. Add marker category page
+4. Assign marker icon to category
+5. Assign svg marker icon to category
+6. Manage Marker Categories Page
+7. Add Location Page
+8. Manage Location page
+9. Add Map Page
+10. Map Center Settings
+11. Assign Locations To Map
+12. Map Listing Settings
+13. Listing Item Skin
+14. Marker Cluster Settings
+15. Display Circle Or Marker on map Center
+16. Map Theme Settings
+17. Geo Json Settings
+18. Limit Panning Settings
+19. Map Layers Settings
+20. Manage Map Page
+21. Google Map Provider Setting
+22. Street View Settings
+23. Advanace Marker Settings
+24. Open Source Map Provider Settings
 
 == Changelog ==
 
@@ -221,139 +283,92 @@ This section describes how to install the plugin and get it working.
 
 == Upgrade Notice ==
 
+== Upgrade Notice ==
+
 = 4.7.2 =
-  - Upgrade for more stable release.
+  – Upgrade for more stable release.
 
 = 4.7.1 =
-  - Upgrade for more stable release.
+  – Upgrade for more stable release.
 
 = 4.7.0 =
-  - Upgrade for more stable release.
+  – Upgrade for more stable release.
   
 = 4.6.9 =
-  - Upgrade for more stable release.
+  – Upgrade for more stable release.
 
 = 4.6.8 =
-  - Upgrade for compatibility with cookiebot plugin.
+  – Upgrade for compatibility with cookiebot plugin.
 
 = 4.6.7 =
-  - Upgrade for using more translatable strings
+  – Upgrade for using more translatable strings
 
 = 4.6.6 =
-  - Upgrade for more stable release.
+  – Upgrade for more stable release.
 
 = 4.6.5 =
-  - Upgrade for PHP version 8 compatibility.
+  – Upgrade for PHP version 8 compatibility.
 
 = 4.6.4 =
-  - Upgrade for compatibility with Google Tags Manager.
+  – Upgrade for compatibility with Google Tags Manager.
 
 = 4.6.3 =
-  - Upgrade for code mirror editor in the backend.
+  – Upgrade for code mirror editor in the backend.
 
 = 4.6.2 =
-  - Upgrade for more stable and secure version of plugin. Security issue was fixed.
+  – Upgrade for more stable and secure version of plugin. Security issue was fixed.
 
 = 4.6.1 =
-  - New Gutenberg block added to display and customise the google map with live preview right inside the Gutenberg editor.
-  - Unlocked one more paid feature from pro version - Map Themes. User can apply color theme to Map UI.
-  - More hooks added to make plugin more extensible and scalable.
+  – New Gutenberg block added to display and customise the google map with live preview right inside the Gutenberg editor.
+  – Unlocked one more paid feature from pro version – Map Themes. User can apply color theme to Map UI.
+  – More hooks added to make plugin more extensible and scalable.
 
 = 4.6.0 =
-  - Implemented a popup to get feedback from the plugin user if user deactivates the plugin.
-  - Google API loaded via asynchronous way to speedup page load process.
+  – Implemented a popup to get feedback from the plugin user if user deactivates the plugin.
+  – Google API loaded via asynchronous way to speedup page load process.
 
 = 4.5.9 =
-  - Referrer link updated inside plugin and some internal links updated inside core framework
+  – Referrer link updated inside plugin and some internal links updated inside core framework
 
 = 4.5.8 =
-  - Plugin tags updated plus unsued file removed.
+  – Plugin tags updated plus unsued file removed.
 
 = 4.5.7 =
-  - Get Direction link placeholder {get_directions_link} support added to display Get Direction link inside Infowindow.
+  – Get Direction link placeholder {get_directions_link} support added to display Get Direction link inside Infowindow.
 
 = 4.5.6 =
-  - Playground link added and support links updated
+  – Playground link added and support links updated
 
 = 4.5.5 =
-  - Design improvements using css
+  – Design improvements using css
 
 = 4.5.4 =
-  - Remove entry of same category from parent category dropdown when editing that category in backend
+  – Remove entry of same category from parent category dropdown when editing that category in backend
   
 = 4.5.3 =
-  - Translated in 15 Languages.
-  - Tutorial links added.
+  – Translated in 15 Languages.
+  – Tutorial links added.
 
 = 4.5.2 =
-  - Maps preview added on settings page.
+  – Maps preview added on settings page.
 
 = 4.5.1 =
-  - GDPR compatiblity issue fixed.
+  – GDPR compatiblity issue fixed.
 
 = 4.5.0 =
-  - GDPR compatiblity issue fixed.
+  – GDPR compatiblity issue fixed.
 
 = 4.4.9 =
-  - Fixed the initwpmaps error and use the default confirmation for delete.
+  – Fixed the initwpmaps error and use the default confirmation for delete.
 
 = 4.4.8 =
-  - Fixed the json encode error on add location page.
+  – Fixed the json encode error on add location page.
 
 = 4.4.7 =
-  - GDPR support added for popular wordpress plugins.
+  – GDPR support added for popular wordpress plugins.
 
 = 4.4.6 =
   Please update to 4.4.6 or above to use the most stable version of the plugin.
 
 = 4.4.5 =
   Please update to 4.4.5 or above to use the most stable version of the plugin.
-
-== Frequently Asked Questions ==
-
-= Is this plugin fully compatible with GDPR regulations for Google Maps integration? =
-Yes, It is fully compatible with GDPR regulations, ensuring secure and privacy-conscious Google Maps integration.
-
-= Can I create a custom marker ? =
-Yes, you can upload your own marker image or you can choose from readymade icons.
-
-= Do I need to calculate latitude & longitude myself ? =
-No, Address field is google autosuggest enabled so you just start typing and choose your address. Latitude & Longitude will be calculated automatically.
-
-= How many locations I can assign to the map? =
-You can assign as many as location you want to display on google maps.
-
-= How to display map on page? =
-Go to 'Manage Maps' and copy the shortcode for your map. Each map will have own shortcode. You just paste that on your page. 
-
-= Can I display map using widget? =
-Yes, First create your map and then you can display your map in sidebar from widget section.
-
-= How to register google maps api key? =
-Go to [Google Maps API console]
-(https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&keyType=CLIENT_SIDE&reusekey=true&pli=1)
-and you can create your google maps api key here.
- 
-We have a guide [Important Changes in Google Maps]
-(https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&keyType=CLIENT_SIDE&reusekey=true)
-
-
-= How to upgrade to pro version? =
-You can purchase [WP MAPS PRO](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium) and then just keep your lite version deactivated and then activate the pro version. You'll not loss any of your data. Your all data will be migrated to pro version automatically. 
-
-= Do we have Live Demo? =
-Yes, You can click on [WP MAPS PRO LIVE DEMOS](http://www.flippercode.com/product/wp-google-map-pro/) and mail us at hello at flippercode dot com if any pre-purchase query.
-
-= Do we have a Documentation? =
-Yes, You can click on [WP MAPS PRO TUTORIALS](https://www.wpmapspro.com/tutorials) and you will get all documentation with proper steps and video tutorials.
-
-= Do we have offer refund? =
-Yes, You can get refund any time if pro version is not suitable for you. 
-
-= Do we have offer customization? =
-Yes, You can mail us your requirement at hello at flippercode dot com. 
-
-== Links ==
-[Upgrade to Pro](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium) |
-[Live Examples](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium) |
-[Developed by flippercode](http://www.flippercode.com)

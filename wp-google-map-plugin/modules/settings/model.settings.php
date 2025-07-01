@@ -1,118 +1,115 @@
 <?php
 /**
  * Class: WPGMP_Model_Settings
+ * Handles plugin settings save and navigation registration.
+ *
  * @author Flipper Code <hello@flippercode.com>
- * @version 4.1.6
+ * @version 3.0.0
  * @package Maps
  */
 
 if ( ! class_exists( 'WPGMP_Model_Settings' ) ) {
 
-	/**
-	 * Setting model for Plugin Options.
-	 * @package Maps
-	 * @author Flipper Code <hello@flippercode.com>
-	 */
 	class WPGMP_Model_Settings extends FlipperCode_Model_Base {
+		function __construct() {}
+
 		/**
-		 * Intialize Backup object.
-		 */
-		function __construct() {
-		}
-		/**
-		 * Admin menu for Settings Operation
-		 * @return array Admin menu navigation(s).
+		 * Navigation entries for settings page.
+		 *
+		 * @return array
 		 */
 		function navigation() {
-			return array(
+			return apply_filters('wpgmp_settings_navigation', [
 				'wpgmp_manage_settings' => esc_html__( 'Plugin Settings', 'wp-google-map-plugin' ),
-			);
+			]);
 		}
+
 		/**
-		 * Add or Edit Operation.
+		 * Save plugin settings.
+		 *
+		 * @return array
 		 */
 		function save() {
-			
 			global $_POST;
 			
-			//Permission Verification
-			if ( ! current_user_can('administrator') )
-			die( 'You are not allowed to save changes!' );
-			
-			//Nonce Verification
-			if( !isset( $_REQUEST['_wpnonce'] ) || ( isset( $_REQUEST['_wpnonce'] ) && empty($_REQUEST['_wpnonce']) ) )
-			die( 'You are not allowed to save changes!' );
-			if ( isset( $_REQUEST['_wpnonce'] ) && ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wpgmp-nonce' ) )
-			die( 'You are not allowed to save changes!' );
+			if (!isset($_REQUEST['_wpnonce']) || empty($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], 'wpgmp-nonce')) {
+				die( esc_html__( 'You are not allowed to save changes!', 'wp-google-map-plugin' ) );
+			}
 
-			//Check Validations
-			$this->verify( $_POST );
+			$this->verify($_POST);
 
-			if ( is_array( $this->errors ) and ! empty( $this->errors ) ) {
+			if (!empty($this->errors)) {
 				$this->throw_errors();
 			}
-			$extra_fields = array();
-			if ( isset( $_POST['location_extrafields'] ) ) {
-				foreach ( $_POST['location_extrafields'] as $index => $label ) {
-					if ( $label != '' ) {
-						$extra_fields[$index] = sanitize_text_field( wp_unslash( $label ) );
+
+			$wpgmp_saved_settings = maybe_unserialize(get_option('wpgmp_settings'));
+			$extra_fields = [];
+
+			if (!empty($_POST['location_extrafields'])) {
+				foreach ($_POST['location_extrafields'] as $index => $label) {
+					if ($label !== '') {
+						$extra_fields[$index] = sanitize_text_field(wp_unslash($label));
 					}
 				}
 			}
 
-			$meta_hide = array();
-			if ( isset( $_POST['wpgmp_allow_meta'] ) ) {
-				foreach ( $_POST['wpgmp_allow_meta'] as $index => $label ) {
-					if ( $label != '' ) {
-						$meta_hide[$index] = sanitize_text_field( wp_unslash( $label ) );
+			$meta_hide = [];
+			if (!empty($_POST['wpgmp_allow_meta']) && is_array($_POST['wpgmp_allow_meta'])) {
+				foreach ($_POST['wpgmp_allow_meta'] as $index => $label) {
+					if ($label !== '') {
+						$meta_hide[$index] = sanitize_text_field(wp_unslash($label));
 					}
 				}
 			}
-			update_option( 'wpgmp_language',sanitize_text_field( wp_unslash( $_POST['wpgmp_language'] ) ) );
-			update_option( 'wpgmp_api_key',sanitize_text_field( wp_unslash( $_POST['wpgmp_api_key'] ) ) );
-			update_option( 'wpgmp_scripts_place',sanitize_text_field( wp_unslash( $_POST['wpgmp_scripts_place'] ) ) );
-			update_option( 'wpgmp_location_extrafields', serialize(  $extra_fields  ) );
-			update_option( 'wpgmp_allow_meta', serialize(  $meta_hide  ));
-			
-			$wpgmp_settings = get_option( 'wpgmp_settings', true );
 
-			if ( ! is_array( $wpgmp_settings ) ) {
-				$wpgmp_settings = array();
+			$settings = [
+				'wpgmp_map_source'           => sanitize_text_field(wp_unslash($_POST['wpgmp_map_source'] ?? '')),
+				'wpgmp_tiles_source'         => sanitize_text_field(wp_unslash($_POST['wpgmp_tiles_source'] ?? '')),
+				'wpgmp_router_source'        => sanitize_text_field(wp_unslash($_POST['wpgmp_router_source'] ?? '')),
+				'wpgmp_language'             => sanitize_text_field(wp_unslash($_POST['wpgmp_language'] ?? '')),
+				'wpgmp_scripts_place'        => sanitize_text_field(wp_unslash($_POST['wpgmp_scripts_place'] ?? '')),
+				'wpgmp_version'              => sanitize_text_field(wp_unslash($_POST['wpgmp_version'] ?? '')),
+				'wpgmp_scripts_minify'       => sanitize_text_field(wp_unslash($_POST['wpgmp_scripts_minify'] ?? 'yes')),
+				'wpgmp_allow_meta'           => serialize($meta_hide),
+				'wpgmp_metabox_map'          => sanitize_text_field(wp_unslash($_POST['wpgmp_metabox_map'] ?? '')),
+				'wpgmp_auto_fix'             => sanitize_text_field(wp_unslash($_POST['wpgmp_auto_fix'] ?? '')),
+				'wpgmp_hide_notification'    => sanitize_text_field(wp_unslash($_POST['wpgmp_hide_notification'] ?? '')),
+				'wpgmp_advanced_marker'    => sanitize_text_field(wp_unslash($_POST['wpgmp_advanced_marker'] ?? 'false')),
+				'wpgmp_set_timeout'       => sanitize_text_field(wp_unslash($_POST['wpgmp_set_timeout'] ?? '100')),
+				'wpgmp_debug_mode'           => sanitize_text_field(wp_unslash($_POST['wpgmp_debug_mode'] ?? '')),
+				'wpgmp_gdpr'                 => sanitize_text_field(wp_unslash($_POST['wpgmp_gdpr'] ?? '')),
+				'wpgmp_gdpr_msg'             => wp_unslash($_POST['wpgmp_gdpr_msg'] ?? ''),
+				'wpgmp_gdpr_show_placeholder'=> sanitize_text_field(wp_unslash($_POST['wpgmp_gdpr_show_placeholder'] ?? '')),
+				'wpgmp_country_specific'     => sanitize_text_field(wp_unslash($_POST['wpgmp_country_specific'] ?? '')),
+				'wpgmp_countries'            => wp_unslash($_POST['wpgmp_countries'] ?? []),
+			];
+
+			foreach (['wpgmp_api_key','wpgmp_mapbox_key'] as $key) {
+				if (!empty($_POST[$key])) {
+					$settings[$key] = sanitize_text_field(wp_unslash($_POST[$key]));
+				}
 			}
 
-			if ( isset( $_POST['wpgmp_auto_fix'] ) ) {
-
-				$wpgmp_settings['wpgmp_auto_fix']         = sanitize_text_field( wp_unslash( $_POST['wpgmp_auto_fix'] ) );
-			} else {
-				$wpgmp_settings['wpgmp_auto_fix']         = '';
+			if (!empty($extra_fields)) {
+				$settings['wpgmp_extrafield_val'] = $wpgmp_saved_settings['wpgmp_extrafield_val'] ?? [];
+				foreach ($extra_fields as $val) {
+					$slug = sanitize_title($val);
+					$settings['wpgmp_extrafield_val'][$slug] = $settings['wpgmp_extrafield_val'][$slug] ?? [];
+				}
 			}
 
-			if ( isset( $_POST['wpgmp_debug_mode'] ) ) {
-				$wpgmp_settings['wpgmp_debug_mode']             = sanitize_text_field( wp_unslash( $_POST['wpgmp_debug_mode'] ) );
-			} else {
-				$wpgmp_settings['wpgmp_debug_mode']             = '';
+			if (!empty($wpgmp_saved_settings['wpgmp_enabled']) && $wpgmp_saved_settings['wpgmp_enabled'] === 'yes') {
+				$settings['wpgmp_enabled'] = 'yes';
+				$settings['wpgmp_debug_info'] = $wpgmp_saved_settings['wpgmp_debug_info'] ?? '';
 			}
 
-			if ( isset( $_POST['wpgmp_gdpr'] ) ) {
-				$wpgmp_settings['wpgmp_gdpr']             = sanitize_text_field( wp_unslash( $_POST['wpgmp_gdpr'] ) );
-			} else {
-				$wpgmp_settings['wpgmp_gdpr']             = '';
-			}
+			$settings = apply_filters('wpgmp_plugin_settings', $settings);
+			$extra_fields = apply_filters('wpgmp_plugin_extra_fields', $extra_fields);
 
-			if ( isset( $_POST['wpgmp_gdpr_show_placeholder'] ) ) {
-				$wpgmp_settings['wpgmp_gdpr_show_placeholder']             = sanitize_text_field( wp_unslash( $_POST['wpgmp_gdpr_show_placeholder'] ) );
-			} else {
-				$wpgmp_settings['wpgmp_gdpr_show_placeholder']             = '';
-			}
+			update_option('wpgmp_settings', $settings);
+			update_option('wpgmp_location_extrafields', serialize($extra_fields));
 
-			$wpgmp_settings['wpgmp_gdpr_msg']         = wp_unslash( $_POST['wpgmp_gdpr_msg'] );
-
-			$wpgmp_settings = apply_filters('wpgmp_plugin_settings',$wpgmp_settings);
-			update_option( 'wpgmp_settings', $wpgmp_settings );
-
-			$response['success'] = esc_html__( 'Setting(s) were saved successfully.','wp-google-map-plugin' );
-			return $response;
-
+			return ['success' => esc_html__('Plugin settings were saved successfully.', 'wp-google-map-plugin')];
 		}
 	}
 }

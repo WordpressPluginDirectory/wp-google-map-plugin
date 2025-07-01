@@ -3,7 +3,7 @@
  * Class: WPGMP_Model_Extentions
  *
  * @author Flipper Code <hello@flippercode.com>
- * @version 4.1.6
+ * @version 5.2.6
  * @package Maps
  */
 

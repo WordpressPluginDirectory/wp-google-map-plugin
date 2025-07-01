@@ -7,12 +7,22 @@
  */
 
 $form->add_element(
-	'group',
-	'route_direction_settings',
-	array(
-		'value'  => esc_html__('Route Direction Settings', 'wp-google-map-plugin').WPGMP_PREMIUM_LINK,
+	'group', 'map_route_settings', array(
+		'value'  => esc_html__( 'Route Direction Settings', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
 		'after'  => '</div>',
-		'parent_class'		=> 'fc-locked',
+		'tutorial_link' => 'https://www.wpmapspro.com/docs/how-to-display-route-tab-in-tabs-setting/',
+		'pro' => true
+	)
+);
+
+$form->add_element(
+	'html',
+	'wpgmp_map_route_setting_msg',
+	array(
+		'html' => WPGMP_Helper::wpgmp_instructions('routes'),
+		'show'  => 'true',
+		'before' => '<div class="fc-7">',
+		'after'  => '</div>',
 	)
 );

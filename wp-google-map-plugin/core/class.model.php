@@ -1,6 +1,7 @@
 <?php
 /**
  * Model base class
+ *
  * @author Flipper Code <hello@flippercode.com>
  * @version 3.0.0
  * @package Core
@@ -10,42 +11,49 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 
 	/**
 	 * Model base class
+	 *
 	 * @author Flipper Code <hello@flippercode.com>
 	 * @version 3.0.0
 	 * @package Core
 	 */
 	class FlipperCode_Model_Base {
-		
+
 		/**
 		 * Errors container.
+		 *
 		 * @var array
 		 */
 		protected $errors = array();
 		/**
 		 * Success message container.
+		 *
 		 * @var array
 		 */
 		protected $success = array();
 		/**
 		 * Hold query to be executed.
+		 *
 		 * @var string
 		 */
 		private $query = '';
 		/**
 		 * Table name assoicated to the model class.
+		 *
 		 * @var string
 		 */
 		public $table = '';
 		/**
 		 * Unique field name of the model table.
+		 *
 		 * @var [type]
 		 */
 		public $unique;
 		/**
 		 * Navigations releated to the model.
+		 *
 		 * @var array
 		 */
-		public  $navigation = array( '' );
+		public $navigation = array( '' );
 		/**
 		 * Model class constructer.
 		 */
@@ -54,22 +62,25 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		}
 		/**
 		 * Assign value to property.
+		 *
 		 * @param string $property Property Name.
 		 * @param string $value    Property Value.
 		 */
-		function set_val($property, $value) {
+		function set_val( $property, $value ) {
 
 			if ( is_array( $value ) ) {
-				$this->{$property} = $value; } elseif ($this->valid( $property,$value ))
-			$this->{$property} = $value;
+				$this->{$property} = $value; } elseif ( $this->valid( $property, $value ) ) {
+				$this->{$property} = $value;
+				}
 		}
 		/**
 		 * Validate property value before assign.
+		 *
 		 * @param  string $property Property Name.
 		 * @param  string $value    Property Value.
 		 * @return boolean          True or False.
 		 */
-		function valid($property, $value) {
+		function valid( $property, $value ) {
 
 			if ( property_exists( $this, $property ) ) {
 
@@ -79,7 +90,7 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 
 					foreach ( $this->validations[ $property ] as $type => $message ) {
 
-						$validator->add( $property,$value,$type,$message );
+						$validator->add( $property, $value, $type, $message );
 					}
 
 					$errors = $validator->validate();
@@ -95,49 +106,34 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 				}
 			}
 		}
-
-		public function authenticate_action_requests(){
-			
-			//Authentication
-			if( !is_user_logged_in() )
-			wp_die( 'You are not allowed to save changes!' );	
-			
-			//Authorization			
-			if ( ! current_user_can('administrator') )
-			wp_die( 'You are not allowed to save changes!' );
-			
-			//Nonce Verification
-			if(!isset( $_REQUEST['_wpnonce'] ) || empty($_REQUEST['_wpnonce']) )
-			wp_die('You are not allowed to save changes!');
-			if( !wp_verify_nonce( $_REQUEST['_wpnonce'], 'bulk-'.$this->_args['plural'] ) )
-			wp_die('You are not allowed to save changes!');
-			
-			
-		}
-		
 		/**
 		 * Validate all property together.
+		 *
 		 * @param  array $data Property name and value pair.
 		 * @return boolean       True or False.
 		 */
-		function verify($data = array()) {
+		function verify( $data = array() ) {
 
 			$errors = '';
-			//Call extension validation.
-			if( isset($data['fc_entity_type']) and $data['fc_entity_type']!='' ) {
-				$this->validations = apply_filters($data['fc_entity_type'].'_validation',$this->validations,$data);
+			// Call extension validation.
+			if ( isset( $data['fc_entity_type'] ) and $data['fc_entity_type'] != '' ) {
+				$this->validations = apply_filters( $data['fc_entity_type'] . '_validation', $this->validations, $data );
 			}
-			
+
 			if ( isset( $this->validations ) ) {
 
 				foreach ( $this->validations as $field => $checkup ) {
 					$validator = new FlipperCode_Validator();
-					$dimension = explode('::',$field);
+					$dimension = explode( '::', $field );
 					foreach ( $checkup as $property => $message ) {
-						if( count($dimension) == 1 ) {
-							$validator->add( $field,$data[ $dimension[0] ],$property,$message );
-						} else if(  count($dimension) == 2  ) {
-							$validator->add( $field,$data[ $dimension[0] ][ $dimension[1] ],$property,$message );
+						if ( count( $dimension ) == 1 ) {
+							if ( isset( $data[ $dimension[0] ] ) ) {
+								$validator->add( $field, $data[ $dimension[0] ], $property, $message );
+							}
+						} elseif ( count( $dimension ) == 2 ) {
+							if ( isset( $data[ $dimension[0] ][ $dimension[1] ] ) ) {
+								$validator->add( $field, $data[ $dimension[0] ][ $dimension[1] ], $property, $message );
+							}
 						}
 					}
 					$errors = $validator->validate();
@@ -145,14 +141,13 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 						$this->errors[ $field ] = $errors[ $field ];
 					}
 				}
-
 			}
 
-			if( isset($data['fc_entity_type']) and $data['fc_entity_type']!='' ) {
-				$this->errors = apply_filters($data['fc_entity_type'].'_custom_validation',$this->errors,$data);
+			if ( isset( $data['fc_entity_type'] ) and $data['fc_entity_type'] != '' ) {
+				$this->errors = apply_filters( $data['fc_entity_type'] . '_custom_validation', $this->errors, $data );
 			}
-			
-			if( is_array( $this->errors ) and !empty( $this->errors ) ) {
+
+			if ( is_array( $this->errors ) and ! empty( $this->errors ) ) {
 				return false;
 			}
 			return true;
@@ -160,105 +155,89 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		}
 		/**
 		 * Retrive records from database based on conditional array.
+		 *
 		 * @param string  $table     Table name.
 		 * @param array   $fcv_array Conditional Array.
 		 * @param string  $sortBy    Sort by.
 		 * @param boolean $ascending Order by.
 		 * @param string  $limit     Limit.
 		 */
+		function get( $table = '', $fcv_array = array(), $sortBy = '', $ascending = true, $limit = '' ) {
 
-		function get($table = '', $fcv_array = array(), $sortBy = '', $ascending = true, $limit = '') {
+			$connection = FlipperCode_Database::connect();
 
-		    global $wpdb;
-		    $connection = FlipperCode_Database::connect();
+			$sqlLimit    = ( '' != $limit ? "LIMIT $limit" : '' );
+			$this->query = "SELECT * FROM $this->table ";
+			$ruleList    = array();
+			$objects     = array();
 
-		    $table = esc_sql($table);
+			if ( count( $fcv_array ) > 0 ) {
 
-		    $sqlLimit = ('' != $limit ? "LIMIT %d" : '');
-		    $this->query = "SELECT * FROM {$this->table} ";
-		    $params = array();
+				$this->query .= ' WHERE ';
 
-		    if (count($fcv_array) > 0) {
-		        $this->query .= ' WHERE ';
+				for ( $i = 0, $c = count( $fcv_array ); $i < $c; $i++ ) {
 
-		        for ($i = 0, $c = count($fcv_array); $i < $c; $i++) {
-		            if (count($fcv_array[$i]) == 1) {
-		                $this->query .= ' ' . $fcv_array[$i][0] . ' ';
-		                continue;
-		            } else {
-		                if ($i > 0 && count($fcv_array[$i - 1]) != 1) {
-		                    $this->query .= ' AND ';
-		                }
-		                if (isset($this->pog_attribute_type[$fcv_array[$i][0]]['db_attributes']) && 'NUMERIC' != $this->pog_attribute_type[$fcv_array[$i][0]]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[$fcv_array[$i][0]]['db_attributes'][0]) {
-		                    if (1 == $GLOBALS['configuration']['db_encoding']) {
-		                        $value = $this->is_column($fcv_array[$i][2]) ? 'BASE64_DECODE(' . $fcv_array[$i][2] . ')' : '%s';
-		                        $this->query .= 'BASE64_DECODE(`' . $fcv_array[$i][0] . '`) ' . $fcv_array[$i][1] . ' ' . $value;
-		                        if (!$this->is_column($fcv_array[$i][2])) $params[] = $fcv_array[$i][2];
-		                    } else {
-		                        $value = $this->is_column($fcv_array[$i][2]) ? $fcv_array[$i][2] : '%s';
-		                        $this->query .= '`' . $fcv_array[$i][0] . '` ' . $fcv_array[$i][1] . ' ' . $value;
-		                        if (!$this->is_column($fcv_array[$i][2])) $params[] = $this->escape($fcv_array[$i][2]);
-		                    }
-		                } else {
-		                    $value = $this->is_column($fcv_array[$i][2]) ? $fcv_array[$i][2] : '%s';
-		                    if ('in' == strtolower($fcv_array[$i][1])) {
-		                        $values = explode(',', $fcv_array[$i][2]);
-		                        $placeholders = implode(',', array_fill(0, count($values), '%s'));
-		                        $params = array_merge($params, $values); // Assuming IN clause values are handled properly
-		                        $value = "($placeholders)";
-		                    } else {
-		                        $params[] = $fcv_array[$i][2];
-		                    }
-		                    $this->query .= '`' . $fcv_array[$i][0] . '` ' . $fcv_array[$i][1] . ' ' . $value;
-		                }
-		            }
-		        }
-		    }
+					if ( count( $fcv_array[ $i ] ) == 1 ) {
+						 $this->query .= ' ' . $fcv_array[ $i ][0] . ' ';
+						continue;
+					} else {
+						if ( $i > 0 && count( $fcv_array[ $i - 1 ] ) != 1 ) {
+							$this->query .= ' AND ';
+						}
+						if ( isset( $this->pog_attribute_type[ $fcv_array[ $i ][0] ]['db_attributes'] ) && 'NUMERIC' != $this->pog_attribute_type[ $fcv_array[ $i ][0] ]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[ $fcv_array[ $i ][0] ]['db_attributes'][0] ) {
+							if ( 1 == $GLOBALS['configuration']['db_encoding'] ) {
+								$value        = $this->is_column( $fcv_array[ $i ][2] ) ? 'BASE64_DECODE(' . $fcv_array[ $i ][2] . ')' : "'" . $fcv_array[ $i ][2] . "'";
+								$this->query .= 'BASE64_DECODE(`' . $fcv_array[ $i ][0] . '`) ' . $fcv_array[ $i ][1] . ' ' . $value;
+							} else {
+								$value        = $this->is_column( $fcv_array[ $i ][2] ) ? $fcv_array[ $i ][2] : "'" . $this->escape( $fcv_array[ $i ][2] ) . "'";
+								$this->query .= '`' . $fcv_array[ $i ][0] . '` ' . $fcv_array[ $i ][1] . ' ' . $value;
+							}
+						} else {
 
-		    if (!empty($sortBy)) {
-		        if (isset($this->pog_attribute_type[$sortBy]['db_attributes']) && 'NUMERIC' != $this->pog_attribute_type[$sortBy]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[$sortBy]['db_attributes'][0]) {
-		            if (1 == $GLOBALS['configuration']['db_encoding']) {
-		                $sortBy = "BASE64_DECODE($sortBy) ";
-		            } else {
-		                $sortBy = "$sortBy ";
-		            }
-		        } else {
-		            $sortBy = "$sortBy ";
-		        }
-		    } else {
-		        $sortBy = $this->unique;
-		    }
+							$value = $this->is_column( $fcv_array[ $i ][2] ) ? $fcv_array[ $i ][2] : "'" . $fcv_array[ $i ][2] . "'";
+							if ( 'in' == strtolower( $fcv_array[ $i ][1] ) ) {
+								$value = str_replace( "'", '', $value );
+								$value = '(' . $value . ')';
+							}
+							 $this->query .= '`' . $fcv_array[ $i ][0] . '` ' . $fcv_array[ $i ][1] . ' ' . $value;
+						}
+					}
+				}
+			}
 
-		    $sort_order = ($ascending) ? 'ASC' : 'DESC';
-		    $order_by_clause = sanitize_sql_orderby($sortBy . ' ' . $sort_order);
-		    $this->query .= ' ORDER BY ' . $order_by_clause . " $sqlLimit";
+			if ( ! empty( $sortBy ) ) {
+				if ( isset( $this->pog_attribute_type[ $sortBy ]['db_attributes'] ) && 'NUMERIC' != $this->pog_attribute_type[ $sortBy ]['db_attributes'][0] && 'SET' != $this->pog_attribute_type[ $sortBy ]['db_attributes'][0] ) {
+					if ( 1 == $GLOBALS['configuration']['db_encoding'] ) {
+						$sortBy = "BASE64_DECODE($sortBy) ";
+					} else {
+						$sortBy = "$sortBy ";
+					}
+				} else {
+					$sortBy = "$sortBy ";
+				}
+			} else {
+				$sortBy = $this->unique;
+			}
 
-		    if ('' != $limit) {
-		        $params[] = (int) $limit;
-		    }
+			$this->query .= ' ORDER BY ' . $sortBy . ' ' . ( $ascending ? 'ASC' : 'DESC' ) . " $sqlLimit";
 
-		    // Use $wpdb->prepare to safely prepare the query only if there are placeholders
-		    if (!empty($params)) {
-		        $prepared_query = $wpdb->prepare($this->query, $params);
-		    } else {
-		        $prepared_query = $this->query;
-		    }
-			
-			$results = FlipperCode_Database::reader( $prepared_query, $connection );
-			return $results;
+			$thisObjectName = get_class( $this );
+			$cursors        = FlipperCode_Database::reader( $this->query, $connection );
+
+			return $cursors;
 		}
-
 		/**
 		 * Query to be executed.
+		 *
 		 * @param  string $query SQL Query.
 		 * @return array        Records.
 		 */
-		function query($query) {
+		function query( $query ) {
 
-			$this->query = $query;
-			$connection = FlipperCode_Database::connect();
+			$this->query    = $query;
+			$connection     = FlipperCode_Database::connect();
 			$thisObjectName = get_class( $this );
-			$cursors = FlipperCode_Database::reader( $this->query, $connection );
+			$cursors        = FlipperCode_Database::reader( $this->query, $connection );
 
 			if ( ! empty( $cursors ) ) {
 
@@ -274,13 +253,14 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		}
 		/**
 		 * Validate file extension.
+		 *
 		 * @param  string $file_name File Name.
 		 * @return boolean      True or False.
 		 */
-		public function wpp_validate_extension($file_name) {
+		public function wpp_validate_extension( $file_name ) {
 
 			$ext_array = array( '.csv', '.xml', '.json', '.xls' );
-			$extension = strtolower( strrchr( $file_name,'.' ) );
+			$extension = strtolower( strrchr( $file_name, '.' ) );
 			$ext_count = count( $ext_array );
 
 			if ( ! $file_name ) {
@@ -290,9 +270,9 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 					return true;
 				} else {
 					foreach ( $ext_array as $value ) {
-						$first_char = substr( $value,0,1 );
+						$first_char = substr( $value, 0, 1 );
 						if ( '.' <> $first_char ) {
-							$extensions[] = '.'.strtolower( $value );
+							$extensions[] = '.' . strtolower( $value );
 						} else {
 							$extensions[] = strtolower( $value );
 						}
@@ -314,34 +294,35 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		}
 		/**
 		 * Throw errors in try block.
+		 *
 		 * @throws Exception User custom Errors.
 		 */
 		protected function throw_errors() {
 
-			if ( isset( $this->errors ) && is_array( $this->errors ) ) {
+			if ( isset( $this->errors ) and is_array( $this->errors ) ) {
 
-				$escaped_errors = array_map( 'esc_html', $this->errors );
-				$final_error_message = implode( '<br>', $escaped_errors );
-				throw new Exception( wp_kses_post($final_error_message) );
+				throw new Exception( implode( '<br>', $this->errors ) );
 
 			}
 		}
 
 		/**
 		 * This function will try to encode $text to base64, except when $text is a number. This allows us to Escape all data before they're inserted in the database, regardless of attribute type.
+		 *
 		 * @param string $text String.
 		 * @return string encoded to base64.
 		 */
-		public function escape($text) {
+		public function escape( $text ) {
 
-			return @mysql_real_escape_string( $text );
+			return esc_sql( $text );
 		}
 		/**
 		 * Check if column name.
+		 *
 		 * @param  string $value Column name.
 		 * @return boolean        True or False.
 		 */
-		public static function is_column($value) {
+		public static function is_column( $value ) {
 
 			if ( strlen( $value ) > 2 ) {
 				if ( substr( $value, 0, 1 ) == '`' && substr( $value, strlen( $value ) - 1, 1 ) == '`' ) {
@@ -354,10 +335,11 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 		}
 		/**
 		 * Convert XML to array.
+		 *
 		 * @param  string $xml XML nodes.
 		 * @return array      Array nodes.
 		 */
-		public function wpp_xml_2array($xml) {
+		public function wpp_xml_2array( $xml ) {
 
 			$arr = array();
 
@@ -375,15 +357,16 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 
 		/**
 		 * Validate file extension.
+		 *
 		 * @param  string $file_name File Name.
 		 * @return boolean      True or False.
 		 */
-		public function validate_extension($file_name) {
+		public function validate_extension( $file_name ) {
 
 			$ext_array = array( '.csv' );
-			$extension = strtolower( strrchr( $file_name,'.' ) );
+			$extension = strtolower( strrchr( $file_name, '.' ) );
 			$ext_count = count( $ext_array );
-
+			$valid_extension = false;
 			if ( ! $file_name ) {
 				return false;
 			} else {
@@ -391,9 +374,9 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 					return true;
 				} else {
 					foreach ( $ext_array as $value ) {
-						$first_char = substr( $value,0,1 );
+						$first_char = substr( $value, 0, 1 );
 						if ( '.' <> $first_char ) {
-							$extensions[] = '.'.strtolower( $value );
+							$extensions[] = '.' . strtolower( $value );
 						} else {
 							$extensions[] = strtolower( $value );
 						}
@@ -401,7 +384,7 @@ if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 
 					foreach ( $extensions as $value ) {
 						if ( $value == $extension ) {
-							$valid_extension = 'TRUE';
+							$valid_extension = true;
 						}
 					}
 

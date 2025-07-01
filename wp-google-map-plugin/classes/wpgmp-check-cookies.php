@@ -81,7 +81,7 @@ function wpgmp_hide_map_container($map_class, $map_id) {
 
 	$wpgmp_settings = get_option( 'wpgmp_settings', true );
 	if( !isset($wpgmp_settings['wpgmp_gdpr_show_placeholder']) or $wpgmp_settings['wpgmp_gdpr_show_placeholder'] != 'true'){
-		return;
+		return $map_class;
 	}
 	$show_placeholder = !wpgmp_check_cookies_accepted();
 
@@ -92,4 +92,4 @@ function wpgmp_hide_map_container($map_class, $map_id) {
 	return $map_class;
 }
 
-add_filter('wpgmp_container_class', 'wpgmp_hide_map_container', 10, 2);
+add_filter('wpgmp_container_css_class', 'wpgmp_hide_map_container', 10, 2);

@@ -6,7 +6,6 @@
  * @author Flipper Code <hello@flippercode.com>
  */
 
-
 $form->add_element(
 	'group', 'map_marker_cluster', array(
 		'value'  => esc_html__( 'Marker Cluster Settings', 'wp-google-map-plugin' ),
@@ -18,7 +17,7 @@ $form->add_element(
 
 $form->add_element(
 	'checkbox', 'map_cluster_setting[marker_cluster]', array(
-		'lable'   => esc_html__( 'Apply Marker Cluster', 'wp-google-map-plugin' ),
+		'label'   => esc_html__( 'Apply Marker Cluster', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'id'      => 'wpgmp_marker_cluster',
 		'current' => isset( $data['map_cluster_setting']['marker_cluster'] ) ? $data['map_cluster_setting']['marker_cluster'] : '',
@@ -30,12 +29,12 @@ $form->add_element(
 
 $form->add_element(
 	'text', 'map_cluster_setting[grid]', array(
-		'lable'         => esc_html__( 'Grid Size', 'wp-google-map-plugin' ),
+		'label'         => esc_html__( 'Grid', 'wp-google-map-plugin' ),
 		'value'         => isset( $data['map_cluster_setting']['grid'] ) ? $data['map_cluster_setting']['grid'] : '',
 		'default_value' => 15,
-		'desc'          => 'Enter grid size here. Default size is 15.',
+		'desc'          => 'Enter grid here. Default is 15.',
 		'class'         => 'marker_cluster_setting form-control',
-		'before'        => '<div class="fc-5">',
+		'before'        => '<div class="fc-6">',
 		'after'         => '</div>',
 		'show'          => 'false',
 	)
@@ -46,26 +45,26 @@ for ( $i = 1; $i < 20; $i++ ) {
 }
 $form->add_element(
 	'select', 'map_cluster_setting[max_zoom]', array(
-		'lable'   => esc_html__( 'Max Zoom Level', 'wp-google-map-plugin' ),
+		'label'   => esc_html__( 'Max Zoom Level', 'wp-google-map-plugin' ),
 		'current' => isset( $data['map_cluster_setting']['max_zoom'] ) ? $data['map_cluster_setting']['max_zoom'] : '',
 		'desc'    => esc_html__( 'Available options 1 to 19.', 'wp-google-map-plugin' ),
 		'options' => $zoom_values,
 		'class'   => 'marker_cluster_setting form-control',
 		'show'    => 'false',
-		'before'  => '<div class="fc-8">',
+		'before'  => '<div class="fc-6">',
 		'after'   => '</div>',
 	)
 );
 
 $form->add_element(
 	'select', 'map_cluster_setting[location_zoom]', array(
-		'lable'         => esc_html__( 'Marker Zoom Level', 'wp-google-map-plugin' ),
+		'label'         => esc_html__( 'Marker Zoom Level', 'wp-google-map-plugin' ),
 		'current'       => isset( $data['map_cluster_setting']['location_zoom'] ) ? $data['map_cluster_setting']['location_zoom'] : '',
 		'desc'          => esc_html__( 'Set zoom level on marker or location click. Available options 1 to 19.', 'wp-google-map-plugin' ),
 		'options'       => $zoom_values,
 		'class'         => 'marker_cluster_setting form-control',
 		'show'          => 'false',
-		'before'        => '<div class="fc-8">',
+		'before'        => '<div class="fc-6">',
 		'after'         => '</div>',
 		'default_value' => '10',
 	)
@@ -73,7 +72,7 @@ $form->add_element(
 
 $form->add_element(
 	'checkbox', 'map_cluster_setting[marker_cluster_style]', array(
-		'lable'   => esc_html__( 'Apply Style(s)', 'wp-google-map-plugin' ),
+		'label'   => esc_html__( 'Apply Style(s)', 'wp-google-map-plugin' ),
 		'value'   => 'true',
 		'id'      => 'marker_cluster_style',
 		'current' => isset( $data['map_cluster_setting']['marker_cluster_style'] ) ? $data['map_cluster_setting']['marker_cluster_style'] : '',
@@ -100,12 +99,14 @@ $icon_set = array(
 
 $form->add_element(
 	'radio', 'map_cluster_setting[icon]', array(
-		'lable'           => esc_html__( 'Cluster Color', 'wp-google-map-plugin' ),
+		'label'           => esc_html__( 'Cluster Color', 'wp-google-map-plugin' ),
 		'radio-val-label' => $icon_set,
 		'current'         => isset( $data['map_cluster_setting']['icon'] ) ? $data['map_cluster_setting']['icon'] : '',
 		'class'           => 'chkbox_class marker_cluster_style',
 		'show'            => 'false',
 		'default_value'   => '4.png',
+		'before' => '<div class="fc-6"><div class="fc-d-flex fc-flex-wrap fc-gap-10">',
+		'after'  => '</div></div>',
 	)
 );
 
@@ -124,11 +125,13 @@ $hover_icon_set = array(
 
 $form->add_element(
 	'radio', 'map_cluster_setting[hover_icon]', array(
-		'lable'           => esc_html__( 'Mouseover Cluster Color', 'wp-google-map-plugin' ),
+		'label'           => esc_html__( 'Mouseover Cluster Color', 'wp-google-map-plugin' ),
 		'radio-val-label' => $hover_icon_set,
 		'current'         => isset( $data['map_cluster_setting']['hover_icon'] ) ? $data['map_cluster_setting']['hover_icon'] : '',
 		'class'           => 'chkbox_class marker_cluster_style',
 		'show'            => 'false',
 		'default_value'   => '4.png',
+		'before' => '<div class="fc-6"><div class="fc-d-flex fc-flex-wrap fc-gap-10">',
+		'after'  => '</div></div>',
 	)
 );
