@@ -2235,7 +2235,7 @@ div.wpgmp_listing_container {
   }
 
   .wpgmp_infobox .wpgmp_infowindow {
-    width: 90% !important;
+    width: 350px !important;
     position: relative;
   }
 }
@@ -2530,7 +2530,7 @@ Accordion layout
 
 @media (max-width: 370px) {
   .wpgmp_infobox .wpgmp_infowindow {
-    width: 65% !important;
+    width: 350px !important;
   }
 }
 
@@ -2948,7 +2948,7 @@ div.wpgmp_search_form input.wpgmp_error:focus {
     position: relative;
 }
 
-.searchBox {
+.wpgmp_map_container .searchBox {
     width: 310px;
     height:46px;
     border: none;

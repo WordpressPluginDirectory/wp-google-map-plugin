@@ -3249,7 +3249,7 @@ fit_bounds() {
 
       // Calculate offsetY based on marker height
       const markerHeight = parseInt(markerSize[1]) || 32;
-      const offsetY = -(markerHeight);
+      const offsetY = -(markerHeight) -15;
       // Apply offset to infowindow
       
       place.infowindow.setOptions({
@@ -3835,19 +3835,28 @@ fit_bounds() {
     if (!place || !place.marker || !iconUrl) return;
   
     const isGoogle = this.isMapProvider('google');
+    const isSvg = iconUrl.toLowerCase().includes('image/svg') || iconUrl.toLowerCase().endsWith('.svg');
   
     if (isGoogle) {
       // Google Maps: uses scaledSize and url object
-      place.marker.setIcon({
-        url: iconUrl,
-        scaledSize: new google.maps.Size(iconSize[0], iconSize[1])
-      });
+      const icon = { url: iconUrl };
+
+      if (isSvg) {
+        icon.scaledSize = new google.maps.Size(iconSize[0], iconSize[1]);
+      }
+
+      place.marker.setIcon(icon);
+
   
     } else {
-      place.marker.setIcon({
-        url: iconUrl,
-        scaledSize: [iconSize[0], iconSize[1]]
-      });
+      const icon = { url: iconUrl };
+
+      if (isSvg) {
+        icon.scaledSize = [iconSize[0], iconSize[1]];
+      }
+
+      place.marker.setIcon(icon);
+
     }
   }
 
@@ -4218,24 +4227,27 @@ fit_bounds() {
     $(listing_container).find(".wpgmp_empty").remove();
 
     if (map_obj.map_data.map_data.listing.list_grid == "wpgmp_listing_grid") {
-      $(window).load(function () {
+      $(window).on("load", function () {
         try {
           var container = $(listing_container).find(".wpgmp_listing_grid");
-          if (container) {
-            var msnry = $(container).data("masonry");
+          if (container.length) {
+            var msnry = container.data("masonry");
             if (msnry) {
               msnry.destroy();
             }
 
-            var $grid = $(container)
-              .imagesLoaded(function () {
-                // init Masonry after all images have loaded
-                $grid.masonry({
-                  itemSelector: ".wpgmp_listing_grid .wpgmp_locations",
-                  columnWidth: ".wpgmp_listing_grid .wpgmp_locations",
-                });
-              })
-              .masonry("reload");
+            container.imagesLoaded(function () {
+              // init Masonry after all images have loaded
+              container.masonry({
+                itemSelector: ".wpgmp_locations",
+                columnWidth: ".wpgmp_locations",
+                percentPosition: true,
+              });
+
+              // Now safe to call reload
+              container.masonry("layout");
+            });
+
           }
         } catch (err) {
           console.log(err);
@@ -5076,7 +5088,7 @@ fit_bounds() {
 
   });
   
-  $container.on("click", '[data-filter="dropdown"]', () => map_obj.update_filters());
+  $(map_obj.container).on("click", '[data-filter="dropdown"]', () => map_obj.update_filters());
   $container.on("click", '[data-filter="checklist"]', () => map_obj.update_filters());
   $container.on("click", '[data-filter="list"]', function () {
       $(this).toggleClass("fc_selected");
@@ -6599,13 +6611,13 @@ wpgmp_handle_place_selection(place, inputField) {
   show_search_control() {
     const map_obj = this;
     const isGoogle = map_obj.isMapProvider("google");
-    const input = $(map_obj.container).find('[data-input="map-search-control"]')[0];
+    const input = $(map_obj.container).find('[data-input="map-search-control"]');
     if (!input) return;
   
     // Create a wrapper and move input inside it
     const wrapper = document.createElement('div');
     wrapper.className = 'wpgmp-search-control-wrapper';
-    wrapper.appendChild(input);
+    wrapper.appendChild(input[0]);
   
     if (isGoogle) {
       const positionKey = map_obj.settings.search_control_position?.toUpperCase();
@@ -6618,10 +6630,10 @@ wpgmp_handle_place_selection(place, inputField) {
       }
 
       // ✅ Initialize autocomplete
-      if (typeof map_obj.google_autosuggest === "function") {
+      if (typeof map_obj.google_auto_suggest === "function") {
         map_obj.google_auto_suggest(input);
       } else {
-        console.warn("google_autosuggest() is not defined or not a function.");
+        console.warn("google_auto_suggest() is not defined or not a function.");
       }
 
   
@@ -7289,14 +7301,14 @@ getMarkerSize() {
 
   let size;
   if (isMobile) {
-    size = wpgmp_local.mobile_marker_size || 24;
+    size = wpgmp_local.mobile_marker_size || [24,24];
   } else if (isRetina) {
-    size = wpgmp_local.retina_marker_size || 64;
+    size = wpgmp_local.retina_marker_size || [64,64];
   } else {
-    size = wpgmp_local.desktop_marker_size || 32;
+    size = wpgmp_local.desktop_marker_size || [32,32];
   }
 
-  return [size, size];
+  return size;
 }
 
  compute_distance(lat1, lng1, lat2, lng2) {
@@ -7815,8 +7827,11 @@ window.WpgmpBaseMaps = WpgmpBaseMaps;
       const icon = document.createElement('img');
       icon.src = iconUrl;
       icon.alt = title;
-      icon.style.width = `${iconSize[0]}px`;
-      icon.style.height = `${iconSize[1]}px`;
+      // Only apply size if the icon is an SVG
+      if (iconUrl.toLowerCase().includes('image/svg') || iconUrl.toLowerCase().endsWith('.svg')) {
+        icon.style.width = `${iconSize[0]}px`;
+        icon.style.height = `${iconSize[1]}px`;
+      }
       icon.title = title;
       icon.style.objectFit = 'contain';
       return icon;
@@ -8103,10 +8118,12 @@ window.WpgmpBaseMaps = WpgmpBaseMaps;
       if (!iconUrl || iconUrl.trim() === '') {
         iconUrl = map_obj.settings.marker_default_icon || wpgmp_local.default_marker_icon;
       }
+
+      const isSvg = iconUrl.toLowerCase().includes('image/svg') || iconUrl.toLowerCase().endsWith('.svg');
     
       if (map_obj.useAdvancedMarker &&  google.maps.marker?.AdvancedMarkerElement ) {
         // AdvancedMarkerElement version
-        const iconElement = map_obj.createIconElement(iconUrl, title, iconSize);
+        const iconElement = isSvg ? map_obj.createIconElement(iconUrl, title, iconSize) : map_obj.createIconElement(iconUrl, title);
 
         return new google.maps.marker.AdvancedMarkerElement({
           map: map,
@@ -8129,8 +8146,10 @@ window.WpgmpBaseMaps = WpgmpBaseMaps;
         if (iconUrl) {
           markerOptions.icon = {
             url: iconUrl,
-            scaledSize: new google.maps.Size(iconSize[0], iconSize[1]),
           };
+          if (isSvg) {
+            markerOptions.icon.scaledSize = new google.maps.Size(parseInt(iconSize[0]), parseInt(iconSize[1]));
+          }
         }
     
         if (anchorPoint) {
@@ -10257,20 +10276,35 @@ map_loaded() {
           wpgmp_local.default_marker_icon;
       }
 
+      const isSvg = iconUrl.toLowerCase().includes('image/svg') || iconUrl.toLowerCase().endsWith('.svg');
+
       if (isDivIcon) {
-        icon = L.divIcon({
+        const divIconOptions = {
           className: customClass,
           html: `<div class="wpgmp-marker-label">${label}</div>`,
-          iconSize,
-          iconAnchor: [iconSize[0] / 2, iconSize[1] / 2],
-        });
+        };
+
+        if (isSvg) {
+          divIconOptions.iconSize = iconSize;
+          divIconOptions.iconAnchor = [iconSize[0] / 2, iconSize[1] / 2];
+        }
+
+      icon = L.divIcon(divIconOptions);
+
       } else {
-        icon = L.icon({
+        const iconOptions = {
           iconUrl,
-          iconSize,
           iconAnchor: [iconSize[0] / 2, iconSize[1]],
           popupAnchor,
-        });
+        };
+
+        // Only apply iconSize if SVG
+        if (isSvg) {
+          iconOptions.iconSize = iconSize;
+        }
+
+        icon = L.icon(iconOptions);
+
       }
 
       const marker = L.marker(position, {

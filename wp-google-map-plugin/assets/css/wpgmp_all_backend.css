@@ -3238,7 +3238,7 @@ Description     : This stylesheet is designed for an weplugins.
     position: relative;
 }
 
-.searchBox {
+.wpgmp_map_container .searchBox {
     width: 310px;
     height:46px;
     border: none;

@@ -1581,7 +1581,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 
 			$html .= FlipperCode_HTML_Markup::field_anchor(
 				'remove_image', array(
-					'value'  => "<i class='wep-icon-trash'></i>",
+					'value'  => "<i class='wep-icon-trash wep-icon-lg'></i>",
 					'before' => '<div class="fc-3">',
 					'after'  => '</div>',
 					'href'   => 'javascript:void(0);',

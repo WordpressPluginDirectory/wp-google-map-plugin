@@ -263,15 +263,15 @@ class WPGMP_Helper{
 		$wpgmp_local['no_routes']     = esc_html__( 'No routes have been assigned to this map.', 'wp-google-map-plugin' );
 		$wpgmp_local['no_categories'] = esc_html__( 'No categories have been assigned to the locations.', 'wp-google-map-plugin' );
 		$default_sizes = [
-			'mobile'  => 24,
-			'desktop' => 32,
-			'retina'  => 64,
+			'mobile'  => [24,24],
+			'desktop' => [32,32],
+			'retina'  => [64,64],
 		];
 		
 		$marker_sizes = apply_filters('wpgmp_marker_size', $default_sizes);
-		$wpgmp_local['mobile_marker_size']  = isset($marker_sizes['mobile']) ? (int) $marker_sizes['mobile'] : $default_sizes['mobile'];
-		$wpgmp_local['desktop_marker_size'] = isset($marker_sizes['desktop']) ? (int) $marker_sizes['desktop'] : $default_sizes['desktop'];
-		$wpgmp_local['retina_marker_size']  = isset($marker_sizes['retina']) ? (int) $marker_sizes['retina'] : $default_sizes['retina'];
+		$wpgmp_local['mobile_marker_size']  = isset($marker_sizes['mobile']) ? $marker_sizes['mobile'] : $default_sizes['mobile'];
+		$wpgmp_local['desktop_marker_size'] = isset($marker_sizes['desktop']) ? $marker_sizes['desktop'] : $default_sizes['desktop'];
+		$wpgmp_local['retina_marker_size']  = isset($marker_sizes['retina']) ? $marker_sizes['retina'] : $default_sizes['retina'];
 
 		$wpgmp_local = apply_filters('wpgmp_js_local', $wpgmp_local);
 		

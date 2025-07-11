@@ -1,5 +1,5 @@
 
-=== WP Maps - Store Locator, Listing, Filters & Google/OpenStreetMap Maps ===
+=== WP Maps - Store Locator,Google Maps,OpenStreetMap,Mapbox,Listing,Directory & Filters ===
 Contributors:      flippercode
 Plugin Name:       WP MAPS
 Tags: store locator, google maps, openstreetmap, map, directory
@@ -7,12 +7,12 @@ Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
 Tested up to: 6.8.1
-Stable tag: 4.8.0
+Stable tag: 4.8.1
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WordPress map plugin for Google Maps, OpenStreetMap & Mapbox with store locator, filterable listings, custom markers.
+WordPress map plugin for Google Maps, OpenStreetMap & Mapbox with store locator, filterable listings & custom markers.
 
 == Description ==
 
@@ -71,7 +71,7 @@ Works with all major page builders and themes:
 * Elementor, WPBakery, Divi, Gutenberg, Brizy, Beaver Builder
 * Astra, Avada, OceanWP, GeneratePress, Hello Elementor
 
->Here is a quick highlight on the numerous customizable features offered by the free and pro versions of the <strong>[WP MAPS PRO Version](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)</strong>.
+Here is a quick highlight on the numerous customizable features offered by the free and pro versions of the <strong>[WP MAPS PRO Version](https://www.wpmapspro.com?utm_source=wordpress&utm_medium=liteversion&utm_campaign=freemium&utm_id=freemium)</strong>.
  
 * NO API Key required for OpenStreetMap Maps and API Keys is required for Google Maps.
 * Fully GDPR-compliant Google Maps integration for secure and privacy-friendly usage
@@ -204,32 +204,39 @@ Contact us at [Support](https://weplugins.com/support/).
 
 == Screenshots ==
 
-1. Google Map Page
-2. Open Source map Page
-3. Add marker category page
-4. Assign marker icon to category
-5. Assign svg marker icon to category
-6. Manage Marker Categories Page
-7. Add Location Page
-8. Manage Location page
-9. Add Map Page
-10. Map Center Settings
-11. Assign Locations To Map
-12. Map Listing Settings
-13. Listing Item Skin
-14. Marker Cluster Settings
-15. Display Circle Or Marker on map Center
-16. Map Theme Settings
-17. Geo Json Settings
-18. Limit Panning Settings
-19. Map Layers Settings
-20. Manage Map Page
-21. Google Map Provider Setting
-22. Street View Settings
-23. Advanace Marker Settings
-24. Open Source Map Provider Settings
+1.  Google Map Page – Add and manage maps using Google Maps as the provider
+2.  Open Source Map Page – Create maps using OpenStreetMap or Leaflet
+3.  Add Marker Category – Create categories to group markers (e.g., Hospitals, Restaurants)
+4.  Assign Marker Icon to Category – Set a default icon for each marker category
+5.  Assign SVG Marker Icon – Upload and assign custom SVG icons to marker categories
+6.  Manage Marker Categories – Edit, delete, or organize your marker categories
+7.  Add Location Page – Add new locations with address, coordinates, and other details
+8.  Manage Location Page – View, edit, or delete all added locations
+9.  Add Map Page – Create a new map with layout, zoom, and marker options
+10. Map Center Settings – Set the default center and zoom level for the map
+11. Assign Locations to Map – Attach selected locations to a specific map
+12. Map Listing Settings – Customize how location listings appear next to the map
+13. Listing Item Skins – Choose from different styles for listing item design
+14. Marker Cluster Settings – Enable clustering of nearby markers for better performance
+15. Map Center Display – Show a circle or marker at the map’s center point
+16. Map Theme Settings – Change the map appearance using pre-built themes or styles
+17. GeoJSON Settings – Upload and display GeoJSON shapes or regions on the map
+18. Limit Panning Settings – Restrict map movement beyond a certain boundary
+19. Map Layers Settings – Toggle layers like traffic, transit, or bicycle routes
+20. Manage Maps Page – View, edit, or delete all your saved maps
+21. Google Map Provider Settings – Configure API keys and features for Google Maps
+22. Street View Settings – Enable or disable Google Street View on the map
+23. Advanced Marker Settings – Customize marker animations, z-index, behavior, etc.
+24. Open Source Map Provider Settings – Configure options for Leaflet/OpenStreetMap usage
+
 
 == Changelog ==
+
+= 4.8.1 =
+* Add : Fixed the png marker default size issue.
+* Add : Infowindow open on wrong area issue fixed.
+* Add : Search control autosuggest issue fixed.
+
 
 = 4.7.4 =
 * Add : Fixed the empty latitude and longitude vaildation error message.
