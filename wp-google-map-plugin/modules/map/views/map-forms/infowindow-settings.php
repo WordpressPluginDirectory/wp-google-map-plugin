@@ -214,7 +214,7 @@ if ( isset( $data['map_all_control']['infowindow_openoption'] ) && 'mouseclick' 
 				'sourcecode' => $info_default_value,
 			),
 			'customiser_controls' => array( 'edit_mode', 'placeholder', 'sourcecode' ),
-			'tutorial_link' => 'https://www.wpmapspro.com/docs/how-to-create-extra-fields-for-location-infowindow-2/'
+			'tutorial_link' => 'https://www.wpmapspro.com/docs/customizing-infowindow-messages-for-locations/'
 		)
 	);
 

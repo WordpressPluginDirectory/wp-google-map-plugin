@@ -6617,7 +6617,10 @@ wpgmp_handle_place_selection(place, inputField) {
     // Create a wrapper and move input inside it
     const wrapper = document.createElement('div');
     wrapper.className = 'wpgmp-search-control-wrapper';
-    wrapper.appendChild(input[0]);
+    if (input[0]) {
+      wrapper.appendChild(input[0]);
+    }
+    
   
     if (isGoogle) {
       const positionKey = map_obj.settings.search_control_position?.toUpperCase();
