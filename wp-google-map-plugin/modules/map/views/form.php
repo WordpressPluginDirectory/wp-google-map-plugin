@@ -85,7 +85,7 @@ $form->add_element(
 	)
 );
 
-if ( !isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key'] == '' ) {
+if ( (!isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key'] == '') && $wpgmp_settings['wpgmp_map_source'] != 'openstreet' ) {
 
 	$link = '<a target="_blank" href="https://www.wpmapspro.com/docs/get-a-google-maps-api-key/">'.esc_html__("create google maps api key","wp-google-map-plugin").'</a>';
 	$setting_link = '<a target="_blank" href="' . admin_url( 'admin.php?page=wpgmp_manage_settings' ) . '">'.esc_html__("here","wp-google-map-plugin").'</a>';

@@ -778,6 +778,27 @@ if ( is_array( $map_data['places'] ) ) {
 	foreach ( $map_data['places'] as $place ) {
 		$use_me = true;
 
+		if ( isset( $shortcode_filters['category'] ) ) {
+
+            $found_category       = false;
+            $show_categories_only = explode( ',', strtolower( $shortcode_filters['category'] ) );
+
+            if( isset($place['categories']) ) {
+
+                foreach ( $place['categories'] as $cat ) {
+                if ( in_array( strtolower( $cat['name'] ), $show_categories_only ) or in_array( strtolower( $cat['id'] ), $show_categories_only ) ) {
+                    $found_category = true;
+                }
+            }
+                
+            }
+            
+
+            if ( false == $found_category ) {
+                $use_me = false;
+            }
+        }
+
 
 		if ( true == $render_shortcode ) {
 			$place['content'] = do_shortcode( $place['content'] );

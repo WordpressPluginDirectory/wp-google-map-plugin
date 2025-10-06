@@ -6263,7 +6263,7 @@ fit_bounds() {
           });
   
           map_obj.wpgmp_handle_place_selection(place, inputField);
-          inputField.value = place.formattedAddress;
+          inputField.value = selected.placePrediction.text.toString();
         }
       );
     } catch (error) {
