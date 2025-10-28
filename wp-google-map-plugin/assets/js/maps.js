@@ -3670,6 +3670,9 @@ fit_bounds() {
           wpgmp_listing_filter.display_category_filter === true &&
           index == "category"
         ) {
+          if (map_obj.map_data.map_options.select_category) {
+            wpgmp_local.select_category = map_obj.map_data.map_options.select_category;
+          }
           content +=
             '<select data-wpgmp-filter="true" data-wpgmp-map-id="'+map_obj.map_data.map_property.map_id+'" data-wpgmp-filter-by="category" data-filter="dropdown" data-name="category" name="place_' +
             index +
@@ -3776,6 +3779,10 @@ fit_bounds() {
 
       if (this.map_data.listing.search_field_autosuggest === true) {
         autosuggest_class = "wpgmp_auto_suggest";
+      }
+
+      if (this.map_data.map_options.search_placeholder) {
+        wpgmp_local.search_placeholder = this.map_data.map_options.search_placeholder;
       }
 
       content +=
@@ -7608,17 +7615,6 @@ window.WpgmpBaseMaps = WpgmpBaseMaps;
         };
       }
 
-    }
-    
-    
-
-    // Apply localization strings if available
-    if (map_obj.map_data.map_options.search_placeholder) {
-      wpgmp_local.search_placeholder = map_obj.map_data.map_options.search_placeholder;
-    }
-
-    if (map_obj.map_data.map_options.select_category) {
-      wpgmp_local.select_category = map_obj.map_data.map_options.select_category;
     }
 
     // Handle template placeholder storage if using advanced template mode

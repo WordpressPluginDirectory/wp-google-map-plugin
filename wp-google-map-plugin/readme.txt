@@ -6,8 +6,8 @@ Tags: store locator, google maps, openstreetmap, map, directory
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.8.1
-Stable tag: 4.8.5
+Tested up to: 6.8.3
+Stable tag: 4.8.6
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -231,6 +231,10 @@ Contact us at [Support](https://weplugins.com/support/).
 
 
 == Changelog ==
+
+= 4.8.6 =
+* Add : Search and Category placeholder settings now work correctly with OpenStreetMap.
+* Add : Plugin script and style files will not load on another pages.
 
 = 4.8.5 =
 * Add : Fix Autosuggest selected address displays the formatted address.

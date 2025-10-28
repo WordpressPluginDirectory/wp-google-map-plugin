@@ -88,7 +88,13 @@ class WPGMP_Helper{
 		// === Enqueue Scripts Conditionally
 		foreach ( $scripts as $key => $script ) {
 			if ( empty( $assets ) || in_array( $key, $assets ) ) {
-				wp_enqueue_script( $script['handle'], $script['src'], $script['deps'], WPGMP_VERSION, $in_footer );
+				if ( isset( $wpgmp_settings['wpgmp_auto_fix'] ) && $wpgmp_settings['wpgmp_auto_fix'] !== 'true' && $context === 'frontend' ) {
+
+					wp_register_script( $script['handle'], $script['src'], $script['deps'], WPGMP_VERSION, $in_footer );
+					
+				}else{
+					wp_enqueue_script( $script['handle'], $script['src'], $script['deps'], WPGMP_VERSION, $in_footer );
+				}
 			}
 		}
 	
@@ -103,7 +109,11 @@ class WPGMP_Helper{
 	
 		$styles = apply_filters( "wpgmp_{$context}_styles", $styles );
 		foreach ( $styles as $handle => $src ) {
-			wp_enqueue_style( $handle, $src, [], WPGMP_VERSION );
+			if ( isset( $wpgmp_settings['wpgmp_auto_fix'] ) && $wpgmp_settings['wpgmp_auto_fix'] !== 'true' && $context === 'frontend' ) {
+				wp_register_style( $handle, $src, [], WPGMP_VERSION );
+			}else{
+				wp_enqueue_style( $handle, $src, [], WPGMP_VERSION );
+			}
 		}
 	
 		// === Localization for JS
@@ -403,9 +413,7 @@ Enjoy the aroma of freshly roasted beans all day long.';
 				'map_all_control[wpgmp_secondary_color]',
 				'map_geojson_setting',
 				'map_all_control[listing_openoption]',
-				'map_all_control[wpgmp_searchbar_placeholder]',
 				'wpgmp_search_placeholders_list',
-				'map_all_control[wpgmp_category_placeholder]',
 				'map_all_control[wpgmp_display_print_option]',
 				
 			],
