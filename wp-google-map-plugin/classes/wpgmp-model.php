@@ -24,7 +24,8 @@ if ( ! class_exists( 'WPGMP_Model' ) ) {
 
 			$page = isset($_GET['page']) && !empty($_GET['page']) ? $_GET['page'] : '';
 			$module_path = WPGMP_MODEL;
-			$module_path = apply_filters('fc_modal_load_module', $module_path, $page);
+			$module_path = apply_filters('fc_modal_load_module', $module_path, $page); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			parent::__construct( $module_path, 'WPGMP_Model_' );
 
 		}

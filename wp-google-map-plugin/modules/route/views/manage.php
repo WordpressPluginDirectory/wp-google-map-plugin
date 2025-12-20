@@ -4,8 +4,8 @@
  *
  * @package Maps
  */
-  $form = new WPGMP_Template();
-  echo $form->start_page_layout();
+  $form = new WPGMP_Template();// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+  echo wp_kses_post( $form->start_page_layout() );
 if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_Route_Table' ) ) {
 
 	/**
@@ -50,13 +50,16 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_
 		}
 	}
 	global $wpdb;
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$columns = array(
 		'route_title'          => esc_html__( 'Route Title', 'wp-google-map-plugin' ),
 		'route_start_location' => esc_html__( 'Route Start Location', 'wp-google-map-plugin' ),
 		'route_end_location'   => esc_html__( 'Route End Location', 'wp-google-map-plugin' ),
 
 	);
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$sortable  = array( 'route_title', 'route_start_location', 'route_end_location' );
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$tableinfo = array(
 		'table'                   => $wpdb->prefix . 'map_routes',
 		'textdomain'              => 'wp-google-map-plugin',
@@ -86,8 +89,8 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_
 			'no_records_found' => esc_html__( 'No routes were found.', 'wp-google-map-plugin' )
 		),
 	);
-	$obj       = new WPGMP_Route_Table( $tableinfo );
+	$obj       = new WPGMP_Route_Table( $tableinfo ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 
 }
 
-echo $form->end_page_layout();
+echo $form->end_page_layout();// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

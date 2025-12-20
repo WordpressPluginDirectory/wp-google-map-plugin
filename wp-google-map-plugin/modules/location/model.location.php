@@ -363,7 +363,7 @@ if ( ! class_exists( 'WPGMP_Model_Location' ) ) {
         
             $rest_errors = apply_filters('wpgmp_location_rest_validation',$rest_errors,$_POST);
             if ( is_array( $rest_errors ) && ! empty( $rest_errors ) ){
-                return new WP_Error( 'wpgmp_rest_validation_failed', esc_html__( 'Please checkout the errors and fix those to proceed with this request.', 'rest-api-for-google-maps' ), array( 'status' => 422, 'errors' => $rest_errors ) );
+                return new WP_Error( 'wpgmp_rest_validation_failed', esc_html__( 'Please checkout the errors and fix those to proceed with this request.', 'wp-google-map-plugin' ), array( 'status' => 422, 'errors' => $rest_errors ) );
             }
 
 			//Write to DB
@@ -580,7 +580,7 @@ if ( ! class_exists( 'WPGMP_Model_Location' ) ) {
 				}
 
 				if ( count( $csv_columns ) == 0 ) {
-					$response['error'] = _( 'Please map locations fields to csv columns.', 'wp-google-map-plugin' );
+					$response['error'] = __( 'Please map locations fields to csv columns.', 'wp-google-map-plugin' );
 
 					return $response;
 				}

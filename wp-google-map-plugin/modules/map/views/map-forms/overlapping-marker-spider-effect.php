@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  *Marker Spiderfier Effect for overlapping markers in google maps.
  *
@@ -29,3 +30,4 @@ $form->add_element(
 		'after'  => '</div>',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Contro Positioning over google maps.
  *
@@ -91,3 +92,4 @@ $form->add_element(
 		'show'    => 'false',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

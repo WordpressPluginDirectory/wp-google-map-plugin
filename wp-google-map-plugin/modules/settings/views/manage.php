@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
 /**
  * This class used to manage settings page in backend.
  *
@@ -9,10 +11,10 @@
 
 $wpgmp_settings = get_option( 'wpgmp_settings', true );
 
-$form = new WPGMP_Template();
-$form->set_header( esc_html__( 'General Setting(s)', 'wp-google-map-plugin' ), $response, $enable = true );
+$wpgmp_form = new WPGMP_Template(); 
+$wpgmp_form->set_header( esc_html__( 'General Setting(s)', 'wp-google-map-plugin' ), $response, $enable = true );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'group', 'gerenal_settings', array(
 		'value'  => esc_html__( 'General Setting(s)', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
@@ -20,7 +22,7 @@ $form->add_element(
 		'tutorial_link' => 'https://www.wpmapspro.com/docs/get-a-google-maps-api-key/'
 	)
 );
-$form->add_element(
+$wpgmp_form->add_element(
 	'radio', 'wpgmp_map_source', array(
 		'label'           => esc_html__( 'Map Provider', 'wp-google-map-plugin' ),
 		'radio-val-label' => array(
@@ -45,7 +47,7 @@ $tiles_providers = array(
 	'MapBox'          => esc_html__( 'MapBox', 'wp-google-map-plugin' ),
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'select', 'wpgmp_tiles_source', array(
 		'label'   => esc_html__( 'Tiles Provider', 'wp-google-map-plugin' ),
 		'current' => isset($wpgmp_settings['wpgmp_tiles_source']) ? $wpgmp_settings['wpgmp_tiles_source'] : 'OpenStreetMap.Mapnik',
@@ -58,7 +60,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'radio',
 	'wpgmp_router_source',
 	array(
@@ -78,7 +80,7 @@ $form->add_element(
 $referrer = home_url();
 $referrer_two = '*'.$_SERVER['HTTP_HOST'].'/*';
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'message',
 	'wpgmp_api_key_instructions',
 	array(
@@ -90,20 +92,22 @@ $form->add_element(
 	)
 );
 
-$form->set_col( 2 );
+$wpgmp_form->set_col( 2 );
 
 $key_url = 'https://www.wpmapspro.com/docs/get-a-google-maps-api-key/';
 
-$link = '<a href="https://www.wpmapspro.com/docs/get-a-google-maps-api-key/" target="_blank">'.esc_html__("View Instructions","wp-google-map").'</a>'; 
+$link = '<a href="https://www.wpmapspro.com/docs/get-a-google-maps-api-key/" target="_blank">'.esc_html__("View Instructions","wp-google-map-plugin").'</a>'; 
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'text', 'wpgmp_api_key', array(
 		'label'  => esc_html__( 'Google Maps API Key', 'wp-google-map-plugin' ),
 		'value'  => isset($wpgmp_settings['wpgmp_api_key']) ? $wpgmp_settings['wpgmp_api_key'] : "",
 		'before' => '<div class="fc-6"> <div class="wpgmp_apitest"></div>',
 		'after'  => '</div>',
 		'class' => 'fc-form-control wpgmp_map_type wpgmp_map_type_google',
-		'desc'   => sprintf(esc_html__( '%1$s for your website.', 'wp-google-map-plugin' ), $link)
+		'desc'   => sprintf(
+			  /* translators: %s: Plugin link. */
+			esc_html__( '%1$s for your website.', 'wp-google-map-plugin' ), $link)
 	)
 );
 
@@ -112,7 +116,7 @@ if ( !isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key'
 
 	$generate_link = '<a href="https://www.wpmapspro.com/docs/get-a-google-maps-api-key/" class="wpgmp_map_key_missing wpgmp_key_btn fc-btn fc-btn-default btn-lg" target="_blank" >' . esc_html__( 'Generate API Key', 'wp-google-map-plugin' ) . '</a>';
 
-	$form->add_element(
+	$wpgmp_form->add_element(
 		'html', 'wpgmp_key_btn', array(
 			'html'   => $generate_link,
 			'before' => '<div class="fc-2">',
@@ -127,7 +131,7 @@ if ( !isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key'
 
 	$generate_link = '<a href="javascript:void(0);" class="wpgmp_check_key fc-btn fc-btn-default btn-lg" >' . esc_html__( 'Test API Key', 'wp-google-map-plugin' ) . '</a>';
 
-	$form->add_element(
+	$wpgmp_form->add_element(
 		'html', 'wpgmp_key_btn', array(
 			'html'   => $generate_link,
 			'before' => '<div class="fc-2">',
@@ -139,7 +143,7 @@ if ( !isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key'
 }
 
 
-$form->set_col( 1 );
+$wpgmp_form->set_col( 1 );
 
 
 
@@ -200,7 +204,7 @@ $language = array(
 	'zh-TW' => esc_html__( 'CHINESE (TRADITIONAL)', 'wp-google-map-plugin' ),
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'select', 'wpgmp_language', array(
 		'label'   => esc_html__( 'Map Language', 'wp-google-map-plugin' ),
 		'current' => isset($wpgmp_settings['wpgmp_language']) ? $wpgmp_settings['wpgmp_language'] : 'en',
@@ -212,31 +216,35 @@ $form->add_element(
 	)
 );
 
-	$form->add_element(
+	$wpgmp_form->add_element(
 		'text', 'wpgmp_mapbox_key', array(
-			'label'  => esc_html__( 'MapBox API Key', 'wp-leaflet-maps-pro' ),
+			'label'  => esc_html__( 'MapBox API Key', 'wp-google-map-plugin' ),
 			'value'  => isset($wpgmp_settings['wpgmp_mapbox_key']) ? $wpgmp_settings['wpgmp_mapbox_key'] : "",
 			'before' => '<div class="fc-4">',
 			'after'  => '</div>',
 			'class'   => 'form-control wpgmp_map_type wpgmp_map_type_openstreet',
-			'desc' => sprintf( esc_html__( 'Create a %s API key and paste in above textbox.', 'wp-leaflet-maps-pro' ), '<a target="_blank" href="https://www.mapbox.com/account/access-tokens">'.esc_html__(' MapBox ','wp-leaflet-maps-pro').' </a>' ),
+			'desc' => sprintf( 
+				/* translators: %s: Access token link. */
+				esc_html__( 'Create a %s API key and paste in above textbox.', 'wp-google-map-plugin' ), '<a target="_blank" href="https://www.mapbox.com/account/access-tokens">'.esc_html__(' MapBox ','wp-google-map-plugin').' </a>' ),
 			'show' => 'false',
 		)
 	);
 
 $guide_link = '<a href="https://www.wpmapspro.com/category/maps-error-codes/" target="_blank">'.esc_html__("guides.",'wp-google-map-plugin').'</a>'; 
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'html', 'wpgmp_map_preview', array(
 		'label' => 'Map Preview',
 		'class' => 'form-control',
 		'html'   => "<div id='wpgmp_map_preview' style='width:100%;height:300px'></div>",
-		'desc'   => sprintf(esc_html__( 'If Google Maps is not visible then please check the error by clicking Test API Key button above and fix using our %1$s', 'wp-google-map-plugin' ), $guide_link)
+		'desc'   => sprintf(
+			/* translators: %s: Plugin guide link. */
+			esc_html__( 'If Google Maps is not visible then please check the error by clicking Test API Key button above and fix using our %1$s', 'wp-google-map-plugin' ), $guide_link)
 	)
 );
 
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'radio', 'wpgmp_scripts_place', array(
 		'label'           => esc_html__( 'Include Scripts in ', 'wp-google-map-plugin' ),
 		'radio-val-label' => array(
@@ -249,7 +257,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'radio', 'wpgmp_scripts_minify', array(
 		'label'           => esc_html__( 'Minify Scripts', 'wp-google-map-plugin' ),
 		'radio-val-label' => array(
@@ -262,7 +270,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_country_specific', array(
 		'label'         => esc_html__( 'Enable Country Restriction', 'wp-google-map-plugin' ),
 		'value'         => 'true',
@@ -537,7 +545,7 @@ $selected_restricted_countries = $wpgmp_settings['wpgmp_countries'];
 $selected_restricted_countries = array();
 }
 
-$form->add_element(
+$wpgmp_form->add_element(
 'category_selector', 'wpgmp_countries', array(
 	'label'    => esc_html__( 'Choose Countries', 'wp-google-map-plugin' ),
 	'data'     => $newchoose_continent,
@@ -552,7 +560,7 @@ $form->add_element(
 )
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 'group', 'location_metabox_settings', array(
 	'value'  => esc_html__( 'Meta Box Settings', 'wp-google-map-plugin' ),
 	'before' => '<div class="fc-12">',
@@ -564,7 +572,7 @@ $form->add_element(
 
 
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'html',
 	'wpgmp_metabox_msg',
 	array(
@@ -575,7 +583,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 'group', 'location_extra_fields', array(
 	'value'  => esc_html__( 'Create Extra Field(s)', 'wp-google-map-plugin' ),
 	'before' => '<div class="fc-12">',
@@ -585,7 +593,7 @@ $form->add_element(
 )
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'html',
 	'wpgmp_extra_fields_msg',
 	array(
@@ -596,7 +604,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'group', 'map_troubleshooting', array(
 		'value'  => esc_html__( 'Troubleshooting', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
@@ -605,7 +613,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_auto_fix', array(
 		'label'   => esc_html__( 'Auto Fix', 'wp-google-map-plugin' ),
 		'value'   => 'true',
@@ -616,7 +624,7 @@ $form->add_element(
 );
 
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_debug_mode', array(
 		'label'   => esc_html__( 'Turn On Debug Mode', 'wp-google-map-plugin' ),
 		'value'   => 'true',
@@ -626,7 +634,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_hide_notification', array(
 		'label'   => esc_html__( 'Hide Notifications', 'wp-google-map-plugin' ),
 		'value'   => 'true',
@@ -636,7 +644,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_advanced_marker', array(
 		'label'   => esc_html__( 'Use Advanced Marker', 'wp-google-map-plugin' ),
 		'value'   => 'true',
@@ -646,7 +654,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
     'text',
     'wpgmp_set_timeout',
     array(
@@ -659,7 +667,7 @@ $form->add_element(
     )
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'group', 'map_gdpr', array(
 		'value'  => esc_html__( 'Cookies Acceptance', 'wp-google-map-plugin' ),
 		'before' => '<div class="fc-12">',
@@ -668,7 +676,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_gdpr', array(
 		'label'   => esc_html__( 'Enable Cookies Acceptance', 'wp-google-map-plugin' ),
 		'value'   => 'true',
@@ -678,7 +686,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'textarea', 'wpgmp_gdpr_msg', array(
 		'label'                => esc_html__( '"No Map" Notice', 'wp-google-map-plugin' ),
 		'desc'                 => esc_html__( 'Show message instead of map until visitor accept the cookies policy. HTML Tags are allowed. Leave it blank for no message.', 'wp-google-map-plugin' ),
@@ -689,7 +697,7 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'checkbox', 'wpgmp_gdpr_show_placeholder', array(
 		'label'   => esc_html__( 'Show Placeholder', 'wp-google-map-plugin' ),
 		'value'   => 'true',
@@ -699,25 +707,25 @@ $form->add_element(
 	)
 );
 
-$form->add_element(	'hidden', 'wpgmp_version', array( 'value' => WPGMP_VERSION )	);
+$wpgmp_form->add_element(	'hidden', 'wpgmp_version', array( 'value' => WPGMP_VERSION )	);
 
-$form->add_element(
+$wpgmp_form->add_element(
 	'submit', 'wpgmp_save_settings', array(
 		'value' => esc_html__( 'Save Settings', 'wp-google-map-plugin' ),
 	)
 );
-$form->add_element(
+$wpgmp_form->add_element(
 	'hidden', 'operation', array(
 		'value' => 'save',
 	)
 );
-$form->add_element(
+$wpgmp_form->add_element(
 	'hidden', 'page_options', array(
 		'value' => 'wpgmp_api_key,wpgmp_scripts_place',
 	)
 );
 
-$form->render();
+$wpgmp_form->render();
 $map_data['map_options'] = array(
 	'center_lat' =>  '',
 	'center_lng' =>  '',
@@ -727,26 +735,14 @@ $map_data['map_options'] = array(
 $map_data['provider'] = WPGMP_Helper::wpgmp_get_map_provider();
 $map_data['map_property'] = array('map_id' => 1);
 ?>
-<script type="text/javascript">
-/**
- 
-jQuery(document).ready(function($) {
-var map = $("#wpgmp_map_preview").maps("<?php echo base64_encode(wp_json_encode( $map_data )); ?>").data('wpgmp_maps');
-});
-
- */
-</script>
-
-<script type="text/javascript">
+<script type="text/javascript" id="wpgmp-settings-page-map-preview">
 document.addEventListener("wpgmpReady", function () {
 
   jQuery(function ($) {
-
-    const map = $("#wpgmp_map_preview")
-      .maps("<?php echo base64_encode(wp_json_encode($map_data)); ?>")
-      .data("wpgmp_maps");
-
-    console.log("✅ Map initialized", map);
+	   const map = $("#wpgmp_map_preview").maps("<?php echo esc_js( base64_encode(wp_json_encode($map_data)) ); ?>").data("wpgmp_maps");
   });
 });
 </script>
+
+<?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals

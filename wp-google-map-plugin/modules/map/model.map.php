@@ -150,10 +150,8 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 		 */
 		function save() {
 
-			global $_POST;
 			$data     = array();
 			$entityID = '';
-
 
 			//Nonce Verification
 			if( !isset( $_REQUEST['_wpnonce'] ) || ( isset( $_REQUEST['_wpnonce'] ) && empty($_REQUEST['_wpnonce']) ) )
@@ -161,7 +159,6 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 			if ( isset( $_REQUEST['_wpnonce'] ) && ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wpgmp-nonce' ) )
 			die( 'You are not allowed to save changes!' );
 		
-
 			if ( ! isset( $_POST['wpgmp_import_code'] ) or $_POST['wpgmp_import_code'] == '' ) {
 				$this->verify( $_POST );
 			}
@@ -381,7 +378,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 				$extension_name = strtolower( trim( sanitize_text_field( wp_unslash( $_POST['fc_entity_type'] ) ) ) );
 
 				if ( $extension_name != '' ) {
-					$data = apply_filters( $extension_name . '_save', $data, $this->table, $where );
+					$data = apply_filters( $extension_name . '_save', $data, $this->table, $where ); // phpcs:ignore WordPress.Hooks.UnprefixedActionHookName -- Inline suppression for dynamic hook name; prefixing would break compatibility. Use a consistent plugin prefix in future updates.
 				}
 			}
 

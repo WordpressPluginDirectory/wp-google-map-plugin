@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
 /**
  * Template for Drawing Operation
  *
@@ -22,16 +23,7 @@ if ( isset( $_REQUEST['_wpnonce'] ) ) {
 		$data = $_POST;
 	}
 }
-if ( ! empty( $_POST['save_shapes'] ) && $_POST['save_shapes'] == 'save_shapes' ) {
-	$map_id                                       = intval( wp_unslash( $_POST['map_id'] ) );
-	$data['polylines']                            = $_POST['shapes_values'];
-	$infowindow['map_polyline_setting']['shapes'] = serialize( $data );
-	$in_loc_data                                  = array(
-		'map_polyline_setting' => $infowindow['map_polyline_setting']['shapes'],
-	);
-	$where['map_id']                              = $map_id;
-	$insertId                                     = FlipperCode_Database::insert_or_update( TBL_MAP, $in_loc_data, $where );
-}
+// Drawing related code for database entry removed as it was meant for pro only 
 
 if ( ! empty( $_GET['map_id'] ) ) {
 	$map_id       = intval( wp_unslash( $_GET['map_id'] ) );
@@ -1017,11 +1009,11 @@ function wpgmp_generate_map( $map ) {
 	if ( ! empty( $map_shapes ) && is_array( $map_shapes ) ) {
 		$map_data['shapes']['shape'] = $map_shapes; }
 
-	echo '<div class="wpgmp_map_container" rel="map' . $map->map_id . '">';
+	echo '<div class="wpgmp_map_container" rel="map' . esc_attr($map->map_id) . '">';
 
 	echo '<div class="fc-form-group"><input class="wpgmp_auto_suggest fc-form-control" placeholder="' . esc_html__( 'Search location...', 'wp-google-map-plugin' ) . '" type="text"></div>';
 
-	echo '<div class="wpgmp_map" style="width:' . $width . '; height:' . $height . ';" id="map' . $map->map_id . '" ></div>';
+	echo '<div class="wpgmp_map" style="width:100%; height:500px;" id="map' . esc_attr($map->map_id) . '" ></div>';
 
 	echo '</div>';
 	$map_data_obj = json_encode( $map_data );
@@ -1029,9 +1021,10 @@ function wpgmp_generate_map( $map ) {
 	echo '<script type="text/javascript">';
 	echo 'document.addEventListener("wpgmpReady", function () {';
 	echo '  jQuery(function($) {';
-	echo '    var map = $("#map' . esc_js($map_id) . '").maps("' . base64_encode($map_data_obj) . '").data("wpgmp_maps");';
+	echo '    var map = $("#map' . esc_js($map_id) . '").maps("' . esc_js ( base64_encode($map_data_obj) ) . '").data("wpgmp_maps");';
 	echo '  });';
 	echo '});';
 echo '</script>';
 
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals

@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Import Location(s) Tool.
  *
@@ -78,4 +79,5 @@ if ( $step == 'step-1' ) {
 	$form->render();
 
 }
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */
 

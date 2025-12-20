@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Display Tabs over google maps.
  *
@@ -30,3 +31,4 @@ $form->add_element(
 		'after'  => '</div>',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

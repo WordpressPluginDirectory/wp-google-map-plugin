@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Template for Add & Edit Location
  *
@@ -59,7 +60,9 @@ if ( (!isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key
 
 	$form->add_element(
 		'message', 'wpgmp_key_required', array(
-			'value'  => sprintf( esc_html__( 'Google Maps API Key is missing. Follow instructions to %1$s and then insert your key %2$s.', 'wp-google-map-plugin' ), $link, $setting_link ),
+			'value'  => sprintf( 
+			/* translators: %s: Api key creation tutorial link. */				
+			esc_html__( 'Google Maps API Key is missing. Follow instructions to %1$s and then insert your key %2$s.', 'wp-google-map-plugin' ), $link, $setting_link ),
 			'class'  => 'fc-alert fc-alert-danger',
 			'before' => '<div class="fc-12 wpgmp_key_required">',
 			'after'  => '</div>',
@@ -367,7 +370,9 @@ if ( ! empty( $all_categories ) ) {
 	 	
 	$form->add_element(
 		'message', 'no_marker_category_message', array(
-			'value'  => sprintf( esc_html__( 'You don\'t have marker categories right now. You can create marker categories from %1$s', 'wp-google-map-plugin' ), $add_marker_category ),
+			'value'  => sprintf( 
+				/* translators: %s: Add marker category link. */		
+				esc_html__( 'You don\'t have marker categories right now. You can create marker categories from %1$s', 'wp-google-map-plugin' ), $add_marker_category ),
 			'class'  => 'fc-alert fc-alert-danger',
 			'before' => '<div class="fc-12">',
 			'after'  => '</div>',
@@ -463,8 +468,10 @@ $map_data['map_options']['marker_default_icon'] = WPGMP_Helper::wpgmp_default_ma
 <script type="text/javascript">
 document.addEventListener("wpgmpReady", function () {
   jQuery(document).ready(function($) {
-	var map = $("#wpgmp_map").maps("<?php echo base64_encode(wp_json_encode( $map_data )); ?>").data('wpgmp_maps');
+	var map = $("#wpgmp_map").maps("<?php echo esc_js ( base64_encode(wp_json_encode( $map_data ) ) ); ?>").data('wpgmp_maps');
 	});
 
 });
 </script>
+<?php
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

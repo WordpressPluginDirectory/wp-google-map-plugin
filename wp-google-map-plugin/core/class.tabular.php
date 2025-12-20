@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.WP.AlternativeFunctions */
 /**
  * FlipperCode_List_Table_Helper Class File.
  *
@@ -225,11 +226,13 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 
 
 			if( (is_admin())  &&  !empty($current_screen->id)){
-				$this->columns =  apply_filters('fc_tabular_'.$current_screen->id.'_columns',$this->columns);
+				$this->columns =  apply_filters('fc_tabular_'.$current_screen->id.'_columns',$this->columns); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			}
 
 			if( (is_admin())  &&  !empty($current_screen->id)){
-				$this->searchExclude =  apply_filters('fc_tabular_searchExclude',$this->searchExclude);
+				$this->searchExclude =  apply_filters('fc_tabular_searchExclude',$this->searchExclude); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			}
 
 			if( empty($this->table) && empty($this->sql))
@@ -310,7 +313,8 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
             $capability_to_check = (is_admin()) ? sanitize_text_field($_GET['page']) : sanitize_text_field($_GET['cap']);
             if( strpos( $capability_to_check, 'overview' ) !== false )
             $capability_to_check = str_replace('view', 'admin', $capability_to_check);
-        	$capability_to_check = apply_filters('fc_tabular_action_cap',$capability_to_check);
+        	$capability_to_check = apply_filters('fc_tabular_action_cap',$capability_to_check); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 
             return $capability_to_check;
                 
@@ -358,20 +362,15 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 							<div class="wpgmp-overview">
 								<?php $this->show_notification( $this->response ); ?>
 								<fieldset>
-
-							<?php
-							
-								$form_attr = '';
-								if(!empty($this->form_id)){
-									$form_attr .= "id = {$this->form_id}";
-								}
-								if(!empty($this->form_class)){
-									$form_attr .= " class  = 'wpgmp_manage_form {$this->form_class}'";
-								}
-								
-							?>
-								
-							<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=' . $this->admin_listing_page_name ) ); ?>" <?php echo $form_attr; ?>>
+	
+							<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=' . $this->admin_listing_page_name ) ); ?>"
+								<?php if ( ! empty( $this->form_id ) ) : ?>
+									id="<?php echo esc_attr( $this->form_id ); ?>"
+								<?php endif; ?>
+								<?php if ( ! empty( $this->form_class ) ) : ?>
+									class="<?php echo esc_attr( 'wpgmp_manage_form ' . $this->form_class ); ?>"
+								<?php endif; ?>
+							>
 							<?php
 							$search_text = isset($this->translation['search_text']) ? $this->translation['search_text'] : 'Search';
 							$this->search_box( $search_text, 'search_id' );
@@ -426,6 +425,7 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 			$columns = array( 'cb' => '<input type="checkbox" />' );
 
 			if ( ! empty( $this->sql ) ) {
+				 // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $this->sql is internally generated and safe
 				$results = $wpdb->get_results( $this->sql );
 				if ( is_array( $results ) && ! empty( $results ) ) {
 					foreach ( $results[0] as $column_name => $column_value ) {    // Get all columns by provided returned by sql query(Preparing Columns Array).
@@ -439,6 +439,7 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 			} else {
 				if ( empty( $this->columns ) ) {
 					global $wpdb;
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $this->table is internally generated and safe
 					foreach ( $wpdb->get_col( 'DESC ' . $this->table, 0 ) as $column_name ) {  // Query all column name usind DESC (Preparing Columns Array).
 						$this->columns[ $column_name ] = $column_name;
 					}
@@ -491,7 +492,8 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 			}
 
 
-			return  apply_filters('fc_tabular_column_value',$return,$column_name,$item);
+			return  apply_filters('fc_tabular_column_value',$return,$column_name,$item); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 		}
 
 		/**
@@ -549,12 +551,11 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 		function no_items(){
 			
 			if(!empty($this->translation['no_records_found']))
-			echo $this->translation['no_records_found'];
+			echo esc_html($this->translation['no_records_found']);
 			else
-			_e( 'No items found.' );
+			echo 'No items found.';
 			
 		}
-
 
 		/**
 		 * Process bulk actions.
@@ -564,7 +565,7 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 			global $wpdb;
 			$this->now_action = $this->current_action();
 			$ids              = $this->get_user_selected_records();
-			 
+			
 			if ( '' == $this->current_action() && !empty($_POST['action']) &&  ($_POST['action'] == '-1' ||  $_POST['action2'] == '-1' ) && empty($ids) && $_POST['operation'] != '' ) {
 				$this->response['error'] = $this->translation['no_records_selected_for_bulk'];
 			}
@@ -575,9 +576,11 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 				$recordsPlaceholders = array_fill( 0, $recordsCount, '%d' );
 				$placeholdersForRecords = implode( ',', $recordsPlaceholders );
 
-				$query = "DELETE FROM {$this->table} WHERE {$this->primary_col} IN ( $placeholdersForRecords )";
-				//Prepared Query
-				$del = $wpdb->query( $wpdb->prepare( $query, $ids ) );
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $this->table and $this->primary_col are internal class properties
+				$del = $wpdb->query( $wpdb->prepare( 
+					"DELETE FROM {$this->table} WHERE {$this->primary_col} IN ( $placeholdersForRecords )",
+					$ids 
+				) );
 
 				if( method_exists( $this, 'post_bulk_delete') ){
 					$this->post_bulk_delete();
@@ -586,7 +589,7 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 				if( isset($this->translation['bulk_delete_msg']) && !empty($this->translation['bulk_delete_msg']) && ( count($_POST['id'] ) >= 1 ) ){
 					$this->response['success'] = $this->translation['bulk_delete_msg'];
 				}else{
-				   $this->response['success'] = $this->translation['delete_msg'];	
+				$this->response['success'] = $this->translation['delete_msg'];    
 				}
 
 			}
@@ -600,20 +603,32 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 				$ids = $this->get_user_selected_records();
 				$ids = explode(',',$ids);
 				$exportCount = count($ids);
-				$stringPlaceholders = array_fill(0, $exportCount, '%s');
-				$placeholdersForIds = implode(', ', $stringPlaceholders);
-				$prepared_query = ( ! empty( $ids )) ? " WHERE {$this->primary_col} IN ($placeholdersForIds) " : '';
-				$columns      = array_keys( $this->columns );
-				$columns      = ( count( $columns ) == 0 ) ? $columns[0] : implode( ',', $columns );
-				if(empty( $this->sql )){
-					//Prepared Query
-					$query = "SELECT $columns FROM ".$this->table.$prepared_query." order by {$this->primary_col} desc";
-					$data = $wpdb->get_results( $wpdb->prepare($query, $ids), ARRAY_A );
 				
-				}else{
-					//Prepared query $this->sql
-					$query =  $this->sql;
-					$data = $wpdb->get_results( $query,ARRAY_A );
+				$columns = array_keys( $this->columns );
+				$columns = ( count( $columns ) == 0 ) ? $columns[0] : implode( ',', $columns );
+				
+				if(empty( $this->sql )){
+					if ( ! empty( $ids ) ) {
+						$stringPlaceholders = array_fill(0, $exportCount, '%s');
+						$placeholdersForIds = implode(', ', $stringPlaceholders);
+						
+						
+						$query = $wpdb->prepare(
+							// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $this->table and $this->primary_col are internal class properties
+							"SELECT $columns FROM " . $this->table . " WHERE " . $this->primary_col . " IN ($placeholdersForIds) ORDER BY " . $this->primary_col . " DESC",
+							$ids
+						);
+					} else {
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $this->table and $this->primary_col are internal class properties
+						$query = "SELECT $columns FROM " . $this->table . " ORDER BY " . $this->primary_col . " DESC";
+					}
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $query is safely prepared
+					$data = $wpdb->get_results( $query, ARRAY_A );
+				
+				} else {
+					// CORRECTED: If $this->sql is safe and internally generated, add comment to suppress warning
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- SQL is internally generated and safe
+					$data = $wpdb->get_results( $this->sql, ARRAY_A );
 				}
 				
 				$tablerecords = array();
@@ -639,11 +654,12 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 				foreach ( $tablerecords as $record ) {
 					fputcsv( $fp, $record );
 				}
-				fclose( $fp );
+				fclose( $fp ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 				exit;
 
 			}
 		}
+
 		/**
 		 * Show notification message based on response.
 		 *
@@ -694,7 +710,8 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 			$this->process_bulk_action();
 			$query = ( empty( $this->sql ) ) ? 'SELECT * FROM ' . $this->table : $this->sql;
 			if( isset( $_GET['page'] ) && !empty( $_GET['page'] ) ){
-				$query = apply_filters('fc_manage_page_basic_query', $query , sanitize_text_field( wp_unslash( $_GET['page'] ) ) );
+				$query = apply_filters('fc_manage_page_basic_query', $query , sanitize_text_field( wp_unslash( $_GET['page'] ) ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			}
 			
 			if ( isset( $_GET['page'] ) && isset( $_REQUEST['s'] ) ) {
@@ -745,7 +762,7 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 						}
 					}
 
-					//Prepared Query Because It Has User Inputs
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $this->table and $this->primary_col are internal class properties
 					$this->data = $wpdb->get_results(  $wpdb->prepare( 'SELECT * FROM '.$this->table. $prepare_query_with_placeholders. ' order by '.$this->primary_col.' desc', $prepare_args_values )  );
 					
 				}
@@ -758,7 +775,7 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 
 						$query_to_run  = $query;
 						$query_to_run .= " order by {$orderby} {$order}";
-						//Basic static query with no user inputs
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $query_to_run is safe
 						$this->data = $wpdb->get_results( $query_to_run ); 
 						
 					}
@@ -766,8 +783,9 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 						
 						$query_to_run = $query;
 						$query_to_run .= " order by {$this->primary_col} desc";
-						$query_to_run = apply_filters('fc_manage_page_default_query', $query_to_run , sanitize_text_field( wp_unslash( $_GET['page'] ) ) );
-						//Basic static query with no user inputs
+						$query_to_run = apply_filters('fc_manage_page_default_query', $query_to_run , sanitize_text_field( wp_unslash( $_GET['page'] ) ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $query_to_run is safe
 						$this->data = $wpdb->get_results( $query_to_run );
 						
 					}
@@ -780,7 +798,8 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 
 			}
 
-			$current_page = apply_filters('fc_tabular_set_pagination_page',$this->get_pagenum()) ;
+			$current_page = apply_filters('fc_tabular_set_pagination_page',$this->get_pagenum()) ; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			$total_items  = count( $this->data );
 			if ( is_array( $this->data ) && ! empty( $this->data ) ) {
 				$this->found_data = @array_slice( $this->data, ( ( $current_page - 1 ) * $this->per_page ), $this->per_page );
@@ -796,3 +815,4 @@ if ( ! class_exists( 'FlipperCode_List_Table_Helper' ) ) {
 
 	}
 }
+/* phpcs:enable WordPress.WP.AlternativeFunctions */

@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Contro Positioning over google maps.
  *
@@ -13,16 +14,28 @@ $form->add_element(
 		'after'  => '</div>',
 	)
 );
-$url  = admin_url( 'admin.php?page=wpgmp_how_overview' );
-$link = sprintf(
-	wp_kses(
-		esc_html__( 'Enter placeholders {marker_title},{marker_address},{marker_message},{marker_image},{marker_latitude},{marker_longitude}, {extra_field_slug_here}. View complete list <a target="_blank" href="%s">here</a>.', 'wp-google-map-plugin' ), array(
-			'a' => array(
-				'href'   => array(),
-				'target' => '_blank',
-			),
-		)
-	), esc_url( $url )
+
+$url = admin_url( 'admin.php?page=wpgmp_how_overview' );
+$link_text = __( 'here', 'wp-google-map-plugin' );
+$link_html = sprintf(
+    '<a href="%s" target="_blank">%s</a>',
+    esc_url( $url ),
+    $link_text
+);
+
+$link = wp_kses(
+    sprintf(
+		/* translators: %1$s: List of example placeholders. %2$s: The "here" link to the full placeholders list. */
+        __( 'Enter placeholders %1$s. View complete list %2$s.', 'wp-google-map-plugin' ),
+        '{marker_title},{marker_address},{marker_message},{marker_image},{marker_latitude},{marker_longitude}, {extra_field_slug_here}',
+        $link_html
+    ),
+    array(
+        'a' => array(
+            'href'   => array(),
+            'target' => array(),
+        ),
+    )
 );
 
 $form->add_element(
@@ -256,3 +269,4 @@ if ( isset( $data['map_all_control']['infowindow_openoption'] ) && 'mouseclick' 
 			'after'  => '</div>',
 		)
 	);
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

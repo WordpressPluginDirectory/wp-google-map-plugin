@@ -35,7 +35,8 @@ if ( ! class_exists( 'Flippercode_Factory_Model' ) ) {
 		public function create_object( $objectType ) {
 
 			$file = $this->modulePath . $objectType . '/model.' . $objectType . '.php';
-			$file = apply_filters('fc_backend_factory_object_path', $file, $this->modulePath, $objectType);
+			$file = apply_filters('fc_backend_factory_object_path', $file, $this->modulePath, $objectType); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			
 			if ( file_exists( $file ) ) {
 				require_once $file;

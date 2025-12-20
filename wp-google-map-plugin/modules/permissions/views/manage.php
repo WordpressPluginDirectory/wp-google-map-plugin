@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * This class used to manage permissions in backend.
  *
@@ -80,4 +81,5 @@ $form->add_element(
 );
 
 $form->render();
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */
 

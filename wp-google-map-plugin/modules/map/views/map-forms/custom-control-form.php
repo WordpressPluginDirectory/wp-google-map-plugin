@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Custom Control Setting(s).
  *
@@ -26,3 +27,4 @@ $form->add_element(
 		'after'  => '</div>',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

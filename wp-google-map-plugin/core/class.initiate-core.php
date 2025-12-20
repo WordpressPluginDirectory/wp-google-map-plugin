@@ -36,12 +36,15 @@ if ( ! class_exists( 'FlipperCode_Initialise_Core' ) ) {
 			$core_dir_url  = plugin_dir_url( dirname( __FILE__ ) );
 			
 
-			$core_dir_path = apply_filters( 'fc_template_plugin_core_dir_path', $core_dir_path, $data );
-			$core_dir_url = apply_filters( 'fc_template_plugin_core_dir_url', $core_dir_url, $data );
-			$data = apply_filters( 'fc_template_plugin_ajax_post_data', $data, $core_dir_path );
+			$core_dir_path = apply_filters( 'fc_template_plugin_core_dir_path', $core_dir_path, $data ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
-			$template      = $data['template_name'];
-			$template_type = $data['template_type'];
+			$core_dir_url = apply_filters( 'fc_template_plugin_core_dir_url', $core_dir_url, $data ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+			$data = apply_filters( 'fc_template_plugin_ajax_post_data', $data, $core_dir_path ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+
+			$template      = sanitize_file_name($data['template_name']);
+			$template_type = sanitize_text_field($data['template_type']);
 
 			if ( isset( $data['template_name'] ) ) {
 				$layout_file = $core_dir_path . 'templates/' . $template_type . '/' . $template . '/' . $template . '.html';
@@ -60,7 +63,8 @@ if ( ! class_exists( 'FlipperCode_Initialise_Core' ) ) {
 				$response['html'] = '<div id="messages" class="error">Sorry layout ' . $layout_id . ' not found.</div>';
 			} else {
 				$temp_content = $content;
-				$content      = "<div class='fc-infobox-". $template . " fc-" . $template_type . '-' . $template . "'>" . apply_filters( 'fc-dummy-placeholders', $content ) . '</div>';
+				$content      = "<div class='fc-infobox-". $template . " fc-" . $template_type . '-' . $template . "'>" . apply_filters( 'fc-dummy-placeholders', $content ) . '</div>'; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 				$columns      = isset($data['columns']) ? $data['columns'] : '';
 				if ( $columns == '' ) {
 					$columns = 1;}
@@ -188,15 +192,13 @@ if ( ! class_exists( 'FlipperCode_Initialise_Core' ) ) {
 				'class.notifications.php',
 				'class.tabular.php',
 				'class.template.php',
-				'abstract.factory.php',
 				'class.controller-factory.php',
 				'class.model-factory.php',
 				'class.controller.php',
 				'class.model.php',
 				'class.validation.php',
 				'class.database.php',
-				'class.importer.php',
-				'class.plugin-overview.php',
+				'class.importer.php'
 			);
 
 			/**

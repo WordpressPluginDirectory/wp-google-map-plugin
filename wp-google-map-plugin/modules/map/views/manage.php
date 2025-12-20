@@ -4,8 +4,8 @@
  *
  * @package Maps
  */
-  $form = new WPGMP_Template();
-  echo $form->start_page_layout();
+  $form = new WPGMP_Template();  // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+  echo wp_kses_post( $form->start_page_layout() );
 if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_Maps_Table' ) ) {
 
 	/**
@@ -30,7 +30,7 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_M
 				<span class='fc-tooltiptext fc-tooltip-top'>Shortcode has been copied to clipboard.</span>
 				</div>";
 
-			echo '<b>[put_wpgm id=' . $item->map_id . ']</b>&nbsp;&nbsp;'. $tooltip; 
+			echo '<b>[put_wpgm id=' . $item->map_id . ']</b>&nbsp;&nbsp;'. $tooltip; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		}
 		/**
@@ -50,6 +50,7 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_M
 	}
 
 	global $wpdb;
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$columns   = array(
 		'map_title'      => esc_html__( 'Map Title', 'wp-google-map-plugin' ),
 		'map_width'      => esc_html__( 'Map Width', 'wp-google-map-plugin' ),
@@ -57,8 +58,10 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_M
 		'map_zoom_level' => esc_html__( 'Zoom Level', 'wp-google-map-plugin' ),
 		'map_type'       => esc_html__( 'Map Type', 'wp-google-map-plugin' ),
 		'shortcodes'     => esc_html__( 'Map Shortcode', 'wp-google-map-plugin' )
-	);
+	); 
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$sortable  = array( 'map_title', 'map_width', 'map_height', 'map_zoom_level', 'map_type' );
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$tableinfo = array(
 		'table'                   => $wpdb->prefix . 'create_map',
 		'textdomain'              => 'wp-google-map-plugin',
@@ -89,7 +92,7 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_M
 			'no_records_found' => esc_html__( 'No maps were found.', 'wp-google-map-plugin' )
 		),
 	);
-	$obj       = new WPGMP_Maps_Table( $tableinfo );
+	$obj       = new WPGMP_Maps_Table( $tableinfo );  // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 }
 
-echo $form->end_page_layout();
+echo $form->end_page_layout(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

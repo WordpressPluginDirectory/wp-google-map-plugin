@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * This class used to backup all tables for this plugins.
  *
@@ -114,5 +115,7 @@ if ( isset( $_POST['operation'] ) and 'upload_sampledata' == $_POST['operation']
 	);
 
 	$form->render();
+	
+	/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */
 
 	

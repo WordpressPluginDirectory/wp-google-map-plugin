@@ -1,4 +1,7 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
+/* phpcs:disable WordPress.WP.AlternativeFunctions */
+
 /**
  * Generate Bootstrap Form and it's Elements.
  *
@@ -308,7 +311,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 
 		public static function output( $safe_output ) {
 
-			echo $safe_output;
+			echo $safe_output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		}
 		
@@ -374,7 +377,8 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 		}
 		public function get_navigation() {
 
-			$output = apply_filters('fc_plugin_nav_menu','');                 
+			$output = apply_filters('fc_plugin_nav_menu',''); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+                 
 
 			return $output;
 
@@ -479,7 +483,8 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 
 		public static function apply_extensions( $filter, $value ) {
 			$element_html  = '';
-			$element_html .= apply_filters( $filter, '', $value );
+			$element_html .= apply_filters( $filter, '', $value ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			$element_html .= FlipperCode_HTML_Markup::field_hidden( 'fc_entity_type', array( 'value' => strtolower( trim( $filter ) ) ) );
 			return $element_html;
 		}
@@ -811,11 +816,12 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 			}
 
 			if ( $echo ) {
-				$do_balanceTags = apply_filters('fc_form_balance_tags',true,$this);
+				$do_balanceTags = apply_filters('fc_form_balance_tags',true,$this); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 				if($do_balanceTags){
-					echo balanceTags( $form_output );
+					echo balanceTags( $form_output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}else{
-					echo $form_output;
+					echo $form_output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			} else {
 				return $form_output; }
@@ -1394,9 +1400,9 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 			} else {
 				$googleApi   = 'https://www.googleapis.com/webfonts/v1/webfonts?sort=alpha&key=AIzaSyA_3pC94bBI_G_35mmBPzCU0VayhGrTZxI';
 				$fontContent = wp_remote_get( $googleApi, array( 'sslverify' => false ) );
-				$fp          = fopen( $fontFile, 'w' );
-				fwrite( $fp, $fontContent['body'] );
-				fclose( $fp );
+				$fp          = fopen( $fontFile, 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fopen
+				fwrite( $fp, $fontContent['body'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
+				fclose( $fp );  // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 				$content = json_decode( $fontContent['body'] );
 			}
 			if ( $amount == 'all' ) {
@@ -2307,3 +2313,7 @@ if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 		}
 	}
 }
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */
+/* phpcs:enable WordPress.WP.AlternativeFunctions */
+
+

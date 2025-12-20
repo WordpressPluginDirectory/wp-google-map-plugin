@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Control Setting(s).
  *
@@ -111,3 +112,4 @@ $form->add_element(
 		'class'   => 'chkbox_class',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

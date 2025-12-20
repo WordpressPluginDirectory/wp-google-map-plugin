@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Contro Positioning over google maps.
  *
@@ -67,17 +68,50 @@ $form->add_element(
 	)
 );
 
+$fine_tune_desc = __( 
+    'You can fine tune the default search process by specifying certain listing fields to be included / excluded while searching. Although using this feature is completely optional and you can keep both Include / Exclude search field ( below textareas ) empty , but if you want search process to be more controlled & specific, you can use this feature.', 
+    'wp-google-map-plugin' 
+);
+
+$locations_intro = __( 
+    'If you have created locations using our plugin and displaying those locations on map, you can use the following placeholders in below Include / Exclude search field controls :  ', 
+    'wp-google-map-plugin' 
+);
+
+$locations_placeholders = __( 
+    '{marker_title},{marker_message},{marker_address},{marker_city},{marker_state},{marker_country},{marker_postal_code},{marker_latitude},{marker_longitude},{extra_field_slug}.', 
+    'wp-google-map-plugin' 
+);
+
+$posts_intro = __( 
+    'If you are displaying blogs post / some custom post type on map , you can use the following placeholders in below Include / Exclude search field controls :  ', 
+    'wp-google-map-plugin' 
+);
+/* translators: %s: List of supported placeholders. */
+$posts_placeholders = __( 
+	'{post_title},{post_content},{post_excerpt},{post_categories},{post_tags},{post_link},{post_featured_image},{marker_address},{marker_city},{marker_state},{marker_country},{marker_latitude},{marker_longitude},{%custom_field_slug_here%},{taxonomy=taxonomy_slug}.', 
+    'wp-google-map-plugin' 
+);
+
+$desc = __( 
+    'You can perform more strict search using the below include and exclude search fields control. Using both include and exclude search fields are completely optional.', 
+    'wp-google-map-plugin' 
+);
+
+$value = $fine_tune_desc . '<br><br>' . $locations_intro . '<br><br>' . $locations_placeholders . '<br><br><br>' . $posts_intro . '<br><br>' . $posts_placeholders;
+
+$safe_value = wp_kses_post( $value );
+
 $form->add_element(
-	'message',
-	'wpgmp_search_placeholders_list',
-	array(
-		'label' => esc_html__( 'Fine Tune Search Process', 'wp-google-map-plugin' ),
-		'value' => esc_html__('You can fine tune the default search process by speicifying certain listing fields to be included / excluded while searching. Although using this feature is completely optional and you can keep both Include / Exclude search field ( below textareas ) empty , but if you want search process to be more controlled & specific, you can use this feature.','wp-google-map-plugin').'<br><br>'.esc_html__('If you have created locations using our plugin and dislaying those locations on map, you can use the following placeholders in below Include / Exclude search field controls :  ', 'wp-google-map-plugin').'<br><br>'.esc_html__('{marker_title},{marker_message},{marker_address},{marker_city},{marker_state},{marker_country},{marker_postal_code},{marker_latitude},{marker_longitude},{extra_field_slug}.', 'wp-google-map-plugin').'<br><br><br>'.esc_html__('If you are displaying blogs post / some custom post type on map , you can use the following placeholders in below Include / Exclude search field controls :  ', 'wp-google-map-plugin').'<br><br>'.esc_html__('{post_title},{post_content},{post_excerpt},{post_categories},{post_tags},{post_link},{post_featured_image},{marker_address},{marker_city},{marker_state},{marker_country},{marker_latitude},{marker_longitude},{%custom_field_slug_here%},{taxonomy=taxonomy_slug}.', 'wp-google-map-plugin'),
-		'class' => 'fc-alert fc-alert-info form-control  wpgmp_search_display',
-		'show'  => 'false',
-		'desc'    => esc_html__( 'You can perform more strict search using the below include and exclude search fields control. Using both include and exclude search fields are completly optional.', 'wp-google-map-plugin' ),
-		
-	)
+    'message',
+    'wpgmp_search_placeholders_list',
+    array(
+        'label' => esc_html__( 'Fine Tune Search Process', 'wp-google-map-plugin' ),
+        'value' => $safe_value,
+        'class' => 'fc-alert fc-alert-info form-control  wpgmp_search_display',
+        'show'  => 'false',
+        'desc'  => esc_html( $desc ),
+    )
 );
 
 $form->add_element(
@@ -472,3 +506,4 @@ $form->add_element(
 		'show'        => 'false',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

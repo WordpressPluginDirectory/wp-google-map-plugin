@@ -1,5 +1,5 @@
 <?php
-
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 if ( isset( $_REQUEST['_wpnonce'] ) ) {
 	$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) );
 	if ( ! wp_verify_nonce( $nonce, 'wpgmp-nonce' ) ) {
@@ -32,32 +32,58 @@ $form->add_element(
 	)
 );
 
-$purchase_key_tutorial_link = '<a href="https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-" target="_blank">'.esc_html__( 'here', 'wp-google-map-plugin' ).'</a>';
+$url = 'https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-';
 
-$form->add_element(
-	'message',
-	'subscription_verification_notice',
-	array(
-		'value'  => esc_html__( 'In order to verify your purchase and provide you with access to the plugin, we kindly request that you provide us with your purchase key.', 'wp-google-map-plugin' ).sprintf( esc_html__( ' Click %1$s to know your purchase code.', 'wp-google-map-plugin' ), $purchase_key_tutorial_link),
-		'class'  => 'fc-alert fc-alert-warning subscription_verification_notice',
-		'show'   => 'true',
-		'before' => '<div class="fc-12">',
-		'after'  => '</div>',
-	)
+$link_text = __( 'here', 'wp-google-map-plugin' );
+
+$link_html = sprintf(
+    '<a href="%s" target="_blank">%s</a>',
+    esc_url( $url ),
+    $link_text
 );
 
+$instruction = sprintf(
+	/* translators: %s: The "here" link to the Envato purchase code tutorial. */
+    __( 'Click %s to know your purchase code.', 'wp-google-map-plugin' ),
+    $link_html
+);
+
+$intro = __( 'In order to verify your purchase and provide you with access to the plugin, we kindly request that you provide us with your purchase key.', 'wp-google-map-plugin' );
+
+$value = $intro . $instruction;
+
+$safe_value = wp_kses_post( $value );
+
 $form->add_element(
-	'text',
-	'customer_purchase_key',
-	array(
-		'required' => 'true',
-		'label'       => esc_html__( 'Codecanyon Purchase Code', 'wp-google-map-plugin' ),
-		'id'          => 'customer_purchase_key',
-		'value'       => '',
-		'placeholder' => esc_html__( 'Please enter the plugin purchase code', 'wp-google-map-plugin' ),
-		'class'       => 'form-control',
-		'desc'        => esc_html__( 'Please enter the purchase code that you\'ve got from codecanyon.net.', 'wp-google-map-plugin' ).sprintf( esc_html__( ' Click %1$s to get know your purchase code.', 'wp-google-map-plugin' ), $purchase_key_tutorial_link),
-	)
+    'message',
+    'subscription_verification_notice',
+    array(
+        'value'  => $safe_value,
+        'class'  => 'fc-alert fc-alert-warning subscription_verification_notice',
+        'show'   => 'true',
+        'before' => '<div class="fc-12">',
+        'after'  => '</div>',
+    )
+);
+
+$intro_desc = __( 'Please enter the purchase code that you\'ve got from codecanyon.net.', 'wp-google-map-plugin' );
+
+$desc = $intro_desc . ' ' . $instruction;
+
+$safe_desc = wp_kses_post( $desc );
+
+$form->add_element(
+    'text',
+    'customer_purchase_key',
+    array(
+        'required' => 'true',
+        'label'    => esc_html__( 'Codecanyon Purchase Code', 'wp-google-map-plugin' ),
+        'id'       => 'customer_purchase_key',
+        'value'    => '',
+        'placeholder' => esc_html__( 'Please enter the plugin purchase code', 'wp-google-map-plugin' ),
+        'class'    => 'form-control',
+        'desc'     => $safe_desc,
+    )
 );
 
 $form->add_element(
@@ -100,3 +126,4 @@ $form->add_element(
 );
 
 $form->render();
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

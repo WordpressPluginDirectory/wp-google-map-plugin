@@ -6,8 +6,8 @@ Tags: store locator, google maps, openstreetmap, map, directory
 Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Requires at least: 3.4
-Tested up to: 6.8.3
-Stable tag: 4.8.6
+Tested up to: 6.9
+Stable tag: 4.9.0
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -232,6 +232,19 @@ Contact us at [Support](https://weplugins.com/support/).
 
 == Changelog ==
 
+= 4.9.0 =
+* Fix : Fixed plugin version number.
+
+= 4.8.9 =
+* Fix : Applying WordPress's native security and escaping functions in the security class.
+
+= 4.8.8 =
+* Fix : Reported security issue related to shortcode attribute fixed.
+
+= 4.8.7 =
+* Fix : Reported security issue related to file control fixed.
+* Fix : Sample csv download functionality fixed.
+
 = 4.8.6 =
 * Add : Search and Category placeholder settings now work correctly with OpenStreetMap.
 * Add : Plugin script and style files will not load on another pages.
@@ -308,9 +321,44 @@ Contact us at [Support](https://weplugins.com/support/).
 = 4.6.0 =
 * New : API loaded asynchronously for faster map page load.
 
-== Upgrade Notice ==
 
 == Upgrade Notice ==
+
+= 4.9.0 =
+– Upgrade for more stable release
+
+= 4.8.9 =
+– Upgrade for more stable release
+
+= 4.8.8 =
+– Upgrade for more stable release.
+
+= 4.8.7 =
+– Upgrade for more stable release.
+
+= 4.8.6 =
+– Upgrade for more stable release.
+
+= 4.8.5 =
+– Upgrade for more stable release.
+
+= 4.8.4 =
+– Upgrade for more stable release.
+
+= 4.8.3 =
+– Upgrade for more stable release.
+
+= 4.8.2 =
+– Upgrade for more stable release.
+
+= 4.8.1 =
+– Upgrade for more stable release.
+
+= 4.7.4 =
+– Upgrade for more stable release.
+
+= 4.7.3 =
+– Upgrade for more stable release.
 
 = 4.7.2 =
   – Upgrade for more stable release.

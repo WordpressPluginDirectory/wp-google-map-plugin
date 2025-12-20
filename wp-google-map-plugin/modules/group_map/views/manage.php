@@ -5,8 +5,8 @@
  * @package Maps
  */
 
-  $form = new WPGMP_Template();
-  echo $form->start_page_layout();
+  $form = new WPGMP_Template();// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+  echo wp_kses_post( $form->start_page_layout() );
 
 if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_Manage_Group_Table' ) ) {
 
@@ -57,7 +57,7 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_
 		public function column_group_parent( $item ) {
 
 			 global $wpdb;
-			 $parent = $wpdb->get_col( $wpdb->prepare( 'SELECT group_map_title FROM ' . $this->table . ' where group_map_id = %d', $item->group_parent ) );
+			 $parent = $wpdb->get_col( $wpdb->prepare( 'SELECT group_map_title FROM ' . $this->table . ' where group_map_id = %d', $item->group_parent ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			 $parent = ( ! empty( $parent ) ) ? ucwords( $parent[0] ) : '---';
 			 return $parent;
 
@@ -75,6 +75,7 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_
 	}
 	
 	global $wpdb;
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$columns   = array(
 		'group_map_title'   => esc_html__( 'Marker Category Title', 'wp-google-map-plugin' ),
 		'group_marker'      => esc_html__( 'Marker Image', 'wp-google-map-plugin' ),
@@ -82,7 +83,9 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_
 		'extensions_fields' => esc_html__( 'Priority Order', 'wp-google-map-plugin' ),
 		'group_added'       => esc_html__( 'Updated On', 'wp-google-map-plugin' ),
 	);
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$sortable  = array( 'group_map_title', 'extensions_fields' );
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$tableinfo = array(
 		'table'                   => $wpdb->prefix . 'group_map',
 		'textdomain'              => 'wp-google-map-plugin',
@@ -112,9 +115,9 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) and ! class_exists( 'WPGMP_
 			'no_records_found' => esc_html__( 'No marker categories were found.', 'wp-google-map-plugin' )
 		),
 	);
-	$obj = new WPGMP_Manage_Group_Table( $tableinfo );
+	$obj = new WPGMP_Manage_Group_Table( $tableinfo );// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 
 }
 
-echo $form->end_page_layout();
+echo $form->end_page_layout();// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 

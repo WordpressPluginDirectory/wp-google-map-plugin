@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Template for Add & Edit Route
  *
@@ -307,3 +308,4 @@ if ( isset( $_GET['doaction'] ) and 'edit' == 'edit' and isset( $_GET['route_id'
 }
 
 $form->render();
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

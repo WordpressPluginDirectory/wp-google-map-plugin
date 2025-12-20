@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Contro Positioning over google maps.
  *
@@ -109,16 +110,33 @@ $form->add_element(
 	)
 );
 
-$form->add_element(
-	'message', 'styles_message', array(
-		'value'  => esc_html__( 'You can apply above settings manually or you can apply free and readymade maps style by clicking ', 'wp-google-map-plugin' ).'<a href="http://snazzymaps.com/" target="_blank">HERE</a><br>'.esc_html__('Select your favourite snazzy map style & then just copy paste its javascript code snippet in the below textarea control :'),
-		'class'  => 'fc-alert fc-alert-info',
-		'id'     => 'styles_message',
-		'before' => '<div class="fc-12">',
-		'after'  => '</div>',
-	)
+$link_text = __( 'HERE', 'wp-google-map-plugin' );
+
+$link_html = sprintf(
+    '<a href="https://snazzymaps.com/" target="_blank">%s</a>',
+    $link_text
 );
 
+
+$first_part = sprintf(
+	/* translators: %s: The "HERE" link to Snazzy Maps. */
+    __( 'You can apply above settings manually or you can apply free and readymade maps style by clicking %s.', 'wp-google-map-plugin' ),
+    $link_html
+);
+
+$second_part = __( 'Select your favourite snazzy map style & then just copy paste its javascript code snippet in the below textarea control :', 'wp-google-map-plugin' );
+
+$value = $first_part . '<br>' . $second_part;
+
+$form->add_element(
+    'message', 'styles_message', array(
+        'value'  => $value,
+        'class'  => 'fc-alert fc-alert-info',
+        'id'     => 'styles_message',
+        'before' => '<div class="fc-12">',
+        'after'  => '</div>',
+    )
+);
 
 $form->add_element(
 	'textarea', 'map_all_control[custom_style]', array(
@@ -133,3 +151,4 @@ $form->add_element(
 		'after'         => '</div>',
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

@@ -89,7 +89,8 @@ if ( ! class_exists( 'Flippercode_Core_Controller' ) ) {
 		 */
 		public function display( $view, $options = array() ) {
 
-			$this->entity = apply_filters( 'fc_plugin_module_to_load', $this->entity );
+			$this->entity = apply_filters( 'fc_plugin_module_to_load', $this->entity ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			if ( isset( $this->pluginInstance ) && $this->pluginInstance->needs_license_verification() ) {
 				if ( $this->entity == 'debug' ) {
 					$view = 'form';
@@ -103,7 +104,8 @@ if ( ! class_exists( 'Flippercode_Core_Controller' ) ) {
 					$view = $view . '.php';
 			}
 
-			$this->modulePath = apply_filters('fc_backend_module_path', $this->modulePath,$this->entity, $view );
+			$this->modulePath = apply_filters('fc_backend_module_path', $this->modulePath,$this->entity, $view ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
 			
 			if ( ! empty( $view ) ) {
 				if ( file_exists( $this->modulePath . "{$this->entity}/views/" . $view ) ) {

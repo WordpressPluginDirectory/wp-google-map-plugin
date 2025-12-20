@@ -182,6 +182,7 @@ class WPGMP_Helper{
 		}
 	
 		$localized = [
+			'pro_version_feature'       =>  __( 'This feature requires the Pro version of the plugin.', 'wp-google-map-plugin' ),
 			'ajax_url'                  => admin_url( 'admin-ajax.php' ),
 			'nonce'                     => wp_create_nonce( 'fc-call-nonce' ),
 			'copy_icon'                 => WPGMP_IMAGES . 'copy-to-clipboard.png',
@@ -484,7 +485,7 @@ Enjoy the aroma of freshly roasted beans all day long.';
 
 	public static function wpgmp_features_limits_msg() {
 
-		return esc_html__('You\'re using Leaflet. Google Maps–only features have been greyed out.','wp-google-maps');
+		return esc_html__('You\'re using Leaflet. Google Maps–only features have been greyed out.','wp-google-map-plugin');
 
 	}
 

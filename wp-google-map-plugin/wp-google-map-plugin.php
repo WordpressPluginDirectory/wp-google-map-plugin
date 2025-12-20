@@ -1,13 +1,15 @@
 <?php
 /*
-Plugin Name: WP Maps
-Plugin URI: https://weplugins.com/
-Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
-Author: WePlugins
-Author URI: https://weplugins.com/
-Version: 4.8.6
-Text Domain: wp-google-map-plugin
-Domain Path: /lang
+ * Plugin Name: WP Maps
+ * Plugin URI: https://weplugins.com/
+ * Description: A fully customizable WordPress Plugin for Google Maps. Create unlimited Google Maps Shortcodes, assign unlimited locations with custom infowindow messages and add to pages, posts and widgets.
+ * Author: WePlugins
+ * Author URI: https://weplugins.com/
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Version: 4.9.0
+ * Text Domain: wp-google-map-plugin
+ * Domain Path: /lang
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -119,22 +121,26 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
             $this->proVersionInstalled = ($is_google_maps_installed || $is_google_maps_active) ? true : false;
             
         }
+
 		function fc_render_plugin_menu() {
+
 			$plugin_submenu_info = $this->get_plugin_submenu_info_by_parent('wpgmp_view_overview');
-			$page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
-		
+			
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading page parameter for navigation display only
+			$page = ( isset( $_GET['page'] ) && ! empty( $_GET['page'] ) ) ? sanitize_key( $_GET['page'] ) : '';
+			
 			$grouped = [];
-		
+			
 			foreach ($plugin_submenu_info as $menu) {
 				$parts = explode('_', $menu['slug']);
 				$key = $parts[2] ?? 'other';
-		
+
 				if ($key === 'group') $key = 'category';
 				if ($key === 'overview') $key = 'dashboard';
-		
+
 				$grouped[$key][] = $menu;
 			}
-		
+
 			ob_start();
 			?>
 			<div class="fc-header-secondary">
@@ -154,18 +160,18 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 							}
 
 							?>
-							<div class="fc-nav-item <?= esc_attr($active) ?>">
-								<a href="<?= esc_url($first['url']) ?>" class="fc-nav-link <?= esc_attr($first['slug']) ?>">
-									<?= ucfirst(esc_html($group)) ?>
+							<div class="fc-nav-item <?php echo esc_attr( $active ); ?>">
+								<a href="<?php echo esc_url( $first['url'] ); ?>" class="fc-nav-link <?php echo esc_attr( $first['slug'] ); ?>">
+									<?php echo esc_html( ucfirst( $group ) ); ?>
 								</a>
-		
+
 								<?php if (count($items) > 1): ?>
 									<div class="fc-sub-menu">
 										<?php foreach (array_slice($items, 0) as $item): ?>
 											<?php $sub_active = ($page === $item['slug']) ? 'active' : ''; ?>
-											<div class="fc-nav-item <?= esc_attr($sub_active) ?>">
-												<a href="<?= esc_url($item['url']) ?>" class="fc-nav-link <?= esc_attr($item['slug']) ?>">
-													<?= esc_html($item['name']) ?>
+											<div class="fc-nav-item <?php echo esc_attr( $sub_active ); ?>">
+												<a href="<?php echo esc_url( $item['url'] ); ?>" class="fc-nav-link <?php echo esc_attr( $item['slug'] ); ?>">
+													<?php echo esc_html( $item['name'] ); ?>
 												</a>
 											</div>
 										<?php endforeach; ?>
@@ -232,9 +238,9 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 			if ( current_user_can('administrator') ) {
 				return $cap;
 			}
-
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading page parameter for checking capability only
 			$frontend_page = ( !is_admin() && isset( $_GET['location_id'] ) && !empty( $_GET['location_id'] ) && isset($_GET['doaction']) && !empty($_GET['doaction']) && isset($_GET['cap']) && !empty($_GET['cap']) && $_GET['cap'] == 'wpgmp_manage_location' ) ? true : false;
-
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading page parameter for checking capability only
 			$backend_page = ( is_admin() && isset( $_GET['location_id'] ) && !empty( $_GET['location_id'] ) && isset($_GET['doaction']) && !empty($_GET['doaction']) && isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] == 'wpgmp_manage_location' ) ? true : false;
 
 			if($frontend_page || $backend_page){
@@ -432,29 +438,43 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 
 		function wpgmp_sample_csv_download(){
 
-			if(!empty($_GET['do_action']) && $_GET['do_action'] == 'sample_csv_download'){
+			if( !empty($_GET['do_action']) && $_GET['do_action'] == 'sample_csv_download' ){
 
 				if ( isset( $_GET['sample_csv_download_nonce'] ) && wp_verify_nonce( $_GET['sample_csv_download_nonce'], 'sample_csv_download_action' ) ) {
-				  
-				  	$sample_zip =  WPGMP_DIR.'import_sample_file.zip';
-					header("Content-type: application/zip",true,200);
-				    header("Content-Disposition: attachment; filename=import_sample_file.zip");
-				    header("Pragma: no-cache");
-				    header("Expires: 0");
-				    readfile($sample_zip); 
-				    exit();
-				  
+					
+					$sample_zip = WPGMP_DIR . 'import_sample_file.zip';
+					
+					// Initialize WP_Filesystem
+					global $wp_filesystem;
+					if ( empty( $wp_filesystem ) ) {
+						require_once ABSPATH . 'wp-admin/includes/file.php';
+						WP_Filesystem();
+					}
+					
+					if ( $wp_filesystem->exists( $sample_zip ) ) {
+						header("Content-type: application/zip",true,200);
+						header("Content-Disposition: attachment; filename=import_sample_file.zip");
+						header("Pragma: no-cache");
+						header("Expires: 0");
+						header("Content-Length: " . $wp_filesystem->size( $sample_zip ));
+						
+						// Use WP_Filesystem to read and output the file
+						$file_content = $wp_filesystem->get_contents( $sample_zip );
+						if ( $file_content !== false ) {
+							echo $file_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							exit();
+						} else {
+							wp_die( esc_html__( 'Unable to read sample file.', 'wp-google-map-plugin' ) );
+						}
+					} else {
+						wp_die( esc_html__( 'Sample file not found.', 'wp-google-map-plugin' ) );
+					}
 				} else {
-
-				  die( __( 'Something went wrong with the requested action. Please refresh page and try again.', 'wp-google-map-plugin' ) ); 
-
+					wp_die( esc_html__( 'Something went wrong with the requested action. Please refresh page and try again.', 'wp-google-map-plugin' ) );  
 				}
-				
 			}
-
 		}
 		
-
 		/**
 		 * Export data into csv,xml,json or excel file
 		 */
@@ -495,7 +515,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				$font_families   = $styles_and_scripts['font_families'];
 				$fc_skin_styles  = $styles_and_scripts['fc_skin_styles']; 
 				if ( ! empty( $fc_skin_styles ) ) {
-					echo '<style>' . $fc_skin_styles . '</style>';
+					echo '<style id="wpgmp-customiser-style">' . esc_html( $fc_skin_styles ) . '</style>';
 				}
 				if ( ! empty( $font_families ) ) {
 					$font_families = array_unique($font_families);
@@ -519,27 +539,28 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 		 */
 		
 		function wpgmp_frontend_scripts() {  WPGMP_Helper::wpgmp_register_map_frontend_resources();  }
+		
 		/**
 		 * Display map at the frontend using put_wpgmp shortcode.
 		 *
 		 * @param  array  $atts   Map Options.
 		 * @param  string $content Content.
 		 */
-		function wpgmp_show_location_in_map( $atts, $content = null ) {
 
+		function wpgmp_show_location_in_map( $atts, $content = null ) {
+    
+			$sanitized_atts = WPGMP_Security::wpgmp_sanitize_shortcode_atts( $atts );
 			try {
 				$factoryObject = new WPGMP_Controller();
 				$viewObject    = $factoryObject->create_object( 'shortcode' );
-				$output        = $viewObject->display( 'put-wpgmp', $atts );
-				 return $output;
-
+				$output        = $viewObject->display( 'put-wpgmp', $sanitized_atts );
+				return $output;
+				
 			} catch ( Exception $e ) {
-				echo WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) );
-
+				return wp_kses_post( WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) ) );
 			}
-
 		}
-		
+
 		/**
 		 * Ajax Call
 		 */
@@ -577,7 +598,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				$viewObject->display( $obj_operation );
 
 			} catch ( Exception $e ) {
-				echo WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) );
+				echo wp_kses_post( WPGMP_Template::show_message( array( 'error' => $e->getMessage() ) ) );
 
 			}
 
@@ -703,8 +724,9 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				global $wpdb;
 				$currentblog = $wpdb->blogid;
 				$activated   = array();
-				$sql         = "SELECT blog_id FROM {$wpdb->blogs}";
-				$blog_ids    = $wpdb->get_col( $wpdb->prepare( $sql, null ) );
+				$blog_ids = $wpdb->get_col( 
+					$wpdb->prepare( "SELECT blog_id FROM {$wpdb->blogs}" ) 
+				);
 
 				foreach ( $blog_ids as $blog_id ) {
 					switch_to_blog( $blog_id );
@@ -732,8 +754,9 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				global $wpdb;
 				$currentblog = $wpdb->blogid;
 				$activated   = array();
-				$sql         = "SELECT blog_id FROM {$wpdb->blogs}";
-				$blog_ids    = $wpdb->get_col( $wpdb->prepare( $sql, null ) );
+				$blog_ids = $wpdb->get_col( 
+					$wpdb->prepare( "SELECT blog_id FROM {$wpdb->blogs}" ) 
+				);
 
 				foreach ( $blog_ids as $blog_id ) {
 					switch_to_blog( $blog_id );
@@ -870,7 +893,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 			$file_display = array( 'jpg', 'jpeg', 'png', 'gif' );
 
 			if ( file_exists( $dir ) == false ) {
-				echo 'Directory \'', $dir, '\' not found!';
+				echo 'Directory \'', esc_html( $dir ), '\' not found!';
 
 			} else {
 				$dir_contents = scandir( $dir );
@@ -1101,11 +1124,11 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				</div> -->
 
 				<div class="fc-quick-filter">
-					<label><?php _e('Quick Filter:', 'wpgmp'); ?></label>
-					<span class="fc-filter-menu active"><?php _e('All', 'wp-google-map-plugin'); ?></span>
-					<span class="fc-filter-menu"><?php _e('Alphabets', 'wp-google-map-plugin'); ?></span>
-					<span class="fc-filter-menu"><?php _e('Digits', 'wp-google-map-plugin'); ?></span>
-					<span class="fc-filter-menu"><?php _e('Shapes', 'wp-google-map-plugin'); ?></span>
+					<label><?php esc_html_e('Quick Filter:', 'wp-google-map-plugin'); ?></label>
+					<span class="fc-filter-menu active"><?php esc_html_e('All', 'wp-google-map-plugin'); ?></span>
+					<span class="fc-filter-menu"><?php esc_html_e('Alphabets', 'wp-google-map-plugin'); ?></span>
+					<span class="fc-filter-menu"><?php esc_html_e('Digits', 'wp-google-map-plugin'); ?></span>
+					<span class="fc-filter-menu"><?php esc_html_e('Shapes', 'wp-google-map-plugin'); ?></span>
 				</div>
 
 		
@@ -1123,7 +1146,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 							$file_type = strtolower(end($image_data));
 							if ($file !== '.' && $file !== '..' && in_array($file_type, $file_display)) {
 								$svg_content = file_get_contents($dir . '/' . $file);
-								echo "<li class='read_icons' data-title='" . esc_attr($image_data[0]) . "'>" . $svg_content . "</li>";
+								echo "<li class='read_icons' data-title='" . esc_attr($image_data[0]) . "'>" . $svg_content . "</li>";  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							}
 						}
 					}
@@ -1303,9 +1326,8 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 			global $wpdb;
 			
 			if ( is_admin() )
-			$this->wpgmp_define( 'ALLOW_UNFILTERED_UPLOADS', true );
 			$this->wpgmp_define( 'WPGMP_SLUG', 'wpgmp_view_overview' );
-			$this->wpgmp_define( 'WPGMP_VERSION', '4.8.6' );
+			$this->wpgmp_define( 'WPGMP_VERSION', '4.9.0' );
 			$this->wpgmp_define( 'WPGMP_FOLDER', basename( dirname( __FILE__ ) ) );
 			$this->wpgmp_define( 'WPGMP_DIR', plugin_dir_path( __FILE__ ) );
 			$this->wpgmp_define( 'WPGMP_ICONS_DIR', WPGMP_DIR . '/assets/images/icons/' );
@@ -1325,7 +1347,6 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 			$this->wpgmp_define( 'TBL_MAP', $wpdb->prefix . 'create_map' );
 			$this->wpgmp_define( 'TBL_ROUTES', $wpdb->prefix . 'map_routes' );
 
-
 		}
 		
 		public static function wpgmp_get_version_number(){	return WPGMP_VERSION; }
@@ -1343,6 +1364,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 
 			// Load Plugin Files
 			$plugin_files_to_include = array(
+				'wpgmp-security.php',
 				'wpgmp-pro-feature-ui.php',
 				'wpgmp-integration-form.php',
 				'wpgmp-helper.php',
@@ -1350,8 +1372,6 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				'wpgmp-controller.php',
 				'wpgmp-model.php',
 				'wpgmp-map-widget.php',
-				'wpgmp-visual-composer.php',
-				'wpgmp-maps-importer.php',
 				'wpgmp-check-cookies.php',
 				'wpgmp-temp-access.php',
 				'wpgmp-feedback-form.php'
@@ -1372,7 +1392,7 @@ if ( ! class_exists( 'WPGMP_Google_Maps_Lite' ) ) {
 				foreach ( $core_modules as $module ) {
 
 					$file = WPGMP_MODEL . $module . '/model.' . $module . '.php';
-
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 					$file = apply_filters('fc_backend_module_path_load', $file ,$module );
 
 					if ( file_exists( $file ) ) {

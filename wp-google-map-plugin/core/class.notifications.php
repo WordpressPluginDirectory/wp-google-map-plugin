@@ -45,6 +45,7 @@ class WePlugins_Notification {
 						<i class="wep-icon-plug wep-icon-2x"></i>
 					</div>
 					<div>' . sprintf(
+						  /* translators: %s: Plugin Name. */
 						esc_html__(
 							'This plugin now supports OpenStreetMap. Visit the %s to try it out!',
 							'wp-google-map-plugin'

@@ -4,27 +4,37 @@
  * Displays the content of the dialog box when the user clicks on the "Deactivate" link on the plugin settings page
  */
 
-function wpgmp_add_feedback_form()
-{
-    $contact_support_template = __('Need help? We are ready to answer your questions. <a href="https://weplugins.com/support/" target="_blank">Contact Support</a>');
+function wpgmp_add_feedback_form(){
+    
+    $link_text = __( 'Contact Support', 'wp-google-map-plugin' );
+
+    
+    $contact_support_template = sprintf(
+        /* translators: %s: The "Contact Support" link HTML. */
+        __( 'Need help? We are ready to answer your questions. %s', 'wp-google-map-plugin' ),
+        sprintf(
+            '<a href="https://weplugins.com/support/" target="_blank">%s</a>',
+            $link_text
+        )
+    );
 
     $reasons = array(
         array(
             'id'                => 'NOT_WORKING',
-            'text'              => __('The plugin is not working'),
+            'text'              => __('The plugin is not working','wp-google-map-plugin'),
             'input_type'        => 'textarea',
-            'input_placeholder' => esc_attr__("Kindly share what didn't work so we can fix it in future updates."),
+            'input_placeholder' => esc_attr__("Kindly share what didn't work so we can fix it in future updates.",'wp-google-map-plugin'),
         ),
         array(
             'id'                => 'SUDDENLY_STOPPED_WORKING',
-            'text'              => __('The plugin suddenly stopped working'),
+            'text'              => __('The plugin suddenly stopped working','wp-google-map-plugin'),
             'input_type'        => '',
             'input_placeholder' => '',
             'internal_message'  => $contact_support_template,
         ),
         array(
             'id'                => 'BROKE_MY_SITE',
-            'text'              => __('The plugin broke my site'),
+            'text'              => __('The plugin broke my site','wp-google-map-plugin'),
             'input_type'        => '',
             'input_placeholder' => '',
             'internal_message'  => $contact_support_template,
@@ -32,32 +42,32 @@ function wpgmp_add_feedback_form()
         ),
         array(
             'id'                => 'COULDNT_MAKE_IT_WORK',
-            'text'              => __("I couldn't understand how to get it work"),
+            'text'              => __("I couldn't understand how to get it work",'wp-google-map-plugin'),
             'input_type'        => '',
             'input_placeholder' => '',
             'internal_message'  => $contact_support_template,
         ),
         array(
             'id'                => 'FOUND_A_BETTER_PLUGIN',
-            'text'              => __('I found a better plugin'),
+            'text'              => __('I found a better plugin','wp-google-map-plugin'),
             'input_type'        => 'textarea',
-            'input_placeholder' => esc_attr__('Can you please name the plugin and why you liked that it more?'),
+            'input_placeholder' => esc_attr__('Can you please name the plugin and why you liked that it more?','wp-google-map-plugin'),
         ),
         array(
             'id'                => 'GREAT_BUT_NEED_SPECIFIC_FEATURE',
-            'text'              => __('The plugin is great, but I need a specific feature'),
+            'text'              => __('The plugin is great, but I need a specific feature','wp-google-map-plugin'),
             'input_type'        => 'textarea',
-            'input_placeholder' =>  esc_attr__('Can you share more details on the missing feature?'),
+            'input_placeholder' =>  esc_attr__('Can you share more details on the missing feature?','wp-google-map-plugin'),
         ),
         array(
             'id'                => 'TEMPORARY_DEACTIVATION',
-            'text'              => __("It's a temporary deactivation, I'm just debugging an issue"),
+            'text'              => __("It's a temporary deactivation, I'm just debugging an issue",'wp-google-map-plugin'),
             'input_type'        => '',
             'input_placeholder' => '',
         ),
         array(
             'id'                => 'OTHER',
-            'text'              => __('Other'),
+            'text'              => __('Other','wp-google-map-plugin'),
             'input_type'        => 'textarea',
             'input_placeholder' => '',
         ),
@@ -110,6 +120,10 @@ function wpgmp_add_feedback_form()
 
     $plugin_name = 'wp-google-map-plugin';
     $basename = 'wp-google-map-plugin';
+    $processing = esc_html__('Processing...','wp-google-map-plugin');
+    $submit_deactivate = esc_html__('Submit and Deactivate','wp-google-map-plugin');
+    $skip_deactivate = esc_html__('Skip and Deactivate','wp-google-map-plugin');
+    $improve_it = esc_html__('Please tell us the reason so we can improve it.','wp-google-map-plugin');
 
     $script .= '(function($) {
             var modalHtml = ' . json_encode($modal_html) . ",
@@ -200,7 +214,7 @@ function wpgmp_add_feedback_form()
                             beforeSend: function() {
                             	$('.fc-backend-loader').show(); // Show the loader
                                 _parent.find( '.wpgmp-modal-footer .button' ).addClass( 'disabled' );
-                                _parent.find( '.wpgmp-modal-footer .button-secondary' ).text( '" . __('Processing') . "' + '...' );
+                                _parent.find( '.wpgmp-modal-footer .button-secondary' ).text( '" . $processing . "' + '...' );
                             },
                             complete  : function( message ) {
                                 /* Do not show the dialog box, deactivate the plugin. */
@@ -229,7 +243,7 @@ function wpgmp_add_feedback_form()
 
                     \$modal.find( '.wpgmp-modal-reason-input' ).remove();
                     \$modal.find( '.wpgmp-modal-internal-message' ).hide();
-                    \$modal.find( '.wpgmp-modal-button-deactivate' ).text( '" . __('Submit and Deactivate') . "' );
+                    \$modal.find( '.wpgmp-modal-button-deactivate' ).text( '" . $submit_deactivate . "' );
 
                     wpgmpModalEnableDeactivateButton();
 
@@ -244,7 +258,7 @@ function wpgmp_add_feedback_form()
                         _parent.find( 'input, textarea' ).attr( 'placeholder', _parent.data( 'input-placeholder' ) ).focus();
 
                         if ( wpgmpModalIsReasonSelected( 'OTHER' ) ) {
-                            \$modal.find( '.message' ).text( '" . __('Please tell us the reason so we can improve it.') . "' ).show();
+                            \$modal.find( '.message' ).text( '" . $improve_it . "' ).show();
                         }
                     }
                 });
@@ -309,7 +323,7 @@ function wpgmp_add_feedback_form()
             function wpgmpModalShowPanel() {
                 \$modal.find( '.wpgmp-modal-panel' ).addClass( 'active' );
                 /* Update the deactivate button's text */
-                \$modal.find( '.wpgmp-modal-button-deactivate' ).text( '" . __('Skip and Deactivate') . "' );
+                \$modal.find( '.wpgmp-modal-button-deactivate' ).text( '" . $skip_deactivate . "' );
             }
         })(jQuery);";
     wp_register_script('wpgmp-deactivation-form', '', array('jquery'), false, true);

@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Contro Positioning over google maps.
  *
@@ -43,3 +44,4 @@ if ( ! empty( $map ) ) {
 	);
 
 }
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

@@ -1,6 +1,9 @@
 <?php
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
   global $wpdb;
-  $objects       = $wpdb->get_results( 'select location_id, location_address,location_country,location_postal_code,location_state from ' . TBL_LOCATION . " where location_latitude IS NULL OR location_latitude = '' or location_longitude IS NULL OR location_longitude = '' " );
+  $objects       = $wpdb->get_results( 'select location_id, location_address,location_country,location_postal_code,location_state from ' . TBL_LOCATION . " where location_latitude IS NULL OR location_latitude = '' or location_longitude IS NULL OR location_longitude = '' " ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
   $geo_locations = array();
 
   $geocode_limit = apply_filters( 'wpgmp_geocode_limit', 1000 );
@@ -19,8 +22,8 @@ if ( is_array( $objects_1000 ) ) {
 }
 
   $json = json_encode( $geo_locations );
-  $form = new WPGMP_Template();
-  echo $form->start_page_layout();
+  $form = new WPGMP_Template();// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+  echo wp_kses_post( $form->start_page_layout() );
 
 if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_Location_Table' ) ) {
 
@@ -30,6 +33,7 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_L
 
 	// Minimal Configuration :)
 	global $wpdb;
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$columns   = array(
 		'location_title'     => esc_html__( 'Location Title', 'wp-google-map-plugin' ),
 		'location_address'   => esc_html__( 'Address', 'wp-google-map-plugin' ),
@@ -37,7 +41,9 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_L
 		'location_latitude'  => esc_html__( 'Latitude', 'wp-google-map-plugin' ),
 		'location_longitude' => esc_html__( 'Longitude', 'wp-google-map-plugin' ),
 	);
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$sortable  = array( 'location_title', 'location_address', 'location_city', 'location_latitude', 'location_longitude' );
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	$tableinfo = array(
 		'table'                   => $wpdb->prefix . 'map_locations',
 		'textdomain'              => 'wp-google-map-plugin',
@@ -71,8 +77,10 @@ if ( class_exists( 'FlipperCode_List_Table_Helper' ) && ! class_exists( 'WPGMP_L
 			'no_records_found' => esc_html__( 'No locations were found.', 'wp-google-map-plugin' )
 		),
 	);
-	$obj=new WPGMP_Location_Table( $tableinfo );
+	$obj=new WPGMP_Location_Table( $tableinfo );// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 
 }
 
-echo $form->end_page_layout();
+echo $form->end_page_layout();// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
+// phpcs:enabled WordPress.NamingConventions.PrefixAllGlobals

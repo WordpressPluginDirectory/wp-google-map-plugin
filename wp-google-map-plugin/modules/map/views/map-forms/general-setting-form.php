@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Map's general setting(s).
  *
@@ -149,3 +150,4 @@ $form->add_element(
 		'desc'    => esc_html__( 'Controlling Zoom and Pan for desktop, touchscreen and mobile devices.', 'wp-google-map-plugin' ),
 	)
 );
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */

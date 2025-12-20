@@ -1,4 +1,5 @@
 <?php
+/* phpcs:disable WordPress.NamingConventions.PrefixAllGlobals */
 /**
  * Template for Add & Edit Map
  *
@@ -92,7 +93,9 @@ if ( (!isset($wpgmp_settings['wpgmp_api_key']) || $wpgmp_settings['wpgmp_api_key
 
 	$form->add_element(
 		'message', 'wpgmp_key_required', array(
-			'value'  => sprintf( esc_html__( 'Google Maps API Key is missing. Follow instructions to %1$s and then insert your key %2$s.', 'wp-google-map-plugin' ), $link, $setting_link ),
+			'value'  => sprintf( 
+			/* translators: %s: Api key creation docs link. */	
+			esc_html__( 'Google Maps API Key is missing. Follow instructions to %1$s and then insert your key %2$s.', 'wp-google-map-plugin' ), $link, $setting_link ),
 			'class'  => 'fc-alert fc-alert-danger',
 			'before' => '<div class="fc-12 wpgmp_key_required">',
 			'after'  => '</div>',
@@ -165,3 +168,4 @@ if ( isset( $_GET['doaction'] ) and 'edit' == $_GET['doaction'] and isset( $_GET
 	);
 }
 $form->render();
+/* phpcs:enable WordPress.NamingConventions.PrefixAllGlobals */
